@@ -1,3 +1,13 @@
+<?php
+session_start();
+if(isset($_SESSION['id'])) {
+  if(!$_SESSION['newUser'])
+    header("Location: ./feed.php?id=$_SESSION['id']");
+  }
+  else
+    header("Location: ./index.php");
+ ?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -8,7 +18,7 @@
   </head>
   <body>
     <h1>Créer un compte</h1>
-    <form class="" action="/mc_creerCompte.php" method="post">
+    <form class="" action="./mc_creerCompte.php" method="post">
       <label for="prenom">Prénom</label>
       <input type="text" name="prenom">
       <br>
