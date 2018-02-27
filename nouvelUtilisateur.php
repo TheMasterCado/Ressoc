@@ -3,8 +3,11 @@
   <head>
     <meta charset="utf-8">
     <title>Nouvel utilisateur</title>
+    <link rel="stylesheet" type="text/css" href="nouvelUtilisateur.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   </head>
   <body>
+    <h1>Créer un compte</h1>
     <form class="" action="/mc_creerCompte.php" method="post">
       <label for="prenom">Prénom</label>
       <input type="text" name="prenom">
