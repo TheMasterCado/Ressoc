@@ -5,5 +5,5 @@
   $stmt->execute();
   session_start();
   $_SESSION['newUser'] = false;
-  header('Location: /index.php');
+  header('Location: ./index.php');
  ?>

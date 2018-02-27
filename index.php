@@ -11,7 +11,7 @@
   <script>
   function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
-    window.location.replace("/connexion.php?id="+profile.getId());
+    window.location.replace("./connexion.php?id="+profile.getId());
   }
   </script>
   <div class="g-signin2" data-onsuccess="onSignIn"></div>
