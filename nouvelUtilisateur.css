@@ -1,0 +1,23 @@
+body{
+  background: lightgray !important;
+}
+
+form{
+  border-style: dotted;
+  border-width: 5px;
+  margin: auto;
+  width: 50%;
+  text-align: center;
+}
+
+h1{
+  text-align: center;
+}
+
+input{
+  width: 20%;
+}
+
+label{
+  text-align: right;
+}
