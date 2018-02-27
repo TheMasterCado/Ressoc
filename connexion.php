@@ -1,10 +1,14 @@
 <?php
   require('bd.php');
+  session_start();
   $id = intval($_GET['id']);
-  $sql = "SELECT count(*) FROM utilisateur WHERE loginID={$id};";
+  $_SESSION['id'] = $id;
+  $sql = "SELECT count(*) AS nb FROM utilisateur WHERE loginID={$id};";
   $resultats = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-  if($resultats[0][0] == 0)
+  if($_SESSION['newUser'] = ($resultats[0]['nb'] == 0)) {
     header('Location: /nouvelUtilisateur.php');
-  else
+  }
+  else {
     header("Location: /feed.php?id={$_GET['id']}");
+  }
  ?>
