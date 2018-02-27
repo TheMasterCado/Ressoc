@@ -10,6 +10,7 @@
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script>
   function onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
     window.location.replace("/connexion.php?id="+profile.getId());
   }
   </script>
