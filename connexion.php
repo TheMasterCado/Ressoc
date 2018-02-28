@@ -6,7 +6,7 @@
   $sql = "SELECT count(*) AS nb FROM utilisateur WHERE loginID={$id};";
   $resultats = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
   if($_SESSION['newUser'] = ($resultats[0]['nb'] == 0)) {
-    header('Location: ./nouvelUtilisateur.php');
+    header("Location: ./nouvelUtilisateur.php?test=$resultats[0]['nb']");
   }
   else {
     header("Location: ./feed.php?id={$_GET['id']}");
