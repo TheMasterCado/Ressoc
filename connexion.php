@@ -6,7 +6,7 @@
   $sql = "SELECT count(*) AS nb FROM utilisateur WHERE loginID={$id};";
   $resultat = $db->query($sql)->fetch();
   if($_SESSION['newUser'] = ($resultat['nb'] == 0)) {
-    header("Location: ./nouvelUtilisateur.php");
+    //header("Location: ./nouvelUtilisateur.php");
     echo $_SESSION['newUser'];
   }
   else {
