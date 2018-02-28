@@ -1,9 +1,10 @@
 <?php
 session_start();
 if(isset($_SESSION['id'])) {
-  if($_SESSION['newUser']) {}
-    else
-    header("Location: ./feed.php?id=$_SESSION['id']");
+  echo $_SESSION['newUser'];
+  //if($_SESSION['newUser']) {}
+    //else
+  //  header("Location: ./feed.php?id=$_SESSION['id']");
 }
 else
   header("Location: ./index.php");
