@@ -1,8 +1,8 @@
 <?php
 session_start();
 if(isset($_SESSION['id'])) {
-  if(!(boolval($_SESSION['newUser']))
-    header("Location: ./feed.php?id=$_SESSION['id']");
+  echo !boolval($_SESSION['newUser']);
+    //header("Location: ./feed.php?id=$_SESSION['id']");
 }
 else
   header("Location: ./index.php");
