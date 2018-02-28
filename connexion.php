@@ -8,7 +8,6 @@
   $_SESSION['newUser'] = $resultat['nb'] == 0;
   if($_SESSION['newUser']) {
     header("Location: ./nouvelUtilisateur.php");
-    echo $_SESSION['newUser'];
   }
   else {
     header("Location: ./feed.php?id={$_GET['id']}");
