@@ -1,10 +1,8 @@
 <?php
 session_start();
 if(isset($_SESSION['id'])) {
-  echo $_SESSION['newUser'];
-  //if($_SESSION['newUser']) {}
-    //else
-  //  header("Location: ./feed.php?id=$_SESSION['id']");
+  if(!(boolval($_SESSION['newUser']))
+    header("Location: ./feed.php?id=$_SESSION['id']");
 }
 else
   header("Location: ./index.php");
