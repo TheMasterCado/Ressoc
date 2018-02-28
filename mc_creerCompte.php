@@ -4,6 +4,6 @@
   $stmt = $db->prepare($sql);
   $stmt->execute();
   session_start();
-  $_SESSION['newUser'] = false;
+  unset($_SESSION['newUser']);
   header('Location: ./index.php');
  ?>
