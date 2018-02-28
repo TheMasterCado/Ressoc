@@ -7,7 +7,7 @@
   $resultat = $db->query($sql)->fetch();
   $_SESSION['newUser'] = $resultat['nb'] == 0;
   if($_SESSION['newUser']) {
-    //header("Location: ./nouvelUtilisateur.php");
+    header("Location: ./nouvelUtilisateur.php");
     echo $_SESSION['newUser'];
   }
   else {
