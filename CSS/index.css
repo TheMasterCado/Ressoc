@@ -4,12 +4,16 @@
   text-align: center;
 }
 
-.g-signin2 {
-  margin: auto;
+.g-signin2{
+  width: 100%;
   margin-top: 20px;
 }
 
-h2, h6 {
+.g-signin2 > div{
+  margin: 0 auto;
+}
+
+h1, h6 {
   font-family: Verdana;
 }
 
