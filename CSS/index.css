@@ -1,3 +1,8 @@
+html {
+  background: url("http://markinternational.info/data/out/617/224359511-plain-background-images.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
 #content {
   margin: auto;
   margin-top: 10%;
@@ -15,8 +20,5 @@
 
 h1, h6 {
   font-family: Verdana;
-}
-
-h6 {
   font-style: italic;
 }
