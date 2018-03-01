@@ -1,5 +1,7 @@
 #content {
   padding-top: 20%;
+  margin: auto;
+  text-align: center;
 }
 
 .g-signin2 {
