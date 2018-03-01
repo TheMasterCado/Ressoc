@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="google-signin-client_id" content="374009514589-ie80vs5damvpplc85uni3ep2emi64f0b.apps.googleusercontent.com">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="./CSS/index.css">
   <title>Login Ressoc</title>
 </head>
 <body>
@@ -14,12 +15,10 @@
     window.location.replace("./connexion.php?id="+profile.getId());
   }
   </script>
-  <div class="g-signin2" data-onsuccess="onSignIn"></div>
-
-  <div class="modal">
-    <div class="modal-content">
-      <p class="modal-body">TEsting</p>
-    </div>
+  <div id="content" class="center-block">
+    <h2>Ressoc</h2>
+    <h6>Un réseau social presque intéressant.</h6>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
   </div>
 </body>
 </html>
