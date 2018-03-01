@@ -16,7 +16,7 @@
   }
   </script>
   <div id="content" class="center-block">
-    <h2>Ressoc</h2>
+    <h1>Ressoc</h1>
     <h6>Un réseau social presque intéressant.</h6>
     <div class="g-signin2" data-onsuccess="onSignIn"></div>
   </div>
