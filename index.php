@@ -15,5 +15,9 @@
   }
   </script>
   <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+  <div class=".modal">
+    <p>testing</p>
+  </div>
 </body>
 </html>
