@@ -17,7 +17,9 @@
   <div class="g-signin2" data-onsuccess="onSignIn"></div>
 
   <div class="modal">
-    <p>testing</p>
+    <div class="modal-content">
+      <p class="modal-body">TEsting</p>
+    </div>
   </div>
 </body>
 </html>
