@@ -25,11 +25,13 @@ header("Location: ./index.php");
       fetch_basic_profile: true,
       scope: 'profile'
     });
-    var profile = auth2.currentUser.get().getBasicProfile();
-    $('#prenom').attr('value', profile.getGivenName());
-    $('#nom').attr('value', profile.getFamilyName());
-    $('#email').attr('value', profile.getEmail());
-    $('#id').attr('value', profile.getId());
+    auth2.signIn().then(function() {
+      var profile = auth2.currentUser.get().getBasicProfile();
+      $('#prenom').attr('value', profile.getGivenName());
+      $('#nom').attr('value', profile.getFamilyName());
+      $('#email').attr('value', profile.getEmail());
+      $('#id').attr('value', profile.getId());
+    });
   });
 </script>
 <h1>Créer un compte</h1>
