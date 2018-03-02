@@ -12,8 +12,8 @@ header("Location: ./index.php");
 <head>
   <meta charset="utf-8">
   <title>Nouvel utilisateur</title>
-  <link rel="stylesheet" type="text/css" href="./CSS/nouvelUtilisateur.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="./CSS/nouvelUtilisateur.css">
 </head>
 <body>
 <h1>Créer un compte</h1>
