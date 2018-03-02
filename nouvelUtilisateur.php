@@ -16,36 +16,23 @@ header("Location: ./index.php");
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://apis.google.com/js/platform.js"></script>
-  <script>
-  gapi.load('auth2', function() {
-    auth2 = gapi.auth2.init({
-      client_id: '374009514589-ie80vs5damvpplc85uni3ep2emi64f0b.apps.googleusercontent.com',
-      fetch_basic_profile: true,
-      scope: 'profile'
-    });
-    auth2.isSignedIn.get()
-    var profile = auth2.currentUser.get().getBasicProfile();
-    $('#prenom').attr('value', profile.getGivenName());
-    $('#nom').attr('value', profile.getFamilyName());
-    $('#email').attr('value', profile.getEmail());
-    $('#id').attr('value', profile.getId());
-  });
-</script>
 <h1>Créer un compte</h1>
 <form id="formulaire" class="" action="./mc_creerCompte.php" method="post">
   <label for="prenom">Prénom</label>
-  <input id="prenom" type="text" name="prenom">
+  <input type="text" name="prenom" value="<?=$_SESSION['prenom']?>">
   <br>
   <label for="nom">Nom</label>
-  <input id="nom" type="text" name="nom">
+  <input type="text" name="nom" value="<?=$_SESSION['nom']?>">
   <br>
   <label for="nbSessions">Nombre de sessions en informatique</label>
   <input type="number" name="nbSessions" min="1" max="6">
   <br>
-  <input id="email" type="hidden" name="email">
-  <input id="id" type="hidden" name="id">
+  <label for="specialite">Spécialité (facultatif)</label>
+  <input type="text" name="specialite" value="">
+  <br>
+  <input type="hidden" name="email" value="<?=$_SESSION['email']?>">
+  <input type="hidden" name="image" value="<?=$_SESSION['image']?>">
+  <input type="hidden" name="id" value="<?=$_SESSION['id']?>">
   <input type="submit" value="Valider">
 </form>
 </body>

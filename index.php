@@ -9,10 +9,24 @@
 </head>
 <body>
   <script src="https://apis.google.com/js/platform.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script>
   function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
-    window.location.replace("./connexion.php?id="+profile.getId());
+    $.post("./mc_connexion.php", {
+      id: profile.getId(),
+      prenom: profile.getGivenName(),
+      nom: profile.getFamilyName(),
+      email: profile.getEmail(),
+      image: profile.getImageUrl()
+    }, function(data) {
+      if (data == "NEW")
+        window.location.replace("./nouvelUtilisateur.php");
+      else {
+        window.location.replace("./feed.php?id=" + profile.getId());
+      }
+    });
+    window.location.replace("./mc_connexion.php?id="+profile.getId());
   }
   </script>
   <div id="content" class="center-block">
