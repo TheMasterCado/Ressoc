@@ -2,10 +2,10 @@
 session_start();
 if(isset($_SESSION['id'])) {
   if(!isset($_SESSION['newUser']))
-    header("Location: ./feed.php?id={$_SESSION['id']}");
+  header("Location: ./feed.php?id={$_SESSION['id']}");
 }
 else
-  header("Location: ./index.php");
+header("Location: ./index.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,7 +17,7 @@ else
 </head>
 <body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="https://apis.google.com/js/platform.js"></script>
   <script>
   gapi.load('auth2', function() {
     auth2 = gapi.auth2.init({
