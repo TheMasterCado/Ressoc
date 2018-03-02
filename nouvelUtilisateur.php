@@ -31,7 +31,6 @@ else
     $('#email').attr('value', profile.getEmail());
     $('#id').attr('value', profile.getId());
   });
-});
 </script>
 <h1>Créer un compte</h1>
 <form id="formulaire" class="" action="./mc_creerCompte.php" method="post">
