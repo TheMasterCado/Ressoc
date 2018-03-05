@@ -19,7 +19,7 @@ header("Location: ./index.php");
 <h1>Créer un compte</h1>
 <form id="formulaire" class="" action="./mc_creerCompte.php" method="post">
   <label for="prenom">Prénom</label>
-  <input type="text" name="prenom" value="<?=$_SESSION['newUser']['prenom']?>" required>
+  <input type="text" name="prenom" value="<?=$_POST['newUser']['prenom']?>" required>
   <br>
   <label for="nom">Nom</label>
   <input type="text" name="nom" value="<?=$_SESSION['newUser']['nom']?>" required>
