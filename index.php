@@ -26,7 +26,6 @@
         window.location.replace("./feed.php?id=" + profile.getId());
       }
     });
-    window.location.replace("./mc_connexion.php?id="+profile.getId());
   }
   </script>
   <div id="content" class="center-block">
