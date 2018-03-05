@@ -3,7 +3,7 @@
   $sql = "SELECT COUNT(*) AS nb FROM specialite WHERE nom = '"$_POST['specialite']"'";
   $resultat = $db->query($sql)->fetch();
   if($resultat['nb'] == 0){
-  $sql = "INSERT INTO specialite (specialite.nom) VALUES ($_POST['specialite'])";
+  $sql = "INSERT INTO specialite (specialite.nom) VALUES ('"$_POST['specialite']"')";
   $stmt = $db->prepare($sql);
   $stmt->execute();
   }
