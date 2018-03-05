@@ -10,6 +10,6 @@
     echo "NEW";
   }
   else {
-    echo "EXISTING";
+    echo $id;
   }
  ?>
