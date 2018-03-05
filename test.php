@@ -1,6 +1,6 @@
 <?php
 require 'bd.php';
-$sql = "SELECT * FROM specialite;";
-$resultat = $db->query($sql)->fetchAll();
+$sql = "SELECT COUNT(*) AS nb FROM specialite WHERE nom = '"."blabla"."';";
+$resultat = $db->query($sql)->fetch();
   var_dump($resultat);
 ?>
