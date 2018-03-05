@@ -13,8 +13,7 @@ $sql = "INSERT INTO utilisateur (utilisateur.nom, utilisateur.prenom, utilisateu
         VALUES ('".$_POST['nom']."', '".$_POST['prenom']."', '".intval($_POST['nbSessions'])."', '".intval($_POST['id'])."', '".$_POST['image']."', '".$_POST['email']."', '".$specialite['pk_specialite']."');";
  $stmt = $db->prepare($sql);
  $stmt->execute();
- echo "FUCK";
  session_start();
- unset($_SESSION['newUser']);
- header("Location: ./feed.php?id={$_SESSION['id']}");
+ //unset($_SESSION['newUser']);
+ //header("Location: ./feed.php?id={$_SESSION['id']}");
 ?>
