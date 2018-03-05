@@ -9,12 +9,16 @@ if($resultat['nb'] == 0){
 }
 $sql = "SELECT pk_specialite FROM specialite WHERE nom = '".$_POST['specialite']."'";
 $resultat = $db->query($sql)->fetch();
-echo $resultat['pk_specialite'];
-// $sql = "INSERT INTO utilisateur (utilisateur.nom, utilisateur.prenom, utilisateur.nb_session, utilisateur.loginId, utilisateur.image, utilisateur.email, utilisateur.specialite)
-//         VALUES ('".$_POST['nom']."', '".$_POST['prenom']."', '".$_POST['nbSessions']."', '".$_POST['id']."', '".$_POST['image']."', '".$_POST['email']."', '".$resultat['pk_specialite']."');";
-// $stmt = $db->prepare($sql);
-// $stmt->execute();
-// session_start();
-// unset($_SESSION['newUser']);
-// header("Location: ./feed.php?id={$_SESSION['id']}");
+$sql = "INSERT INTO utilisateur (utilisateur.nom, utilisateur.prenom, utilisateur.nb_session, utilisateur.loginId, utilisateur.image, utilisateur.email, utilisateur.specialite)
+         VALUES ('".$_POST['nom']."', '".$_POST['prenom']."', '".$_POST['nbSessions']."', '".$_POST['id']."', '".$_POST['image']."', '".$_POST['email']."', '".$resultat['pk_specialite']."');";
+ $stmt = $db->prepare($sql);
+ $stmt->execute();
+ echo "FUCK";
+ try{
+   session_start();
+   echo "session";
+   unset($_SESSION['newUser']);
+   echo "unset";
+   header("Location: ./feed.php?id={$_SESSION['id']}");
+ }catch{echo "oups";}
 ?>
