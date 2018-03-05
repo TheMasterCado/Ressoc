@@ -7,13 +7,14 @@ if($resultat['nb'] == 0){
   $stmt = $db->prepare($sql);
   $stmt->execute();
 }
-$sql = "SELECT pk_specialite FROM specialite WHERE nom='".$_POST['specialite']."'";
-$resultat = $db->query($sql)->fetch();
-$sql = "INSERT INTO utilisateur (utilisateur.nom, utilisateur.prenom, utilisateur.nb_session, utilisateur.loginId, utilisateur.image, utilisateur.email, utilisateur.specialite)
-        VALUES ('".$_POST['nom']."', '".$_POST['prenom']."', '".$_POST['nbSessions']."', '".$_POST['id']."', '".$_POST['image']."', '".$_POST['email']."', '".$resultat['pk_specialite']."');";
-$stmt = $db->prepare($sql);
-$stmt->execute();
-session_start();
-unset($_SESSION['newUser']);
-header("Location: ./feed.php?id={$_SESSION['id']}");
+echo "yeah";
+// $sql = "SELECT pk_specialite FROM specialite WHERE nom = '".$_POST['specialite']."'";
+// $resultat = $db->query($sql)->fetch();
+// $sql = "INSERT INTO utilisateur (utilisateur.nom, utilisateur.prenom, utilisateur.nb_session, utilisateur.loginId, utilisateur.image, utilisateur.email, utilisateur.specialite)
+//         VALUES ('".$_POST['nom']."', '".$_POST['prenom']."', '".$_POST['nbSessions']."', '".$_POST['id']."', '".$_POST['image']."', '".$_POST['email']."', '".$resultat['pk_specialite']."');";
+// $stmt = $db->prepare($sql);
+// $stmt->execute();
+// session_start();
+// unset($_SESSION['newUser']);
+// header("Location: ./feed.php?id={$_SESSION['id']}");
 ?>

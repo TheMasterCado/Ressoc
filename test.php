@@ -2,5 +2,5 @@
 require 'bd.php';
 $sql = "SELECT COUNT(*) AS nb FROM specialite WHERE nom = '"."blabla"."';";
 $resultat = $db->query($sql)->fetch();
-  var_dump($resultat);
+  echo $resultat['nb'];
 ?>
