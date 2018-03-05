@@ -22,7 +22,7 @@ header("Location: ./index.php");
   <input type="text" name="prenom" value="<?=$_POST['newUser']['prenom']?>" required>
   <br>
   <label for="nom">Nom</label>
-  <input type="text" name="nom" value="<?=$_SESSION['newUser']['nom']?>" required>
+  <input type="text" name="nom" value="<?=$_POST['newUser']['nom']?>" required>
   <br>
   <label for="nbSessions">Nombre de sessions en informatique</label>
   <input type="number" name="nbSessions" min="1" max="6" required>
@@ -30,9 +30,9 @@ header("Location: ./index.php");
   <label for="specialite">Spécialité (facultatif)</label>
   <input type="text" name="specialite">
   <br>
-  <input type="hidden" name="email" value="<?=$_SESSION['newUser']['email']?>">
-  <input type="hidden" name="image" value="<?=$_SESSION['newUser']['image']?>">
-  <input type="hidden" name="id" value="<?=$_SESSION['id']?>">
+  <input type="hidden" name="email" value="<?=$_POST['newUser']['email']?>">
+  <input type="hidden" name="image" value="<?=$_POST['newUser']['image']?>">
+  <input type="hidden" name="id" value="<?=$_POST['id']?>">
   <input type="submit" value="Valider">
 </form>
 </body>
