@@ -1,7 +1,12 @@
 <?php
 session_start();
-if(!isset($_SESSION['id']))
+if(isset($_SESSION['id'])) {
+  if(isset($_SESSION['newUser'])
+    header("Location: ./nouvelUtilisateur.php");
+}
+else {
   header("Location: ./index.php");
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,12 +16,15 @@ if(!isset($_SESSION['id']))
   </head>
   <body>
 <?php
-  require 'bd.php';
-  $sql = "SELECT * FROM publication WHERE loginID={$_SESSION['id']}";
-  $resultat = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-  foreach ($resultat as $pos => $publication) {
-    $publication['texte']
-  }
+echo $_GET['id'];
+echo intval($_GET['id']);
+  // require 'bd.php';
+  // $sql = "SELECT * FROM publication WHERE fk_utilisateur =
+  //         (SELECT pk_utilisateur FROM utilisateur WHERE loginID = {$_GET['id']});";
+  // $resultat = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+  // foreach ($resultat as $pos => $publication) {
+  //   echo $publication['texte'];
+  // }
 ?>
   </body>
 </html>
