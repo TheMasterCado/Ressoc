@@ -1,6 +1,6 @@
 <?php
 require 'bd.php';
 $sql = "SELECT * FROM specialite;";
-while($resultat = $db->query($sql)->fetch())
+$resultat = $db->query($sql)->fetchAll();
   var_dump($resultat);
 ?>
