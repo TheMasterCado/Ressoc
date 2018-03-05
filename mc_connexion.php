@@ -1,7 +1,7 @@
 <?php
   require('bd.php');
   session_start();
-  $id = intval($_POST['id']);
+  $id = $_POST['id'];
   $_SESSION['id'] = $id;
   $sql = "SELECT count(*) AS nb FROM utilisateur WHERE loginID={$id};";
   $resultat = $db->query($sql)->fetch();
@@ -10,6 +10,6 @@
     echo "NEW";
   }
   else {
-    echo $id;
+    echo "EXISTING";
   }
  ?>

@@ -23,7 +23,7 @@
       if (data == "NEW")
         window.location.replace("./nouvelUtilisateur.php");
       else {
-        window.location.replace("./feed.php?id=" + data);
+        window.location.replace("./feed.php?id=" + profile.getId());
       }
     });
   }
