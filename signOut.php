@@ -14,6 +14,6 @@
          window.location.replace("./index.php");
       }
       </script>
-        <div style="display: hidden;" class="g-signin2" data-onsuccess="onSignIn"></div>
+        <div data-width="0" data-height="0" class="g-signin2" data-onsuccess="onSignIn"></div>
   </body>
 </html>
