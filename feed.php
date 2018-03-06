@@ -15,7 +15,7 @@ $feedDe = $db->query($sql)->fetch();
 <html>
 <head>
   <meta charset="utf-8">
-  <title>feed</title>
+  <title>Feed de <?= $feedDe['prenom']." ".$feedDe['nom'] ?></title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="./CSS/feed.css">
 </head>
@@ -27,7 +27,7 @@ $feedDe = $db->query($sql)->fetch();
 
   </script>
   <div id="sidenav">
-    <h3>Feed de <?= $feedDe['prenom']." ".$feedDe['nom'] ?></h3>
+    <h6>Feed de <?= $feedDe['prenom']." ".$feedDe['nom'] ?></h3>
     <?php if($_GET['id'] == $_SESSION['id']) { ?>
       <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#nouvellePublication">Nouvelle publication</button>
     <?php } ?>

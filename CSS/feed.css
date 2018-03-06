@@ -30,8 +30,9 @@ textarea {
   padding-top: 20px; /* Place content 60px from the top */
 }
 
-#sidenav h3 {
+#sidenav h6 {
   margin-bottom: 20px;
+  color: #fff;
 }
 
 #sidenav button, #sidenav a {
