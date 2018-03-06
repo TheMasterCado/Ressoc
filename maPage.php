@@ -17,7 +17,7 @@
         </div>
         <div class="modal-body">
           <form id="form_nouvellePublication">
-            <textarea name="contenu" rows="4" placeholder="Votre publication..." required></textarea><br>
+            <textarea class="form-control" name="contenu" rows="4" placeholder="Votre publication" required></textarea><br>
             <br>
             <input class="form-control" type="text" name="specialite" placeholder="Catégorie de la publication(facultatif)">
             <br>
