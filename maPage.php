@@ -3,7 +3,7 @@
   <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
   <script>
     function traiterNouvellePub() {
-      $.post("./mc_creerPublication.php", toJSON($("#form_nouvellePublication").serializeArray()), function(data) {
+      $.post("http://themastercado.com/mc_creerPublication.php", toJSON($("#form_nouvellePublication").serializeArray()), function(data) {
           location.reload(true);
         });
     }
