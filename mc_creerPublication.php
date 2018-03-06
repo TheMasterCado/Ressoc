@@ -16,7 +16,7 @@ $fk_type_publication = $db->query($sql)->fetch();
 $sql = "SELECT pk_utilisateur FROM utilisateur WHERE loginID = '".$_SESSION['id']."';";
 $fk_utilisateur = $db->query($sql)->fetch();
 $sql = "INSERT INTO publication (publication.texte, publication.fk_type_publication, publication.fk_utilisateur, publication.fk_specialite)
-VALUES ('".$_POST['contenu']."', ".$fk_type_publication['pk_type_publication'].", ".$fk_utilisateur['pk_utilisateur'].", ".((isset($specialite))) ? $specialite['pk_specialite'] : "NULL").");";
+VALUES ('".$_POST['contenu']."', ".$fk_type_publication['pk_type_publication'].", ".$fk_utilisateur['pk_utilisateur'].", ".((isset($specialite)) ? $specialite['pk_specialite'] : "NULL").");";
 $stmt = $db->prepare($sql);
 $stmt->execute();
 ?>
