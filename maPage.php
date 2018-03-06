@@ -3,7 +3,7 @@
   <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
   <script>
     function traiterNouvellePub() {
-      $.post("http://themastercado.com/mc_creerPublication.php", toJSON($("#form_nouvellePublication").serializeArray()), function(data) {
+      $.post("./mc_creerPublication.php", toJSON($("#form_nouvellePublication").serializeArray()), function(data) {
           location.reload(true);
         });
     }
@@ -16,13 +16,12 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
-          <form id="form_nouvellePublication" action="http://themastercado.com/mc_creerPublication.php" method="post">
+          <form id="form_nouvellePublication">
             <textarea name="contenu" rows="4" placeholder="Votre publication..." required></textarea><br>
             <label for="specialte">Catégorie de la publication (facultatif)</label>
             <input type="text" name="specialite"> <br>
             <input type="checkbox" name="estQuestion" value="oui">
             <label for="estQuestion">Ceci est une question.</label>
-            <input type="submit" name="sd" value="yo">
           </form>
         </div>
         <div class="modal-footer">
