@@ -5,8 +5,7 @@
     function traiterNouvellePub() {
       $.post("./mc_creerPublication.php", toJSON($("#form_nouvellePublication").serializeArray()), function(data) {
           location.reload(true);
-        }
-      });
+        });
     }
   </script>
   <div class="modal fade" id="nouvellePublication" role="dialog">
