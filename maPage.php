@@ -12,14 +12,14 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Nouvelle publication</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
           <form id="form_nouvellePublication">
-            <textarea name="contenu" rows="4" placeholder="Votre publication..." required></textarea>
+            <textarea name="contenu" rows="4" placeholder="Votre publication..." required></textarea><br>
             <label for="specialte">Catégorie de la publication (facultatif)</label>
-            <input type="text" name="specialite">
+            <input type="text" name="specialite"> <br>
             <input type="checkbox" name="estQuestion" value="oui">
             <label for="estQuestion">Ceci est une question.</label>
           </form>

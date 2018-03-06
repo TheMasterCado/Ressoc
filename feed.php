@@ -15,6 +15,7 @@ require 'bd.php';
     <meta charset="utf-8">
     <title>feed</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./CSS/feed.css">
   </head>
   <body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -31,30 +32,6 @@ require 'bd.php';
     echo $publication['texte'] . "<br>";
   }
 ?>
-
-<div class="modal fade" id="nouvellePublication" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Nouvelle publication</h4>
-      </div>
-      <div class="modal-body">
-        <form id="form_nouvellePublication">
-          <textarea name="contenu" rows="4" placeholder="Votre publication..." required></textarea>
-          <label for="specialte">Catégorie de la publication (facultatif)</label>
-          <input type="text" name="specialite">
-          <input type="checkbox" name="estQuestion" value="oui">
-          <label for="estQuestion">Ceci est une question.</label>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal" onclick="traiterNouvellePub()">Valider</button>
-      </div>
-    </div>
-
-  </div>
-</div>
 
 <?php require "maPage.php"; ?>
   </body>
