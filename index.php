@@ -11,6 +11,12 @@
   <script src="https://apis.google.com/js/platform.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script>
+  <?php if(isset($_GET['signOut'])) { ?>
+  $(function() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut();
+  });
+  <?php } ?>
   function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
     $.post("./mc_connexion.php", {
