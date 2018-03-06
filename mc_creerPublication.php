@@ -1,4 +1,5 @@
 <?php
+session_start();
 require 'bd.php';
 if($_POST['specialite'] != "") {
   $sql = "SELECT COUNT(*) AS nb FROM specialite WHERE nom = '".$_POST['specialite']."';";

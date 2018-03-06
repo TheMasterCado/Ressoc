@@ -3,7 +3,7 @@
   <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
   <script>
     function traiterNouvellePub() {
-      $.post("./mc_creerPublication.php", toJSON($("#form_nouvellePublication").serializeArray()), function(data) {
+      $.post("./mc_creerPublication.php", $("#form_nouvellePublication").serialize(), function(data) {
           location.reload(true);
         });
     }
