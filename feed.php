@@ -19,11 +19,9 @@ require 'bd.php';
   <body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="./JS/utils.js"></script>
-  <nav>
 <?php if($_GET['id'] == $_SESSION['id']) { ?>
     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#nouvellePublication">Nouvelle publication</button>
 <?php } ?>
-  </nav>
 <?php
   $sql = "SELECT * FROM publication WHERE fk_utilisateur =
   (SELECT pk_utilisateur FROM utilisateur WHERE loginID = {$_GET['id']} AND fk_publication = NULL);";
