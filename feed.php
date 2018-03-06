@@ -34,6 +34,6 @@ require 'bd.php';
 
 
 
-<?php require maPage.php; ?>
+<?php require "maPage.php"; ?>
   </body>
 </html>
