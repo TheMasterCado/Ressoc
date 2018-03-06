@@ -28,9 +28,9 @@ require 'bd.php';
   </script>
   <div id="sidenav">
     <?php if($_GET['id'] == $_SESSION['id']) { ?>
-      <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#nouvellePublication">Nouvelle publication</button>
+      <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#nouvellePublication">Nouvelle publication</button>
     <?php } ?>
-    <button type="button" class="btn btn-info btn-lg" onclick="signOut()">Se déconnecter</button>
+    <button type="button" class="btn btn-info btn-sm" onclick="signOut()">Se déconnecter</button>
   </div>
   <div id="main">
 
