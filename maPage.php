@@ -16,12 +16,13 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
-          <form id="form_nouvellePublication">
+          <form id="form_nouvellePublication" action="http://themastercado.com/mc_creerPublication.php" method="post">
             <textarea name="contenu" rows="4" placeholder="Votre publication..." required></textarea><br>
             <label for="specialte">Catégorie de la publication (facultatif)</label>
             <input type="text" name="specialite"> <br>
             <input type="checkbox" name="estQuestion" value="oui">
             <label for="estQuestion">Ceci est une question.</label>
+            <input type="submit" name="sd" value="yo">
           </form>
         </div>
         <div class="modal-footer">
