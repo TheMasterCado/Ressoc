@@ -18,8 +18,11 @@
         </div>
         <div class="modal-body">
           <form id="form_nouvellePublication">
-            <!-- VERIFIER LES CHAMPS NECESSAIRES (titre, message, checkbox question, etc) -->
-            <input type="text" name="titre" placeholder="Titre de la publication">
+            <textarea name="contenu" rows="4" placeholder="Votre publication..." required></textarea>
+            <label for="specialte">Catégorie de la publication (facultatif)</label>
+            <input type="text" name="specialite">
+            <input type="checkbox" name="estQuestion" value="oui">
+            <label for="estQuestion">Ceci est une question.</label>
           </form>
         </div>
         <div class="modal-footer">
