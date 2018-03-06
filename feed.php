@@ -10,6 +10,8 @@ if(!isset($_SESSION['id']))
     <title>feed</title>
   </head>
   <body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="./JS/utils.js"></script>
 <?php
   require 'bd.php';
   $sql = "SELECT * FROM publication WHERE loginID={$_SESSION['id']}";
@@ -18,5 +20,9 @@ if(!isset($_SESSION['id']))
     $publication['texte']
   }
 ?>
+
+
+
+<?php require maPage.php; ?>
   </body>
 </html>
