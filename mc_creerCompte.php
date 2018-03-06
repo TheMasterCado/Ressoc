@@ -12,9 +12,9 @@ if($_POST['specialite'] != "") {
   $specialite = $db->query($sql)->fetch();
 }
 $sql = "INSERT INTO utilisateur (utilisateur.nom, utilisateur.prenom, utilisateur.nb_session,
-        utilisateur.loginID, utilisateur.image, utilisateur.email, utilisateur.fk_specialite)
+        utilisateur.loginID, utilisateur.image, utilisateur.email".((isset($specialite)) ? ", publication.fk_specialite" : "").")
         VALUES ('".$_POST['nom']."', '".$_POST['prenom']."', ".$_POST['nbSessions'].", '".$_POST['id']."',
-        '".$_POST['image']."', '".$_POST['email']."', ".((isset($specialite))) ? $specialite['pk_specialite'] : "NULL").");";
+        '".$_POST['image']."', '".$_POST['email']."'".((isset($specialite))) ? ", ".$specialite['pk_specialite'] : "").");";
 $stmt = $db->prepare($sql);
 $stmt->execute();
 session_start();
