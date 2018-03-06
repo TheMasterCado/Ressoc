@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(isset($_SESSION['id'] && isset($_GET['id']))) {
+if(isset($_SESSION['id']) && isset($_GET['id'])) {
   if(isset($_SESSION['newUser']))
   header("Location: ./nouvelUtilisateur.php");
 }
@@ -31,6 +31,7 @@ $feedDe = $db->query($sql)->fetch();
     <?php if($_GET['id'] == $_SESSION['id']) { ?>
       <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#nouvellePublication">Nouvelle publication</button>
     <?php } ?>
+
     <a class="btn btn-info btn-sm" href="./feed.php?id=<?= $_SESSION['id'] ?>">Mon feed</a>
     <a class="btn btn-info btn-sm" href="./index.php?signOut">Se déconnecter</a>
   </div>
