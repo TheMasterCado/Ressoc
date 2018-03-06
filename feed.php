@@ -33,7 +33,7 @@ $feedDe = $db->query($sql)->fetch();
     <?php } ?>
 
     <a class="btn btn-info btn-sm" href="./feed.php?id=<?= $_SESSION['id'] ?>">Mon feed</a>
-    <a class="btn btn-info btn-sm" href="./index.php?signOut">Se déconnecter</a>
+    <a class="btn btn-info btn-sm" href="./signOut.php">Se déconnecter</a>
   </div>
   <div id="main">
 
