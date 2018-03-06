@@ -19,6 +19,7 @@ textarea {
 
 #sidenav {
   height: 100%; /* 100% Full-height */
+  text-align: center;
   width: 200px; /* 0 width - change this with JavaScript */
   position: fixed; /* Stay in place */
   z-index: 1; /* Stay on top */
@@ -30,5 +31,7 @@ textarea {
 }
 
 #sidenav button {
-  padding: 8px 8px 8px 32px;
+  padding: 8px;
+  width: 80%;
+  margin: 10px;
 }
