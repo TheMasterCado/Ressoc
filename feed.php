@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(isset($_SESSION['id'])) {
+if(isset($_SESSION['id'] && isset($_GET['id']))) {
   if(isset($_SESSION['newUser']))
   header("Location: ./nouvelUtilisateur.php");
 }
@@ -8,6 +8,8 @@ else {
   header("Location: ./index.php");
 }
 require 'bd.php';
+$sql = "SELECT prenom, nom FROM utilisateur WHERE loginID = '".$_GET['id']."';";
+$feedDe = $db->query($sql)->fetch();
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,15 +24,15 @@ require 'bd.php';
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="./JS/utils.js"></script>
   <script>
-    function signOut() {
-      window.location.replace("./index.php?signOut");
-    }
+
   </script>
   <div id="sidenav">
+    <h3>Feed de <?= $feedDe['prenom']." ".$feedDe['nom'] ?></h3>
     <?php if($_GET['id'] == $_SESSION['id']) { ?>
       <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#nouvellePublication">Nouvelle publication</button>
     <?php } ?>
-    <button type="button" class="btn btn-info btn-sm" onclick="signOut()">Se déconnecter</button>
+    <a class="btn btn-info btn-sm" href="./feed.php?id=<?= $_SESSION['id'] ?>">Mon feed</a>
+    <a class="btn btn-info btn-sm" href="./index.php?signOut">Se déconnecter</a>
   </div>
   <div id="main">
 

@@ -15,9 +15,9 @@
     $(function() {
       gapi.load('auth2', function() {
         gapi.auth2.init();
-        var auth2 = gapi.auth2.getAuthInstance();
-        auth2.signOut();
       });
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut();
     });
     <?php } ?>
     function onSignIn(googleUser) {
@@ -30,7 +30,7 @@
         image: profile.getImageUrl()
       }, function(data) {
         if (data == "NEW")
-        window.location.replace("./nouvelUtilisateur.php");
+          window.location.replace("./nouvelUtilisateur.php");
         else {
           window.location.replace("./feed.php?id=" + profile.getId());
         }
