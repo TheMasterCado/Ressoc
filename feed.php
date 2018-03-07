@@ -41,7 +41,7 @@ $feedDe = $db->query($sql)->fetch();
     (SELECT pk_utilisateur FROM utilisateur WHERE loginID = {$_GET['id']} AND fk_publication IS NULL);";
     $resultat = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     foreach ($resultat as $pos => $publication) {
-      echo "<div class='well well-sm'>" . $publication['texte'] . "</div>";
+      echo "<div class='card-block'>" . $publication['texte'] . "</div>";
     }
     ?>
   </div>
