@@ -36,16 +36,14 @@ $feedDe = $db->query($sql)->fetch();
     <a class="btn btn-info btn-sm" href="./signOut.php">Se déconnecter</a>
   </div>
   <div id="main">
-    <div class="card">
     <?php
     $sql = "SELECT * FROM publication WHERE fk_utilisateur =
     (SELECT pk_utilisateur FROM utilisateur WHERE loginID = {$_GET['id']} AND fk_publication IS NULL);";
     $resultat = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     foreach ($resultat as $pos => $publication) {
-      echo "<div class='card-block'>" . $publication['texte'] . "</div>";
+      echo "<div class='card'>" . $publication['texte'] . "</div>";
     }
     ?>
-  </div>
   </div>
 
   <?php require "maPage.php"; ?>
