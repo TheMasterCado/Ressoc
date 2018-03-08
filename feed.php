@@ -39,31 +39,27 @@ $publications = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
       val: valeur
     }, function(data) {
         var points = parseInt($(el).parent().siblings(".card-subtitle").children("strong").text(), 10);
-        if($(el).text() == "Bien (+1)") {
-          if(valeur == 0) {
-            points -= 1;
-            $(el).attr("valeur", 1);
-          }
-          else {
-            points += ($(el).siblings(".selected").length == 0) ? 1 : 2;
-            $(el).attr("valeur", 0);
-          }
-        }
-        else {
-          if(valeur == 0) {
-            points += 1;
-            $(el).attr("valeur", -1);
-          }
-          else {
-            points -= ($(el).siblings(".selected").length == 0) ? 1 : 2;
-            $(el).attr("valeur", 0);
-          }
-        }
-          $(el).parent().siblings(".card-subtitle").children("strong").text(points);
-          $(el).toggleClass("selected");
-          $(el).siblings(".card-link").toggleClass("selected", false);
-        });
+        if(valeur != 0)
+          points += valeur;
+        else
+          points += $(el).hasClass("vert") ? -1 : 1;
+        points *= ($(el).siblings(".selected").length == 0) ? 1 : 2;
+        $(el).parent().siblings(".card-subtitle").children("strong").text(points);
+        deselectionner($(el).siblings(".card-link").eq(0));
+        selectionner(el);
+      });
   }
+
+  function deselectionner(el) {
+    $(el).toggleClass("selected", false);
+    $(el).attr("valeur", $(el).hasClass("vert") ? 1 : -1);
+  }
+
+  function selectionner(el) {
+    $(el).toggleClass("selected", true);
+    $(el).attr("valeur", 0);
+  }
+
   </script>
   <div id="sidenav">
     <h6>Feed de <?= $feedDe['prenom']." ".$feedDe['nom'] ?></h6>
