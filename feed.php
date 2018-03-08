@@ -40,9 +40,9 @@ $publications = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }, function(data) {
         var points = parseInt($(el).parent().siblings(".card-subtitle").children("strong").text(), 10);
         if(valeur != 0)
-          var diff += valeur;
+          var diff = valeur;
         else
-          var diff += $(el).hasClass("vert") ? -1 : 1;
+          var diff = $(el).hasClass("vert") ? -1 : 1;
         diff *= ($(el).siblings(".selected").length == 0) ? 1 : 2;
         $(el).parent().siblings(".card-subtitle").children("strong").text(points + diff);
         deselectionner($(el).siblings(".card-link").eq(0));
