@@ -52,7 +52,7 @@ body {
 
 a.selected {
   font-weight: bold;
-  color: #fe1;
+  color: #ed0 !important;
 }
 
 .lien-vote {

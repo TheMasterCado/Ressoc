@@ -32,23 +32,37 @@ $publications = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="./JS/utils.js"></script>
   <script>
-  function traiterPoints(valeur, pk_publication, el) {
+  function traiterPoints(pk_publication, el) {
+    var valeur = $(el).attr("valeur");
     $.post("./mc_traiterVotes.php", {
       pub: pk_publication,
       val: valeur
     }, function(data) {
         $(el).toggleClass("selected");
         $(el).siblings(".card-link").toggleClass("selected", false);
-        var points = parseInt($(el).parent().siblings(".card-subtitle").children("span").text(), 10);
-        if(valeur != 0)
-          points += valeur;
-        else
-          if($(el).text() == "Bien (+1)")
+        var points = parseInt($(el).parent().siblings(".card-subtitle").children("strong").text(), 10);
+        if($(el).text() == "Bien (+1)") {
+          if(valeur == 0) {
             points -= 1;
-          else
+            $(el).attr("valeur", 1);
+          }
+          else {
             points += 1;
-        $(el).parent().siblings(".card-subtitle").children("span").text(points);
-    });
+            $(el).attr("valeur", 0);
+          }
+        }
+        else {
+          if(valeur == 0) {
+            points += 1;
+            $(el).attr("valeur", -1);
+          }
+          else {
+            points -= 1;
+            $(el).attr("valeur", 0);
+          }
+        }
+          $(el).parent().siblings(".card-subtitle").children("strong").text(points);
+        });
   }
   </script>
   <div id="sidenav">
@@ -71,24 +85,22 @@ $publications = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
       $points = 0;
       $voteCurrentUser = 0;
       foreach ($votes as $pos => $vote) {
-        $points += intval($vote['valeur']);
+        $points += $vote['valeur'];
         if($vote['fk_utilisateur'] == $currentUser['pk_utilisateur'])
-          $voteCurrentUser = intval($vote['valeur']);
+          $voteCurrentUser = $vote['valeur'];
       }
     ?>
     <div class='card'>
       <div class="card-body">
         <h6 class="card-subtitle mb-2 text-muted">
-          <span><?= $points ?></span>points - par <?= $feedDe['prenom'] . " " . $feedDe['nom'] ?>
+          <strong><?= $points ?></strong> points - par <?= $feedDe['prenom'] . " " . $feedDe['nom'] ?>
         </h6>
         <p class="card-text"><?= $publication['texte'] ?></p>
         <span class="lien-vote">
-          <a href="#" class="card-link <?= ($voteCurrentUser == 1) ? "selected" : "text-success" ?>"
-             onclick="traiterPoints(<?= ($voteCurrentUser == 1) ? "0" : "1" ?>,
-                     <?= $publication['pk_publication'] ?>, this)">Bien (+1)</a>
-          <a href="#" class="card-link <?= ($voteCurrentUser == -1) ? "selected" : "text-danger" ?>"
-             onclick="traiterPoints(<?= ($voteCurrentUser == -1) ? "0" : "-1" ?>,
-                      <?= $publication['pk_publication'] ?>, this">Mauvais (-1)</a>
+          <a href="#" valeur="<?= ($voteCurrentUser == 1) ? "0" : "1" ?>" class="card-link <?= ($voteCurrentUser == 1) ? "selected" : "text-success" ?>"
+             onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Bien (+1)</a>
+          <a href="#" valeur="<?= ($voteCurrentUser == 1) ? "0" : "-1" ?>" class="card-link <?= ($voteCurrentUser == -1) ? "selected" : "text-danger" ?>"
+             onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this">Mauvais (-1)</a>
         </span>
             <a href="#" class="card-link">Commentaires</a>
       </div>
