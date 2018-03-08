@@ -102,7 +102,7 @@ $publications = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
           <a href="#" valeur="<?= ($voteCurrentUser == -1) ? "0" : "-1" ?>" class="card-link rouge <?= ($voteCurrentUser == -1) ? "selected" : "" ?>"
              onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Mauvais (-1)</a>
         </span>
-            <a href="#" class="card-link">Commentaires</a>
+            <a href="#" class="card-link lien-com">Commentaires</a>
       </div>
     </div>
     <?php } ?>
