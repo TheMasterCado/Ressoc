@@ -37,6 +37,14 @@ body {
   color: #fff;
 }
 
+#sidenav-footer {
+  height: 10%;
+  position: fixed;
+  bottom: 0;
+  margin-bottom: 10px;
+  color: #ddd;
+}
+
 #sidenav button, #sidenav a {
   padding: 8px;
   width: 80%;
