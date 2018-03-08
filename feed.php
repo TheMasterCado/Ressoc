@@ -38,8 +38,6 @@ $publications = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
       pub: pk_publication,
       val: valeur
     }, function(data) {
-        $(el).toggleClass("selected");
-        $(el).siblings(".card-link").toggleClass("selected", false);
         var points = parseInt($(el).parent().siblings(".card-subtitle").children("strong").text(), 10);
         if($(el).text() == "Bien (+1)") {
           if(valeur == 0) {
@@ -62,6 +60,8 @@ $publications = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
           }
         }
           $(el).parent().siblings(".card-subtitle").children("strong").text(points);
+          $(el).toggleClass("selected");
+          $(el).siblings(".card-link").toggleClass("selected", false);
         });
   }
   </script>

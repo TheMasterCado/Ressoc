@@ -64,6 +64,5 @@ a.rouge {
 }
 
 a.lien-com {
-  position: fixed;
-  right: 0;
+  float: right;
 }
