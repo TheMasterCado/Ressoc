@@ -45,7 +45,7 @@ $publications = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
             $(el).attr("valeur", 1);
           }
           else {
-            points += ($(".selected").length == 0) ? 1 : 2;
+            points += ($(el).siblings(".selected").length == 0) ? 1 : 2;
             $(el).attr("valeur", 0);
           }
         }
@@ -55,7 +55,7 @@ $publications = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
             $(el).attr("valeur", -1);
           }
           else {
-            points -= ($(".selected").length == 0) ? 1 : 2;
+            points -= ($(el).siblings(".selected").length == 0) ? 1 : 2;
             $(el).attr("valeur", 0);
           }
         }
