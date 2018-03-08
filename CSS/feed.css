@@ -38,11 +38,11 @@ body {
 }
 
 #sidenav-footer {
-  height: 10%;
+  width: 100%;
   position: fixed;
   bottom: 0;
-  margin-bottom: 10px;
-  color: #ddd;
+
+  color: #999;
 }
 
 #sidenav button, #sidenav a {
