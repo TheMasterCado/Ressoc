@@ -62,3 +62,7 @@ a.vert {
 a.rouge {
   color: #dc3545;
 }
+
+.stay-right {
+  float: right;
+}

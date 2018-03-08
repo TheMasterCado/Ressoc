@@ -94,7 +94,7 @@ $publications = array_reverse($publications);
       <div class="card-body">
         <h6 class="card-subtitle mb-3 text-muted">
           <strong><?= $points ?></strong> points - par <?= $feedDe['prenom'] . " " . $feedDe['nom'] ?>
-          <span class="pull-right">Catégorie: <strong><?php
+          <span class="stay-right">Catégorie: <strong><?php
             if(!empty($publication['fk_specialite'])) {
               $sql = "SELECT nom FROM specialite WHERE pk_specialite = ".$publication['fk_specialite'].";";
               $specialite = $db->query($sql)->fetch();
@@ -102,7 +102,7 @@ $publications = array_reverse($publications);
             }
             else
               echo "Aucune";
-            ?></span>
+            ?></strong></span>
         </h6>
         <p class="card-text"><?= $publication['texte'] ?></p>
         <span>
@@ -111,7 +111,7 @@ $publications = array_reverse($publications);
           <a href="#" valeur="<?= ($voteCurrentUser == -1) ? "0" : "-1" ?>" class="card-link rouge <?= ($voteCurrentUser == -1) ? "selected" : "" ?>"
              onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Mauvais (-1)</a>
         </span>
-            <a href="#" class="card-link pull-right">Commentaires</a>
+            <a href="#" class="card-link stay-right">Commentaires</a>
       </div>
     </div>
     <?php } ?>
