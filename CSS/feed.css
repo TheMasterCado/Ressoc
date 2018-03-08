@@ -63,6 +63,11 @@ a.rouge {
   color: #dc3545;
 }
 
+p.card-text {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
 .stay-right {
   float: right;
 }
