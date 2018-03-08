@@ -44,7 +44,7 @@ foreach ($publication as $pos => $publication) {
   <script src="./JS/utils.js"></script>
   <script>
   function traiterPoints(valeur, pk_publication, el) {
-    $.post("./mc_traitervotes.php", {
+    $.post("./mc_traiterVotes.php", {
       pub: pk_publication,
       val: valeur
     }, function(data) {

@@ -22,9 +22,8 @@
       }, function(data) {
         if (data == "NEW")
           window.location.replace("./nouvelUtilisateur.php");
-        else {
+        else
           window.location.replace("./feed.php?id=" + profile.getId());
-        }
       });
     }
     </script>
