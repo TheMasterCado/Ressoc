@@ -50,9 +50,9 @@ $feedDe = $db->query($sql)->fetch();
             <?= 0 . " points - par " . $feedDe['prenom'] . " " . $feedDe['nom'] ?>
           </h6>
           <p class="card-text"><?= $publication['texte'] ?></p>
-          <a class="card-link text-success" onclick="traiterPoints(1, <?= $publication['pk_publication'] ?>)">Bien (+1)</a>
-          <a class="card-link text-danger" onclick="traiterPoints(-1, <?= $publication['pk_publication'] ?>)">Mauvais (-1)</a>
-          <a class="card-link">Commentaires</a>
+          <a href="#" class="card-link text-success" onclick="traiterPoints(1, <?= $publication['pk_publication'] ?>)">Bien (+1)</a>
+          <a href="#" class="card-link text-danger" onclick="traiterPoints(-1, <?= $publication['pk_publication'] ?>)">Mauvais (-1)</a>
+          <a href="#" class="card-link">Commentaires</a>
         </div>
       </div>
     <?php } ?>
