@@ -40,7 +40,7 @@ $feedDe = $db->query($sql)->fetch();
   <div id="main">
     <?php
     $sql = "SELECT * FROM publication WHERE fk_utilisateur =
-    (SELECT pk_utilisateur FROM utilisateur WHERE loginID = {$_GET['id']}) AND fk_publication IS NULL);";
+    (SELECT pk_utilisateur FROM utilisateur WHERE loginID = {$_GET['id']}) AND fk_publication IS NULL;";
     $resultat = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     foreach ($resultat as $pos => $publication) {
     ?>
