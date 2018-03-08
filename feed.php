@@ -38,10 +38,10 @@ $publications = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     <?php if($_GET['id'] == $_SESSION['id']) { ?>
       <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#nouvellePublication">Nouvelle publication</button>
     <?php } ?>
-    
+
     <a class="btn btn-info btn-sm" href="./feed.php?id=<?= $_SESSION['id'] ?>">Mon feed</a>
     <a class="btn btn-info btn-sm" href="./signOut.php">Se déconnecter</a>
-    <div class="sidenav-footer">
+    <div id="sidenav-footer">
       <h6>Connecté en tant que <br> <?= $currentUser['prenom']." ".$currentUser['nom'] ?></h6>
       </div>
     </div>
