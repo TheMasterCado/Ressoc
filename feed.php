@@ -97,10 +97,10 @@ $publications = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         </h6>
         <p class="card-text"><?= $publication['texte'] ?></p>
         <span class="lien-vote">
-          <a href="#" valeur="<?= ($voteCurrentUser == 1) ? "0" : "1" ?>" class="card-link <?= ($voteCurrentUser == 1) ? "selected" : "text-success" ?>"
+          <a href="#" valeur="<?= ($voteCurrentUser == 1) ? "0" : "1" ?>" class="card-link text-success <?= ($voteCurrentUser == 1) ? "selected" : "" ?>"
              onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Bien (+1)</a>
-          <a href="#" valeur="<?= ($voteCurrentUser == 1) ? "0" : "-1" ?>" class="card-link <?= ($voteCurrentUser == -1) ? "selected" : "text-danger" ?>"
-             onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this">Mauvais (-1)</a>
+          <a href="#" valeur="<?= ($voteCurrentUser == -1) ? "0" : "-1" ?>" class="card-link text-danger <?= ($voteCurrentUser == -1) ? "selected" : "" ?>"
+             onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Mauvais (-1)</a>
         </span>
             <a href="#" class="card-link">Commentaires</a>
       </div>
