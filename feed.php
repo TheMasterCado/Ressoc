@@ -24,7 +24,9 @@ $feedDe = $db->query($sql)->fetch();
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="./JS/utils.js"></script>
   <script>
-
+    function traiterPoints(valeur, pk_publication) {
+      //todo
+    }
   </script>
   <div id="sidenav">
     <h6>Feed de <?= $feedDe['prenom']." ".$feedDe['nom'] ?></h3>
@@ -38,7 +40,7 @@ $feedDe = $db->query($sql)->fetch();
   <div id="main">
     <?php
     $sql = "SELECT * FROM publication WHERE fk_utilisateur =
-    (SELECT pk_utilisateur FROM utilisateur WHERE loginID = {$_GET['id']} AND fk_publication IS NULL);";
+    (SELECT pk_utilisateur FROM utilisateur WHERE loginID = {$_GET['id']}) AND fk_publication IS NULL);";
     $resultat = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     foreach ($resultat as $pos => $publication) {
     ?>
@@ -48,8 +50,8 @@ $feedDe = $db->query($sql)->fetch();
             <?= 0 . " points - par " . $feedDe['prenom'] . " " . $feedDe['nom'] ?>
           </h6>
           <p class="card-text"><?= $publication['texte'] ?></p>
-          <a class="card-link text-success">Bien (+1)</a>
-          <a class="card-link text-danger">Mauvais (-1)</a>
+          <a class="card-link text-success" onclick="traiterPoints(1, <?= $publication['pk_publication'] ?>)">Bien (+1)</a>
+          <a class="card-link text-danger" onclick="traiterPoints(-1, <?= $publication['pk_publication'] ?>)">Mauvais (-1)</a>
           <a class="card-link">Commentaires</a>
         </div>
       </div>
