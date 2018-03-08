@@ -18,17 +18,6 @@ $currentUser = $db->query($sql)->fetch();
 $sql = "SELECT * FROM publication WHERE
         fk_utilisateur = ".$feedDe['pk_utilisateur']." AND fk_publication IS NULL;";
 $publications = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-foreach ($publications as $pos => $publication) {
-  $sql = "SELECT * FROM vote WHERE fk_publication = ".$publication['pk_publication'].";";
-  $votes = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-  $publication['points'] = 0;
-  $publication['voteCurrentUser'] = 0;
-  foreach ($votes as $pos => $vote) {
-    $publication['points'] += $vote['valeur'];
-    if($vote['fk_utilisateur'] == $currentUser['pk_utilisateur'])
-      $publication['voteCurrentUser'] = $vote['valeur'];
-  }
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -77,20 +66,29 @@ foreach ($publications as $pos => $publication) {
   <div id="main">
     <?php
     foreach ($publications as $pos => $publication) {
+      $sql = "SELECT * FROM vote WHERE fk_publication = ".$publication['pk_publication'].";";
+      $votes = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+      $points = 0;
+      $voteCurrentUser = 0;
+      foreach ($votes as $pos => $vote) {
+        $points += $vote['valeur'];
+        if($vote['fk_utilisateur'] == $currentUser['pk_utilisateur'])
+          $voteCurrentUser = $vote['valeur'];
+      }
     ?>
     <div class='card'>
       <div class="card-body">
         <h6 class="card-subtitle mb-2 text-muted">
-          <span><?= $publication['points'] ?></span>points - par <?= $feedDe['prenom'] . " " . $feedDe['nom'] ?>
+          <span><?= $points ?></span>points - par <?= $feedDe['prenom'] . " " . $feedDe['nom'] ?>
         </h6>
         <p class="card-text"><?= $publication['texte'] ?></p>
         <span class="lien-vote">
-          <a href="#" class="card-link <?= ($publication['voteCurrentUser'] == 1) ? "selected" : "text-success" ?>"
-             onclick="traiterPoints(<?= ($publication['voteCurrentUser'] == 1) ? "0" : "1" ?>,
+          <a href="#" class="card-link <?= ($voteCurrentUser == 1) ? "selected" : "text-success" ?>"
+             onclick="traiterPoints(<?= ($voteCurrentUser == 1) ? "0" : "1" ?>,
                      <?= $publication['pk_publication'] ?>, this)">Bien (+1)</a>
-          <a href="#" class="card-link <?= ($publication['voteCurrentUser'] == -1) ? "selected" : "text-danger" ?>"
-             onclick="traiterPoints(<?= ($publication['voteCurrentUser'] == -1) ? "0" : "-1" ?>,
-                      <?= $publication['pk_publication'] ?>, this)">Mauvais (-1)</a>
+          <a href="#" class="card-link <?= ($voteCurrentUser == -1) ? "selected" : "text-danger" ?>"
+             onclick="traiterPoints(<?= ($voteCurrentUser == -1) ? "0" : "-1" ?>,
+                      <?= $publication['pk_publication'] ?>, this">Mauvais (-1)</a>
         </span>
             <a href="#" class="card-link">Commentaires</a>
       </div>
