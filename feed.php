@@ -47,7 +47,7 @@ $publications = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
             $(el).attr("valeur", 1);
           }
           else {
-            points += 1;
+            points += ($(".selected").length == 0) ? 1 : 2;
             $(el).attr("valeur", 0);
           }
         }
@@ -57,7 +57,7 @@ $publications = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
             $(el).attr("valeur", -1);
           }
           else {
-            points -= 1;
+            points -= ($(".selected").length == 0) ? 1 : 2;
             $(el).attr("valeur", 0);
           }
         }
@@ -96,10 +96,10 @@ $publications = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
           <strong><?= $points ?></strong> points - par <?= $feedDe['prenom'] . " " . $feedDe['nom'] ?>
         </h6>
         <p class="card-text"><?= $publication['texte'] ?></p>
-        <span class="lien-vote">
-          <a href="#" valeur="<?= ($voteCurrentUser == 1) ? "0" : "1" ?>" class="card-link text-success <?= ($voteCurrentUser == 1) ? "selected" : "" ?>"
+        <span>
+          <a href="#" valeur="<?= ($voteCurrentUser == 1) ? "0" : "1" ?>" class="card-link vert <?= ($voteCurrentUser == 1) ? "selected" : "" ?>"
              onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Bien (+1)</a>
-          <a href="#" valeur="<?= ($voteCurrentUser == -1) ? "0" : "-1" ?>" class="card-link text-danger <?= ($voteCurrentUser == -1) ? "selected" : "" ?>"
+          <a href="#" valeur="<?= ($voteCurrentUser == -1) ? "0" : "-1" ?>" class="card-link rouge <?= ($voteCurrentUser == -1) ? "selected" : "" ?>"
              onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Mauvais (-1)</a>
         </span>
             <a href="#" class="card-link">Commentaires</a>

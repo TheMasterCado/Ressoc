@@ -55,6 +55,10 @@ a.selected {
   color: #ed0 !important;
 }
 
-.lien-vote {
-  margin-right: 5px;
+a.vert {
+  color: #28a745;
+}
+
+a.rouge {
+  color: #dc3545;
 }
