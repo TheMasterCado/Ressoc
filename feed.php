@@ -41,9 +41,19 @@ $feedDe = $db->query($sql)->fetch();
     (SELECT pk_utilisateur FROM utilisateur WHERE loginID = {$_GET['id']} AND fk_publication IS NULL);";
     $resultat = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     foreach ($resultat as $pos => $publication) {
-      echo "<div class='card'>" . $publication['texte'] . "</div>";
-    }
     ?>
+      <div class='card'>
+        <div class="card-body">
+          <h6 class="card-subtitle mb-2 text-muted">
+            <?= 0 . " points - par " . $feedDe['prenom'] . " " . $feedDe['nom'] ?>
+          </h6>
+          <p class="card-text"><?= $publication['texte'] ?></p>
+          <a class="card-link text-success">Bien (+1)</a>
+          <a class="card-link text-danger">Mauvais (-1)</a>
+          <a class="card-link">Commentaires</a>
+        </div>
+      </div>
+    <?php } ?>
   </div>
 
   <?php require "maPage.php"; ?>
