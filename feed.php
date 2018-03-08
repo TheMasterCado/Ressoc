@@ -18,6 +18,7 @@ $currentUser = $db->query($sql)->fetch();
 $sql = "SELECT * FROM publication WHERE
         fk_utilisateur = ".$feedDe['pk_utilisateur']." AND fk_publication IS NULL;";
 $publications = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+$publications = array_reverse($publications);
 ?>
 <!DOCTYPE html>
 <html>
