@@ -92,9 +92,9 @@ $publications = array_reverse($publications);
     ?>
     <div class='card'>
       <div class="card-body">
-        <h6 class="card-subtitle mb-2 text-muted">
+        <h6 class="card-subtitle mb-3 text-muted">
           <strong><?= $points ?></strong> points - par <?= $feedDe['prenom'] . " " . $feedDe['nom'] ?>
-          <strong class="pull-right">Catégorie: <?php
+          <span class="pull-right">Catégorie: <strong><?php
             if(!empty($publication['fk_specialite'])) {
               $sql = "SELECT nom FROM specialite WHERE pk_specialite = ".$publication['fk_specialite'].";";
               $specialite = $db->query($sql)->fetch();
@@ -102,7 +102,7 @@ $publications = array_reverse($publications);
             }
             else
               echo "Aucune";
-            ?></strong>
+            ?></span>
         </h6>
         <p class="card-text"><?= $publication['texte'] ?></p>
         <span>
