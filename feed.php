@@ -38,7 +38,7 @@ $publications = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
       val: valeur
     }, function(data) {
         $(el).toggleClass("selected");
-        $(el).siblings(".card-link").toggleClass("selected");
+        $(el).siblings(".card-link").toggleClass("selected", false);
         var points = parseInt($(el).parent().siblings(".card-subtitle").children("span").text(), 10);
         if(valeur != 0)
           points += valeur;
@@ -71,9 +71,9 @@ $publications = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
       $points = 0;
       $voteCurrentUser = 0;
       foreach ($votes as $pos => $vote) {
-        $points += $vote['valeur'];
+        $points += intval($vote['valeur']);
         if($vote['fk_utilisateur'] == $currentUser['pk_utilisateur'])
-          $voteCurrentUser = $vote['valeur'];
+          $voteCurrentUser = intval($vote['valeur']);
       }
     ?>
     <div class='card'>
