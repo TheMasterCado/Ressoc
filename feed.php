@@ -59,7 +59,6 @@ foreach ($publication as $pos => $publication) {
           else
             points += 1;
         $(el).parent().siblings(".card-subtitle").children("span").text(points);
-      }
     });
   }
   </script>
@@ -78,24 +77,24 @@ foreach ($publication as $pos => $publication) {
   <div id="main">
     <?php
     foreach ($publications as $pos => $publication) {
-      ?>
-      <div class='card'>
-        <div class="card-body">
-          <h6 class="card-subtitle mb-2 text-muted">
-            <span><?= $publication['points'] ?></span>points - par <?= $feedDe['prenom'] . " " . $feedDe['nom'] ?>
-          </h6>
-          <p class="card-text"><?= $publication['texte'] ?></p>
-          <span class="lien-vote">
-            <a href="#" class="card-link <?= ($publication['voteCurrentUser'] == 1) ? "selected" : "text-success" ?>"
-               onclick="traiterPoints(<?= ($publication['voteCurrentUser'] == 1) ? "0" : "1" ?>,
-                        <?= $publication['pk_publication'] ?>, this)">Bien (+1)</a>
-            <a href="#" class="card-link <?= ($publication['voteCurrentUser'] == -1) ? "selected" : "text-danger" ?>"
-               onclick="traiterPoints(<?= ($publication['voteCurrentUser'] == -1) ? "0" : "-1" ?>,
-                        <?= $publication['pk_publication'] ?>, this)">Mauvais (-1)</a>
-          </span>
-          <a href="#" class="card-link">Commentaires</a>
-        </div>
+    ?>
+    <div class='card'>
+      <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-muted">
+          <span><?= $publication['points'] ?></span>points - par <?= $feedDe['prenom'] . " " . $feedDe['nom'] ?>
+        </h6>
+        <p class="card-text"><?= $publication['texte'] ?></p>
+        <span class="lien-vote">
+          <a href="#" class="card-link <?= ($publication['voteCurrentUser'] == 1) ? "selected" : "text-success" ?>"
+             onclick="traiterPoints(<?= ($publication['voteCurrentUser'] == 1) ? "0" : "1" ?>,
+                     <?= $publication['pk_publication'] ?>, this)">Bien (+1)</a>
+          <a href="#" class="card-link <?= ($publication['voteCurrentUser'] == -1) ? "selected" : "text-danger" ?>"
+             onclick="traiterPoints(<?= ($publication['voteCurrentUser'] == -1) ? "0" : "-1" ?>,
+                      <?= $publication['pk_publication'] ?>, this)">Mauvais (-1)</a>
+        </span>
+            <a href="#" class="card-link">Commentaires</a>
       </div>
+    </div>
     <?php } ?>
   </div>
 
