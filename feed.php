@@ -18,7 +18,7 @@ $currentUser = $db->query($sql)->fetch();
 $sql = "SELECT * FROM publication WHERE
         fk_utilisateur = ".$feedDe['pk_utilisateur']." AND fk_publication IS NULL;";
 $publications = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-foreach ($publication as $pos => $publication) {
+foreach ($publications as $pos => $publication) {
   $sql = "SELECT * FROM vote WHERE fk_publication = ".$publication['pk_publication'].";";
   $votes = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
   $publication['points'] = 0;
