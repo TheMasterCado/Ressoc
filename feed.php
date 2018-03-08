@@ -46,7 +46,10 @@ $publications = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         diff *= ($(el).siblings(".selected").length == 0) ? 1 : 2;
         $(el).parent().siblings(".card-subtitle").children("strong").text(points + diff);
         deselectionner($(el).siblings(".card-link").eq(0));
-        selectionner(el);
+        if($(el).hasClass("selected"))
+          deselectionner(el);
+        else
+          selectionner(el);
       });
   }
 
