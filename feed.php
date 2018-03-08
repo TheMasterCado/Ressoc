@@ -68,7 +68,7 @@ $publications = array_reverse($publications);
   <div id="sidenav">
     <h6>Feed de <?= $feedDe['prenom']." ".$feedDe['nom'] ?></h6>
     <?php if($_GET['id'] == $_SESSION['id']) { ?>
-      <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#nouvellePublication">Nouvelle publication</button>
+    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#nouvellePublication">Nouvelle publication</button>
     <?php } ?>
 
     <a class="btn btn-info btn-sm" href="./feed.php?id=<?= $_SESSION['id'] ?>">Mon feed</a>
@@ -94,6 +94,15 @@ $publications = array_reverse($publications);
       <div class="card-body">
         <h6 class="card-subtitle mb-2 text-muted">
           <strong><?= $points ?></strong> points - par <?= $feedDe['prenom'] . " " . $feedDe['nom'] ?>
+          <strong class="pull-right">Catégorie: <?php
+            if(!empty($publication['fk_specialite'])) {
+              $sql = "SELECT nom FROM specialite WHERE pk_specialite = ".$publication['fk_specialite'].";";
+              $specialite = $db->query($sql)->fetch();
+              echo $specialite['nom'];
+            }
+            else
+              echo "Aucune";
+            ?></strong>
         </h6>
         <p class="card-text"><?= $publication['texte'] ?></p>
         <span>
@@ -102,7 +111,7 @@ $publications = array_reverse($publications);
           <a href="#" valeur="<?= ($voteCurrentUser == -1) ? "0" : "-1" ?>" class="card-link rouge <?= ($voteCurrentUser == -1) ? "selected" : "" ?>"
              onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Mauvais (-1)</a>
         </span>
-            <a href="#" class="card-link lien-com">Commentaires</a>
+            <a href="#" class="card-link pull-right">Commentaires</a>
       </div>
     </div>
     <?php } ?>

@@ -1,6 +1,6 @@
 <?php
 require 'bd.php';
-if($_POST['specialite'] != "") {
+if(!empty(trim($_POST['specialite']))) {
   $sql = "SELECT COUNT(*) AS nb FROM specialite WHERE nom = '".$_POST['specialite']."';";
   $resultat = $db->query($sql)->fetch();
   if($resultat['nb'] == 0){
