@@ -49,3 +49,12 @@ body {
   width: 80%;
   margin: 10px;
 }
+
+a.selected {
+  font-weight: bold;
+  color: #fe1;
+}
+
+.lien-vote {
+  margin-right: 5px;
+}
