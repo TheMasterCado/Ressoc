@@ -106,12 +106,12 @@ $publications = array_reverse($publications);
             </h6>
         <p class="card-text"><?= str_replace("\n", "<br>", $publication['texte']) ?></p>
         <span>
-          <a href="#" valeur="<?= ($voteCurrentUser == 1) ? "0" : "1" ?>" class="card-link vert <?= ($voteCurrentUser == 1) ? "selected" : "" ?>"
+          <a href="javascript:void(null);" valeur="<?= ($voteCurrentUser == 1) ? "0" : "1" ?>" class="card-link vert <?= ($voteCurrentUser == 1) ? "selected" : "" ?>"
              onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Bien (+1)</a>
-          <a href="#" valeur="<?= ($voteCurrentUser == -1) ? "0" : "-1" ?>" class="card-link rouge <?= ($voteCurrentUser == -1) ? "selected" : "" ?>"
+          <a href="javascript:void(null);" valeur="<?= ($voteCurrentUser == -1) ? "0" : "-1" ?>" class="card-link rouge <?= ($voteCurrentUser == -1) ? "selected" : "" ?>"
              onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Mauvais (-1)</a>
         </span>
-            <a href="#" class="card-link stay-right">Commentaires</a>
+            <a href="javascript:void(null);" class="card-link stay-right">Commentaires</a>
       </div>
     </div>
     <?php } ?>
