@@ -103,8 +103,8 @@ $publications = array_reverse($publications);
             else
               echo "Aucune";
             ?></strong></span>
-        </h6>
-        <p class="card-text"><?= $publication['texte'] ?></p>
+            </h6>
+        <p class="card-text"><?= str_replace("\n", "<br>", $publication['texte']) ?></p>
         <span>
           <a href="#" valeur="<?= ($voteCurrentUser == 1) ? "0" : "1" ?>" class="card-link vert <?= ($voteCurrentUser == 1) ? "selected" : "" ?>"
              onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Bien (+1)</a>
