@@ -34,7 +34,7 @@
 }
 
 .lien-feed-utilisateur {
-  color: #5bc0de; 
+  color: #5bc0de;
 }
 
 .lien-feed-utilisateur:hover {
@@ -45,4 +45,20 @@
   padding: 8px;
   width: 80%;
   margin: 10px;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #333;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #222;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #111; 
 }
