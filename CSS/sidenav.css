@@ -31,13 +31,13 @@
   height: 30%;
   width: 194px;
   text-align: left;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .lien-feed-utilisateur {
   color: #5bc0de;
   display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .lien-feed-utilisateur:hover {
