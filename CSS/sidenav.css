@@ -34,6 +34,10 @@
 
 .lien-feed-utilisateur {
   color: #5bc0de;
+  display: block;
+  margin-left: 10px;
+  margin-bottom: 2px;
+  padding: 8px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow-x: hidden;
