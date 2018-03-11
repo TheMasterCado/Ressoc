@@ -11,7 +11,7 @@ require 'bd.php';
 //Infos de l'utilisateur propriétaire du feed
 $sql = "SELECT prenom, nom, pk_utilisateur FROM utilisateur WHERE loginID = '".$_GET['id']."';";
 $feedDe = $db->query($sql)->fetch();
-//Toutes les publications avec les votes associés
+//Toutes les publications
 $sql = "SELECT * FROM publication WHERE
         fk_utilisateur = ".$feedDe['pk_utilisateur']." AND fk_publication IS NULL
         ORDER BY pk_publication DESC;";
@@ -29,7 +29,6 @@ $publications = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 <body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <script src="./JS/utils.js"></script>
   <script>
   function traiterPoints(pk_publication, el) {
     var valeur = $(el).attr("valeur");
@@ -98,7 +97,7 @@ $publications = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
           <a href="javascript:void(null);" valeur="<?= ($voteCurrentUser == -1) ? "0" : "-1" ?>" class="card-link rouge <?= ($voteCurrentUser == -1) ? "selected" : "" ?>"
              onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Mauvais (-1)</a>
         </span>
-            <a href="javascript:void(null);" class="card-link stay-right">Commentaires</a>
+            <a href="./publication.php?id=<?= $publication['pk_publication'] ?>" class="card-link stay-right">Commentaires</a>
       </div>
     </div>
     <?php } ?>
