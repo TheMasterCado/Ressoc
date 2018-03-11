@@ -25,7 +25,6 @@
 
 #liste-utilisateurs {
   overflow-y: scroll;
-  overflow-x: hidden;
   margin: auto;
   margin-top: 50px;
   height: 30%;
@@ -35,9 +34,9 @@
 
 .lien-feed-utilisateur {
   color: #5bc0de;
-  display: block;
   text-overflow: ellipsis;
   white-space: nowrap;
+  overflow-x: hidden;
 }
 
 .lien-feed-utilisateur:hover {
