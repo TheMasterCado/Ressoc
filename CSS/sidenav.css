@@ -37,7 +37,7 @@
   display: block;
   margin: 0;
   margin-left: 10px;
-  padding: 8px;
+  padding: 2px 8px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow-x: hidden;
