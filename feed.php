@@ -16,12 +16,13 @@ $sql = "SELECT * FROM publication WHERE
         fk_utilisateur = ".$feedDe['pk_utilisateur']." AND fk_publication IS NULL
         ORDER BY pk_publication DESC;";
 $publications = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+$titre = "Feed de";
 ?>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Feed de <?= $feedDe['prenom']." ".$feedDe['nom'] ?></title>
+  <title><?= $titre." ".$feedDe['prenom']." ".$feedDe['nom'] ?></title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="./CSS/feed.css">
   <link rel="stylesheet" href="./CSS/sidenav.css">

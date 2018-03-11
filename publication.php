@@ -19,12 +19,13 @@ $commentaires = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 $sql = "SELECT prenom, nom, pk_utilisateur FROM utilisateur WHERE pk_utilisateur =
         (SELECT fk_utilisateur FROM publication WHERE pk_publication = ".$_GET['id'].");";
 $feedDe = $db->query($sql)->fetch();
+$titre = "Publication de";
 ?>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Publication de <?= $feedDe['prenom']." ".$feedDe['nom'] ?></title>
+  <title><?= $titre." ".$feedDe['prenom']." ".$feedDe['nom'] ?></title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="./CSS/feed.css">
   <link rel="stylesheet" href="./CSS/sidenav.css">

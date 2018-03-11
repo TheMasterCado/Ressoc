@@ -7,7 +7,7 @@ $sql = "SELECT prenom, nom, pk_utilisateur FROM utilisateur WHERE loginID = '".$
 $currentUser = $db->query($sql)->fetch();
  ?>
 <div id="sidenav">
-  <h6>Feed de<br><?= $feedDe['prenom']." ".$feedDe['nom'] ?></h6>
+  <h6><?= $titre ?><br><?= $feedDe['prenom']." ".$feedDe['nom'] ?></h6>
   <?php if($_GET['id'] == $_SESSION['id']) { ?>
   <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#nouvellePublication">Nouvelle publication</button>
   <?php } ?>
