@@ -29,12 +29,15 @@
   margin: auto;
   margin-top: 50px;
   height: 30%;
-  width: 190px;
+  width: 194px;
   text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .lien-feed-utilisateur {
   color: #5bc0de;
+  display: block;
 }
 
 .lien-feed-utilisateur:hover {
