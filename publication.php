@@ -86,9 +86,9 @@ $titre = "Publication de";
         </h6>
         <p class="card-text"><?= str_replace("\n", "<br>", $publication['texte']) ?></p>
         <span>
-          <a href="javascript:void(null);" valeur="<?= ($voteCurrentUserPub == 1) ? "0" : "1" ?>" class="card-link vert <?= ($voteCurrentUser == 1) ? "selected" : "" ?>"
+          <a href="javascript:void(null);" valeur="<?= ($voteCurrentUserPub == 1) ? "0" : "1" ?>" class="card-link vert <?= ($voteCurrentUserPub == 1) ? "selected" : "" ?>"
              onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Bien (+1)</a>
-          <a href="javascript:void(null);" valeur="<?= ($voteCurrentUserPub == -1) ? "0" : "-1" ?>" class="card-link rouge <?= ($voteCurrentUser == -1) ? "selected" : "" ?>"
+          <a href="javascript:void(null);" valeur="<?= ($voteCurrentUserPub == -1) ? "0" : "-1" ?>" class="card-link rouge <?= ($voteCurrentUserPub == -1) ? "selected" : "" ?>"
              onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Mauvais (-1)</a>
         </span>
       </div>
