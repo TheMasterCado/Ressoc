@@ -8,6 +8,9 @@ else {
   header("Location: ./index.php");
 }
 require 'bd.php';
+//Infos de l'utilisateur propriétaire du feed
+$sql = "SELECT prenom, nom, pk_utilisateur FROM utilisateur WHERE loginID = '".$_GET['id']."';";
+$feedDe = $db->query($sql)->fetch();
 //Toutes les publications avec les votes associés
 $sql = "SELECT * FROM publication WHERE
         fk_utilisateur = ".$feedDe['pk_utilisateur']." AND fk_publication IS NULL;";
