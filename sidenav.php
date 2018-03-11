@@ -1,7 +1,4 @@
 <?php
-//Infos de l'utilisateur propriétaire du feed
-$sql = "SELECT prenom, nom, pk_utilisateur FROM utilisateur WHERE loginID = '".$_GET['id']."';";
-$feedDe = $db->query($sql)->fetch();
 //Tous les utilisateurs
 $sql = "SELECT prenom, nom, loginID FROM utilisateur ORDER BY prenom ASC;";
 $allUsers = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);

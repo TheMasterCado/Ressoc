@@ -19,43 +19,6 @@ body {
   margin-bottom: 25px;
 }
 
-#sidenav {
-  color: #fff;
-  height: 100%; /* 100% Full-height */
-  text-align: center;
-  width: 200px; /* 0 width - change this with JavaScript */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Stay on top */
-  top: 0; /* Stay at the top */
-  left: 0;
-  background-color: #333; /* Black*/
-  overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 20px; /* Place content 60px from the top */
-}
-
-#sidenav h6 {
-  margin-bottom: 20px;
-}
-
-#sidenav-footer {
-  width: 200px;
-  position: fixed;
-  bottom: 0;
-  color: #999;
-}
-
-#liste-utilisateurs {
-  overflow: scroll;
-  height: 30%;
-  width: 200px;
-}
-
-#sidenav button, #sidenav a {
-  padding: 8px;
-  width: 80%;
-  margin: 10px;
-}
-
 a.selected {
   font-weight: bold;
   color: #ed0 !important;
