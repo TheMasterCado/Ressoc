@@ -17,7 +17,7 @@ $sql = "SELECT * FROM publication WHERE
 $commentaires = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 //Infos sur OP
 $sql = "SELECT prenom, nom, pk_utilisateur FROM utilisateur WHERE pk_utilisateur =
-        (SELECT fk_utilisateur WHERE pk_publication = .".$_GET['id'].");";
+        (SELECT fk_utilisateur FROM publication WHERE pk_publication = .".$_GET['id'].");";
 $feedDe = $db->query($sql)->fetch();
 ?>
 <!DOCTYPE html>
