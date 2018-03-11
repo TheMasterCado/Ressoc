@@ -29,7 +29,7 @@
   margin: auto;
   margin-top: 50px;
   height: 30%;
-  width: 180px;
+  width: 190px;
   text-align: left;
 }
 
@@ -60,5 +60,5 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #111; 
+    background: #111;
 }
