@@ -13,9 +13,9 @@ $sql = "SELECT prenom, nom, pk_utilisateur FROM utilisateur WHERE loginID = '".$
 $feedDe = $db->query($sql)->fetch();
 //Toutes les publications avec les votes associés
 $sql = "SELECT * FROM publication WHERE
-        fk_utilisateur = ".$feedDe['pk_utilisateur']." AND fk_publication IS NULL;";
+        fk_utilisateur = ".$feedDe['pk_utilisateur']." AND fk_publication IS NULL
+        ORDER BY pk_publication DESC;";
 $publications = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-$publications = array_reverse($publications);
 ?>
 <!DOCTYPE html>
 <html>
