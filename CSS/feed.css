@@ -44,6 +44,12 @@ body {
   color: #999;
 }
 
+#liste-utilisateurs {
+  overflow: scroll;
+  height: 30%;
+  width: 200px;
+}
+
 #sidenav button, #sidenav a {
   padding: 8px;
   width: 80%;

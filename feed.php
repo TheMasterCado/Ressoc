@@ -8,12 +8,6 @@ else {
   header("Location: ./index.php");
 }
 require 'bd.php';
-//Infos de l'utilisateur propriétaire du feed
-$sql = "SELECT prenom, nom, pk_utilisateur FROM utilisateur WHERE loginID = '".$_GET['id']."';";
-$feedDe = $db->query($sql)->fetch();
-//Infos de l'utilisateur connecté
-$sql = "SELECT prenom, nom, pk_utilisateur FROM utilisateur WHERE loginID = '".$_SESSION['id']."';";
-$currentUser = $db->query($sql)->fetch();
 //Toutes les publications avec les votes associés
 $sql = "SELECT * FROM publication WHERE
         fk_utilisateur = ".$feedDe['pk_utilisateur']." AND fk_publication IS NULL;";
@@ -65,18 +59,7 @@ $publications = array_reverse($publications);
   }
 
   </script>
-  <div id="sidenav">
-    <h6>Feed de <?= $feedDe['prenom']." ".$feedDe['nom'] ?></h6>
-    <?php if($_GET['id'] == $_SESSION['id']) { ?>
-    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#nouvellePublication">Nouvelle publication</button>
-    <?php } ?>
-
-    <a class="btn btn-info btn-sm" href="./feed.php?id=<?= $_SESSION['id'] ?>">Mon feed</a>
-    <a class="btn btn-info btn-sm" href="./signOut.php">Se déconnecter</a>
-    <div id="sidenav-footer">
-      <h6>Connecté en tant que <br> <?= $currentUser['prenom']." ".$currentUser['nom'] ?></h6>
-    </div>
-  </div>
+  <?php require 'sidenav.php'; ?>
   <div id="main">
     <?php
     foreach ($publications as $pos => $publication) {
