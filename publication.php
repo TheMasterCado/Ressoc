@@ -8,18 +8,9 @@ else {
   header("Location: ./index.php");
 }
 require 'bd.php';
-//publication et les votes
+//publication
 $sql = "SELECT * FROM publication WHERE pk_publication = ".$_GET['id'].";";
 $publication = $db->query($sql)->fetch();
-$sql = "SELECT * FROM vote WHERE fk_publication = ".$_GET['id'].";";
-$votesPub = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-$pointsPub = 0;
-$voteCurrentUserPub = 0;
-foreach ($votesPub as $pos => $vote) {
-  $pointsPub += $vote['valeur'];
-  if($vote['fk_utilisateur'] == $currentUser['pk_utilisateur'])
-    $voteCurrentUserPub = $vote['valeur'];
-}
 //Tous les commentaires
 $sql = "SELECT * FROM publication WHERE
         fk_publication = ".$_GET['id'].";";
@@ -79,6 +70,17 @@ $feedDe = $db->query($sql)->fetch();
     <div class='card'>
       <div class="card-body">
         <h6 class="card-subtitle mb-3 text-muted">
+          <?php
+          $sql = "SELECT * FROM vote WHERE fk_publication = ".$_GET['id'].";";
+          $votesPub = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+          $pointsPub = 0;
+          $voteCurrentUserPub = 0;
+          foreach ($votesPub as $pos => $vote) {
+            $pointsPub += $vote['valeur'];
+            if($vote['fk_utilisateur'] == $currentUser['pk_utilisateur'])
+              $voteCurrentUserPub = $vote['valeur'];
+          }
+           ?>
           <strong><?= $pointsPub ?></strong> points - par <?= $feedDe['prenom'] . " " . $feedDe['nom'] ?>
         </h6>
         <p class="card-text"><?= str_replace("\n", "<br>", $publication['texte']) ?></p>
