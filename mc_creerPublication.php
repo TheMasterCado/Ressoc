@@ -4,7 +4,8 @@ require 'bd.php';
 if(!empty(trim($_POST['specialite']))) {
   $sql = "SELECT COUNT(*) AS nb FROM specialite WHERE nom = :specialite;";
   $stmt = $db->prepare($sql);
-  $resultat = $stmt->execute([':specialite' => $_POST['specialite']])->fetch();
+  $stmt->execute([':specialite' => $_POST['specialite']]);
+  $resultat = $stmt->fetch();
   if($resultat['nb'] == 0){
     $sql = "INSERT INTO specialite (specialite.nom) VALUES (:specialite);";
     $stmt = $db->prepare($sql);
@@ -12,16 +13,19 @@ if(!empty(trim($_POST['specialite']))) {
   }
   $sql = "SELECT pk_specialite FROM specialite WHERE nom = :specialite;";
   $stmt = $db->prepare($sql);
-  $specialite = $stmt->execute([':specialite' => $_POST['specialite']])->fetch();
+  $stmt->execute([':specialite' => $_POST['specialite']]);
+  $specialite = $stmt->fetch();
 }
 
 $sql = "SELECT pk_type_publication FROM type_publication WHERE description = :estQuestion;";
 $stmt = $db->prepare($sql);
-$fk_type_publication = $stmt->execute([':estQuestion' => ((isset($_POST['estQuestion'])) ? "Question" : "Texte")])->fetch();
+$stmt->execute([':estQuestion' => ((isset($_POST['estQuestion'])) ? "Question" : "Texte")]);
+$fk_type_publication = $stmt->fetch();
 
 $sql = "SELECT pk_utilisateur FROM utilisateur WHERE loginID = :id;";
 $stmt = $db->prepare($sql);
-$fk_utilisateur = $stmt->execute([':id' => $_SESSION['id']])->fetch();
+$stmt->execute([':id' => $_SESSION['id']]);
+$fk_utilisateur = $stmt->fetch();
 
 $sql = "INSERT INTO publication (publication.texte, publication.fk_type_publication,
         publication.fk_utilisateur, publication.fk_specialite, publication.fk_publication)
