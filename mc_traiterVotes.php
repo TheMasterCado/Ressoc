@@ -3,11 +3,13 @@ session_start();
 require 'bd.php';
 $sql = "SELECT pk_utilisateur FROM utilisateur WHERE loginID = :id;";
 $stmt = $db->prepare($sql);
-$utilisateur = $stmt->execute([':id' => $_SESSION['id']])->fetch();
+$stmt->execute([':id' => $_SESSION['id']]);
+$utilisateur = $stmt->fetch();
 $sql = "SELECT COUNT(*) AS nb FROM vote WHERE fk_publication = :pub AND
         fk_utilisateur = :pk_utilisateur;";
 $stmt = $db->prepare($sql);
-$resultat = $stmt->execute([':pub' => $_POST['pub'], ':pk_utilisateur' => $utilisateur['pk_utilisateur']])->fetch();
+$stmt->execute([':pub' => $_POST['pub'], ':pk_utilisateur' => $utilisateur['pk_utilisateur']]);
+$resultat = $stmt->fetch();
 if($resultat['nb'] == 0)
   $sql = "INSERT INTO vote (vote.fk_publication, vote.fk_utilisateur, vote.valeur)
           VALUES (:pub, :pk_utilisateur, :val;";
