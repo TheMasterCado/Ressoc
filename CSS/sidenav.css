@@ -25,6 +25,7 @@
 
 #liste-utilisateurs {
   overflow-y: scroll;
+  overflow-x: hidden;
   margin: auto;
   margin-top: 50px;
   height: 30%;
@@ -35,6 +36,7 @@
 #liste-utilisateurs a.lien-feed-utilisateur {
   color: #5bc0de;
   display: block;
+  width: 100%;
   margin: 0;
   margin-left: 10px;
   padding: 2px 8px;
