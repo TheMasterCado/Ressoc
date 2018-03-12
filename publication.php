@@ -9,16 +9,21 @@ else {
 }
 require 'bd.php';
 //publication
-$sql = "SELECT * FROM publication WHERE pk_publication = ".$_GET['id'].";";
-$publication = $db->query($sql)->fetch();
+$sql = "SELECT * FROM publication WHERE pk_publication = :id;";
+$stmt = $db->prepare($sql);
+$stmt->execute([':id' => $_GET['id']]);
+$publication = $stmt->fetch();
 //Tous les commentaires
-$sql = "SELECT * FROM publication WHERE
-        fk_publication = ".$_GET['id'].";";
-$commentaires = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+$sql = "SELECT * FROM publication WHERE fk_publication = :id;";
+$stmt = $db->prepare($sql);
+$stmt->execute([':id' => $_GET['id']]);
+$commentaires = $stmt->fetchAll(PDO::FETCH_ASSOC);
 //Infos sur OP
 $sql = "SELECT prenom, nom, pk_utilisateur FROM utilisateur WHERE pk_utilisateur =
-        (SELECT fk_utilisateur FROM publication WHERE pk_publication = ".$_GET['id'].");";
-$feedDe = $db->query($sql)->fetch();
+        (SELECT fk_utilisateur FROM publication WHERE pk_publication = :id);";
+$stmt = $db->prepare($sql);
+$stmt->execute([':id' => $_GET['id']]);
+$feedDe = $stmt->fetch();
 $titre = "Publication de";
 ?>
 <!DOCTYPE html>
@@ -72,8 +77,10 @@ $titre = "Publication de";
       <div class="card-body">
         <h6 class="card-subtitle mb-3 text-muted">
           <?php
-          $sql = "SELECT * FROM vote WHERE fk_publication = ".$_GET['id'].";";
-          $votesPub = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+          $sql = "SELECT * FROM vote WHERE fk_publication = :id;";
+          $stmt = $db->prepare($sql);
+          $stmt->execute([':id' => $_GET['id']]);
+          $votesPub = $stmt->fetchAll(PDO::FETCH_ASSOC);
           $pointsPub = 0;
           $voteCurrentUserPub = 0;
           foreach ($votesPub as $pos => $vote) {
@@ -96,10 +103,14 @@ $titre = "Publication de";
     <div id="commentaires">
       <?php
       foreach ($commentaires as $pos => $commentaire) {
-        $sql = "SELECT prenom, nom FROM utilisateur WHERE pk_utilisateur = ".$commentaire['fk_utilisateur'].";";
-        $auteur = $db->query($sql)->fetch();
-        $sql = "SELECT * FROM vote WHERE fk_publication = ".$commentaire['pk_publication'].";";
-        $votes = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        $sql = "SELECT prenom, nom FROM utilisateur WHERE pk_utilisateur = :fk_utilisateur;";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([':fk_utilisateur' => $commentaire['fk_utilisateur']]);
+        $auteur = $stmt->fetch();
+        $sql = "SELECT * FROM vote WHERE fk_publication = :pk_publication;";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([':pk_publication' => $commentaire['pk_publication']]);
+        $votes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $points = 0;
         $voteCurrentUser = 0;
         foreach ($votes as $pos => $vote) {

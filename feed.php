@@ -15,9 +15,11 @@ $stmt->execute([':id' => $_GET['id']]);
 $feedDe = $stmt->fetch();
 //Toutes les publications
 $sql = "SELECT * FROM publication WHERE
-        fk_utilisateur = ".$feedDe['pk_utilisateur']." AND fk_publication IS NULL
+        fk_utilisateur = :pk_utilisateur AND fk_publication IS NULL
         ORDER BY pk_publication DESC;";
-$publications = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+$stmt = $db->prepare($sql);
+$stmt->execute([':pk_utilisateur' => $feedDe['pk_utilisateur']]);
+$publications = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $titre = "Feed de";
 ?>
 <!DOCTYPE html>
@@ -69,8 +71,10 @@ $titre = "Feed de";
   <div id="main">
     <?php
     foreach ($publications as $pos => $publication) {
-      $sql = "SELECT * FROM vote WHERE fk_publication = ".$publication['pk_publication'].";";
-      $votes = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+      $sql = "SELECT * FROM vote WHERE fk_publication = :pk_publication;";
+      $stmt = $db->prepare($sql);
+      $stmt->execute([':pk_publication' => $publication['pk_publication']]);
+      $votes = $stmt->fetchAll(PDO::FETCH_ASSOC);
       $points = 0;
       $voteCurrentUser = 0;
       foreach ($votes as $pos => $vote) {
