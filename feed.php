@@ -83,7 +83,7 @@ $titre = "Feed de";
           $voteCurrentUser = $vote['valeur'];
       }
     ?>
-    <div class='card<?= ($publication['description'] == 'Question') ? ' border-question' : '' ?>'>
+    <div class='card <?= ($publication['description'] == 'Question') ? 'border-question' : 'border-texte' ?>'>
       <div class="card-body">
         <h6 class="card-subtitle mb-3 text-muted">
           <strong><?= $points ?></strong> points - par <?= $feedDe['prenom'] . " " . $feedDe['nom'] ?>

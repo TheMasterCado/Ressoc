@@ -9,7 +9,8 @@ else {
 }
 require 'bd.php';
 //publication
-$sql = "SELECT * FROM publication WHERE pk_publication = :id;";
+$sql = "SELECT * FROM publication INNER JOIN type_publication ON
+        fk_type_publication = pk_type_publication WHERE pk_publication = :id;";
 $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $_GET['id']]);
 $publication = $stmt->fetch();
@@ -82,7 +83,7 @@ $titre = "Publication de";
   <?php require 'sidenav.php'; ?>
   <div id="main">
     <div id="publication-originale">
-      <div class='card'>
+      <div class='card <?= ($publication['description'] == 'Question') ? 'border-question' : 'border-texte' ?>'>
         <div class="card-body">
           <h6 class="card-subtitle mb-3 text-muted">
             <?php

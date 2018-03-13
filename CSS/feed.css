@@ -42,6 +42,10 @@ p.card-text {
   float: right;
 }
 
-.border-question {
+card.border-question {
+  border: 5px solid red;
+}
+
+card.border-texte {
   border: 5px solid red;
 }
