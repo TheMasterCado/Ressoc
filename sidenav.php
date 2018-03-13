@@ -8,7 +8,7 @@ $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $_SESSION['id']]);
 $currentUser = $stmt->fetch();
 //Spécialité de l'utilisateur à qui le feed appartient
-if($feedDe['specialite'] != NULL) {
+if($feedDe['fk_specialite'] != NULL) {
 $sql = "SELECT nom FROM specialite WHERE pk_specialite = :specialite;";
 $stmt->prepare($sql);
 $stmt->execute([':specialite' => $feedDe['fk_specialite']]);
