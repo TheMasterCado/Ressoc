@@ -2,26 +2,9 @@
 session_start();
 require 'bd.php';
 
-function markUp($pattern, $replaceBy, $text) {
-  $sections = explode($pattern, $text);
-  $newText = "";
-  foreach ($sections as $pos => $valeur) {
-    if($pos % 2 == 1)
-      $newText .= $replaceBy[0];
-    $newText .= $valeur;
-    if($pos % 2 == 1)
-      $newText .= $replaceBy[1];
-  }
-  return $newText;
-}
+require 'php_utils.php';
 
-$formattedText = markUp("**", ['<strong>', '</strong>'], $_POST['contenu']);
-$formattedText = markUp("//", ['<em>', '</em>'], $formattedText);
-$formattedText = markUp("~~", ['<del>', '</del>'], $formattedText);
-$formattedText = markUp("__", ['<ins>', '</ins>'], $formattedText);
-$formattedText = markUp("^^", ['<sup>', '</sup>'], $formattedText);
-$formattedText = markUp("||", ['<mark>', '</mark>'], $formattedText);
-$formattedText = markUp("@@", ['<code>', '</code>'], $formattedText);
+$formattedText = formatEverything($_POST['contenu']);
 
 if(!empty(trim($_POST['specialite']))) {
   $sql = "SELECT COUNT(*) AS nb FROM specialite WHERE nom = :specialite;";
