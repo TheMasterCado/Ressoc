@@ -18,7 +18,7 @@ $specialiteUser = $stmt->fetch();
  <div id="sidenav">
    <h6><?= $titre ?><br><?= $feedDe['prenom']." ".$feedDe['nom'] ?></h6>
    <img src="<?= $feedDe['image'] ?>">
-   <p>Spécialité: <strong><?= ((isset($specialiteUser['nom']) ? $specialiteUser['nom'] : "Aucune") ?></strong></p>
+   <p>Spécialité: <strong><?= (isset($specialiteUser['nom']) ? $specialiteUser['nom'] : "Aucune") ?></strong></p>
    <p>Nombre de sessions: <strong><?= $feedDe['nb_session'] ?></strong></p>
    <div id="sidenav-buttons">
      <?php if($_GET['id'] == $_SESSION['id']) { ?>
