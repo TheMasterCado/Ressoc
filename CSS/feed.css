@@ -41,3 +41,7 @@ p.card-text {
 .stay-right {
   float: right;
 }
+
+.border-question {
+  border: 5px solid red;
+}
