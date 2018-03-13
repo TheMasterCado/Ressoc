@@ -42,10 +42,10 @@ p.card-text {
   float: right;
 }
 
-.card .border-question {
+.border-question {
   border: 2px solid #dc3545;
 }
 
-.card .border-texte {
+.border-texte {
   border: 2px solid #5bc0de;
 }
