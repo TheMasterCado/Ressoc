@@ -65,7 +65,7 @@ code {
   background-color: #eee;
   border-left: 2px solid #bbb;
   white-space: pre-wrap;
-  color: #303336;
+  color: #303336 !important;
 }
 
 quote {
