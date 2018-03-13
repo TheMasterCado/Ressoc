@@ -71,6 +71,13 @@ $titre = "Publication de";
     $(el).attr("valeur", 0);
   }
 
+  function traiterNouveauCom() {
+    $.post("./mc_creerPublication.php", {
+           'contenu' : $("#nouveauCom").text(),
+           'parent'  : <?= $publication['pk_publication'] ?>}, function(data) {
+      location.reload(true);
+    });
+  }
   </script>
   <?php require 'sidenav.php'; ?>
   <div id="main">
@@ -92,6 +99,17 @@ $titre = "Publication de";
             }
             ?>
             <strong><?= $pointsPub ?></strong> points - par <?= $feedDe['prenom'] . " " . $feedDe['nom'] ?>
+            <span class="stay-right">Catégorie: <strong><?php
+              if(!empty($publication['fk_specialite'])) {
+                $sql = "SELECT nom FROM specialite WHERE pk_specialite = ".$publication['fk_specialite'].";";
+                $specialite = $db->query($sql)->fetch();
+                echo $specialite['nom'];
+              }
+              else
+                echo "Aucune";
+              if($publication['description'] == 'Question')
+                echo " | QUESTION"
+              ?></strong></span>
           </h6>
           <p class="card-text"><?= str_replace("\n", "<br>", $publication['texte']) ?></p>
           <span>
@@ -139,7 +157,7 @@ $titre = "Publication de";
       <?php } ?>
       <div class='card'>
         <div class="card-body">
-          <textarea name="nouveauCom" rows="3" class="card-text form-control" placeholder="Entrez votre commentaire."></textarea>
+          <textarea id="nouveauCom" rows="3" class="card-text form-control" placeholder="Entrez votre commentaire."></textarea>
           <a href="javascript:void(null);" class="card-link stay-right" onclick="">Répondre</a>
         </div>
       </div>
