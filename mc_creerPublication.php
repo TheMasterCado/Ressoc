@@ -32,7 +32,7 @@ function formatEverything($string) {
   $text = markUp("__", ['<ins>', '</ins>'], $text, ["@@"]);
   $text = markUp("^^", ['<sup>', '</sup>'], $text, ["@@"]);
   $text = markUp("##", ['<mark>', '</mark>'], $text, ["@@"]);
-  $text = markUp("@@", ['<code>', '</code>'], $text);
+  $text = markUp("@@", ['<code>', '</code>'], $text, []);
   return $text;
 }
 
