@@ -8,7 +8,7 @@ function markUp($pattern, $replaceBy, $text) {
   foreach ($sections as $pos => $valeur) {
     if($pos % 2 == 1)
       $newText .= $replaceBy[0];
-    $newText .= valeur;
+    $newText .= $valeur;
     if($pos % 2 == 1)
       $newText .= $replaceBy[1];
   }
