@@ -5,7 +5,7 @@ $allUsers = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 //Infos de l'utilisateur connecté
 $sql = "SELECT prenom, nom, pk_utilisateur FROM utilisateur WHERE loginID = :id;";
 $stmt = $db->prepare($sql);
-$stmt->execute([':id'] => $_SESSION['id']);
+$stmt->execute([':id' => $_SESSION['id']]);
 $currentUser = $stmt->fetch();
 //Spécialité de l'utilisateur à qui le feed appartient
 if($feedDe['specialite'] != NULL) {
