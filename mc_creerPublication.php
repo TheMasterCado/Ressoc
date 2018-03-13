@@ -8,7 +8,7 @@ function markUp($pattern, $replaceBy, $text, $omit = []) {
     $biggerSections = explode($o, $text);
     foreach ($biggerSections as $pos => $section) {
       if($i % 2 == 0) {
-        $sections = explode($pattern, $text);
+        $sections = explode($pattern, $section);
         foreach ($sections as $pospos => $valeur) {
           if($pospos % 2 == 1)
             $newText .= $replaceBy[0];
