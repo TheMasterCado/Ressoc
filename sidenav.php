@@ -6,7 +6,7 @@ $allUsers = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 $sql = "SELECT prenom, nom, pk_utilisateur FROM utilisateur WHERE loginID = '".$_SESSION['id']."';";
 $currentUser = $db->query($sql)->fetch();
 //Spécialité de l'utilisateur à qui le feed appartient
-$sql = "SELECT nom FROM specialite WHERE pk_specialite = '".$feedDe['specialite']."';";
+$sql = "SELECT nom FROM specialite WHERE pk_specialite = '".$feedDe['fk_specialite']."';";
 $specialiteUser = $db->query($sql)->fetch();
  ?>
  <div id="sidenav">
