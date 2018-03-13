@@ -1,3 +1,7 @@
-#commentaires card {
+#commentaires .card {
   margin-left: 200px;
+}
+
+#publication-originale .card {
+  border: solid #5bc0de 1px;
 }
