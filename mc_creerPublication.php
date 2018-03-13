@@ -17,6 +17,11 @@ function markUp($pattern, $replaceBy, $text) {
 
 $formattedText = markUp("**", ['<strong>', '</strong>'], $_POST['contenu']);
 $formattedText = markUp("//", ['<em>', '</em>'], $formattedText);
+$formattedText = markUp("~~", ['<del>', '</del>'], $formattedText);
+$formattedText = markUp("__", ['<ins>', '</ins>'], $formattedText);
+$formattedText = markUp("^^", ['<sup>', '</sup>'], $formattedText);
+$formattedText = markUp("||", ['<mark>', '</mark>'], $formattedText);
+$formattedText = markUp("@@", ['<pre>', '</pre>'], $formattedText);
 
 if(!empty(trim($_POST['specialite']))) {
   $sql = "SELECT COUNT(*) AS nb FROM specialite WHERE nom = :specialite;";

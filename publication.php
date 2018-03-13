@@ -76,7 +76,7 @@ $titre = "Publication de";
     $.post("./mc_creerPublication.php", {
            'contenu' : $("#nouveauCom").val(),
            'parent'  : <?= $publication['pk_publication'] ?>}, function(data) {
-    //  location.reload(true);
+      location.reload(true);
     });
   }
   </script>
