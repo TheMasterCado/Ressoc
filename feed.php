@@ -14,11 +14,14 @@ $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $_GET['id']]);
 $feedDe = $stmt->fetch();
 //Toutes les publications
-$sql = "SELECT * FROM publication INNER JOIN type_publication ON fk_type_publication = pk_type_publication
-        WHERE fk_utilisateur = :pk_utilisateur AND fk_publication IS NULL
-        ORDER BY pk_publication DESC;";
+$sql = "SELECT *, SUM(valeur) AS points FROM publication
+        INNER JOIN type_publication ON fk_type_publication = pk_type_publication
+        INNER JOIN vote ON pk_publication = vote.fk_publication
+        WHERE publication.fk_utilisateur = :pk_utilisateur AND publication.fk_publication IS NULL
+        GROUP BY pk_publication
+        ORDER BY :ordre DESC;";
 $stmt = $db->prepare($sql);
-$stmt->execute([':pk_utilisateur' => $feedDe['pk_utilisateur']]);
+$stmt->execute([':pk_utilisateur' => $feedDe['pk_utilisateur'], ':ordre' => (isset($_GET['ordre']) ? $_GET['ordre'] : "pk_publication")]);
 $publications = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $titre = "Feed de";
 ?>
@@ -69,6 +72,10 @@ $titre = "Feed de";
   </script>
   <?php require 'sidenav.php'; ?>
   <div id="main">
+    <select class="form-control" id="ordre">
+      <option>Date</option>
+      <option value="points">Points</option>
+    </select>
     <?php
     foreach ($publications as $pos => $publication) {
       $sql = "SELECT COUNT(*) AS nb FROM publication WHERE fk_publication = :pk_publication;";
@@ -90,7 +97,7 @@ $titre = "Feed de";
     <div class='card <?= ($publication['description'] == 'Question') ? 'border-question' : 'border-texte' ?>'>
       <div class="card-body">
         <h6 class="card-subtitle mb-3 text-muted">
-          <strong><?= $points ?></strong> points - par <?= $feedDe['prenom'] . " " . $feedDe['nom'] ?>
+          <strong><?= $publication['points'] ?></strong> points - par <?= $feedDe['prenom'] . " " . $feedDe['nom'] ?>
           <span class="stay-right">Catégorie: <strong><?php
             if(!empty($publication['fk_specialite'])) {
               $sql = "SELECT nom FROM specialite WHERE pk_specialite = ".$publication['fk_specialite'].";";
