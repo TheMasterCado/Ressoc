@@ -18,7 +18,7 @@ function markUp($pattern, $replaceBy, $text, $omit) {
         }
       }
       else {
-        $newText .= $section;
+        $newText .= $o . $section . $o;
       }
     }
   }
