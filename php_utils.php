@@ -9,6 +9,7 @@ function markUp($pattern, $replaceBy, $text, $omit = NULL) {
           $sections = explode($pattern, $section);
           foreach ($sections as $pospos => $valeur) {
             if($pospos % 2 == 1) {
+              $valeur = str_replace(["<", ">"], ["&lt;", "&gt;"], $string);
               $newText .= $replaceBy[0];
             }
             $newText .= $valeur;
@@ -78,8 +79,8 @@ function markUpLinks($patternStart, $patternEnd, $text, $omit = NULL) {
 }
 
 function formatEverything($string) {
-  str_replace("\n", "<br>", $string);
-  $text = markUp("**", ['<strong>', '</strong>'], $string, ["@@"]);
+  $text = str_replace("\n", "<br>", $string);
+  $text = markUp("**", ['<strong>', '</strong>'], $text, ["@@"]);
   $text = markUp("\"\"", ['<em>', '</em>'], $text, ["@@"]);
   $text = markUp("~~", ['<del>', '</del>'], $text, ["@@"]);
   $text = markUp("__", ['<ins>', '</ins>'], $text, ["@@"]);
