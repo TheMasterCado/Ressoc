@@ -73,12 +73,11 @@ $titre = "Publication de";
   }
 
   function traiterNouveauCom() {
-    // $.post("./mc_creerPublication.php", {
-    //        'contenu' : $("#nouveauCom").text(),
-    //        'parent'  : <?= $publication['pk_publication'] ?>}, function(data) {
-    //   location.reload(true);
-    // });
-    console.log($("#nouveauCom").text());
+    $.post("./mc_creerPublication.php", {
+           'contenu' : $("#nouveauCom").val(),
+           'parent'  : <?= $publication['pk_publication'] ?>}, function(data) {
+      location.reload(true);
+    });
   }
   </script>
   <?php require 'sidenav.php'; ?>
