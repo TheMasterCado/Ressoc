@@ -54,7 +54,7 @@ AFTER INSERT
    ON publication FOR EACH ROW
 
 BEGIN
-	INSERT INTO vote (vote.fk_publication, vote.fk_utilisateur, vote.valeur) 
+	INSERT INTO vote (vote.fk_publication, vote.fk_utilisateur, vote.valeur)
     VALUES (NEW.pk_publication, NEW.fk_utilisateur, 1);
 END */;;
 DELIMITER ;
@@ -97,7 +97,7 @@ CREATE TABLE `type_publication` (
 
 LOCK TABLES `type_publication` WRITE;
 /*!40000 ALTER TABLE `type_publication` DISABLE KEYS */;
-INSERT INTO `type_publication` VALUES (1,'Question'),(2,'Texte');
+INSERT INTO `type_publication` VALUES (1,'Question'),(2,'Texte'),(3,'BonneReponse');
 /*!40000 ALTER TABLE `type_publication` ENABLE KEYS */;
 UNLOCK TABLES;
 
