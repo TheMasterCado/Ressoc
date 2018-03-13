@@ -79,7 +79,7 @@ function markUpLinks($patternStart, $patternEnd, $text, $omit = NULL) {
 
 function formatEverything($string) {
   $text = markUp("**", ['<strong>', '</strong>'], $string, ["@@"]);
-  $text = markUp("//", ['<em>', '</em>'], $text, ["@@"]);
+  $text = markUp("\"\"", ['<em>', '</em>'], $text, ["@@"]);
   $text = markUp("~~", ['<del>', '</del>'], $text, ["@@"]);
   $text = markUp("__", ['<ins>', '</ins>'], $text, ["@@"]);
   $text = markUp("^^", ['<sup>', '</sup>'], $text, ["@@"]);
