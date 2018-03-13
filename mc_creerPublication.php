@@ -6,13 +6,11 @@ function markUp($pattern, $replaceBy, $text) {
   $sections = split($pattern, $text);
   $newText = "";
   foreach ($sections as $pos => $valeur) {
-    if($pos % 2 == 1) {
-      $newText .= $replaceBy[0]
-    }
+    if($pos % 2 == 1)
+      $newText .= $replaceBy[0];
     $newText .= valeur;
-    if($pos % 2 == 1) {
-      $newText .= $replaceBy[1]
-    }
+    if($pos % 2 == 1)
+      $newText .= $replaceBy[1];
   }
   return $newText;
 }
