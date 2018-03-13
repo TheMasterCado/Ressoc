@@ -2,24 +2,35 @@
 session_start();
 require 'bd.php';
 
-function markUp($pattern, $replaceBy, $text, $omit) {
+function markUp($pattern, $replaceBy, $text, $omit = NULL) {
   $newText = "";
-  foreach ($omit as $i => $o) {
-    $biggerSections = explode($o, $text);
-    foreach ($biggerSections as $pos => $section) {
-      if($pos % 2 == 0) {
-        $sections = explode($pattern, $section);
-        foreach ($sections as $pospos => $valeur) {
-          if($pospos % 2 == 1)
+  if(!empty($omit)) {
+    foreach ($omit as $i => $o) {
+      $biggerSections = explode($o, $text);
+      foreach ($biggerSections as $pos => $section) {
+        if($pos % 2 == 0) {
+          $sections = explode($pattern, $section);
+          foreach ($sections as $pospos => $valeur) {
+            if($pospos % 2 == 1)
             $newText .= $replaceBy[0];
-          $newText .= $valeur;
-          if($pospos % 2 == 1)
+            $newText .= $valeur;
+            if($pospos % 2 == 1)
             $newText .= $replaceBy[1];
+          }
+        }
+        else {
+          $newText .= $o . $section . $o;
         }
       }
-      else {
-        $newText .= $o . $section . $o;
-      }
+    }
+  }
+  else {
+    foreach ($sections as $pospos => $valeur) {
+      if($pospos % 2 == 1)
+      $newText .= $replaceBy[0];
+      $newText .= $valeur;
+      if($pospos % 2 == 1)
+      $newText .= $replaceBy[1];
     }
   }
   return $newText;
