@@ -78,6 +78,7 @@ function markUpLinks($patternStart, $patternEnd, $text, $omit = NULL) {
 }
 
 function formatEverything($string) {
+  str_replace("\n", "<br>", $string);
   $text = markUp("**", ['<strong>', '</strong>'], $string, ["@@"]);
   $text = markUp("\"\"", ['<em>', '</em>'], $text, ["@@"]);
   $text = markUp("~~", ['<del>', '</del>'], $text, ["@@"]);

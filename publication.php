@@ -148,7 +148,7 @@ $titre = "Publication de";
           <h6 class="card-subtitle mb-3 text-muted">
             <strong><?= $points ?></strong> points - par <?= $auteur['prenom'] . " " . $auteur['nom'] ?>
           </h6>
-          <p class="card-text"><?= str_replace("\n", "<br>", $commentaire['texte']) ?></p>
+          <p class="card-text"><?= $commentaire['texte'] ?></p>
           <span>
             <a href="javascript:void(null);" valeur="<?= ($voteCurrentUser == 1) ? "0" : "1" ?>" class="card-link vert <?= ($voteCurrentUser == 1) ? "selected" : "" ?>"
                onclick="traiterPoints(<?= $commentaire['pk_publication'] ?>, this)">Bien (+1)</a>
