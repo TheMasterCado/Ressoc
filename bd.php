@@ -12,4 +12,3 @@
     echo 'Erreur SQL : ' . $e->getMessage() . '<br />';
   }
 ?>
-s
