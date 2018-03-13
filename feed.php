@@ -96,7 +96,7 @@ $titre = "Feed de";
             else
               echo "Aucune";
             if($publication['description'] == 'Question')
-              echo " | QUESTION"
+              echo " | QUESTION";
             ?></strong></span>
             </h6>
         <p class="card-text"><?= $publication['texte'] ?></p>
