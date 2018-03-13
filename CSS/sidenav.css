@@ -37,6 +37,10 @@
   margin: 0;
 }
 
+#sidenav img {
+  margin-bottom: 5px;
+}
+
 #liste-utilisateurs a.lien-feed-utilisateur {
   color: #5bc0de;
   display: block;
