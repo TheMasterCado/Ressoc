@@ -3,7 +3,7 @@ session_start();
 require 'bd.php';
 
 function markUp($pattern, $replaceBy, $text) {
-  $sections = split($pattern, $text);
+  $sections = explode($pattern, $text);
   $newText = "";
   foreach ($sections as $pos => $valeur) {
     if($pos % 2 == 1)
