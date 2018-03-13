@@ -8,6 +8,7 @@ $currentUser = $db->query($sql)->fetch();
  ?>
 <div id="sidenav">
   <h6><?= $titre ?><br><?= $feedDe['prenom']." ".$feedDe['nom'] ?></h6>
+  <img src="<?= $feedDe['image'] ?>">
   <?php if($_GET['id'] == $_SESSION['id']) { ?>
   <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#nouvellePublication">Nouvelle publication</button>
   <?php } ?>
