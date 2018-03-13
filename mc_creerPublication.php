@@ -15,13 +15,32 @@ function markUp($pattern, $replaceBy, $text) {
   return $newText;
 }
 
-$formattedText = markUp("**", ['<strong>', '</strong>'], $_POST['contenu']);
-$formattedText = markUp("//", ['<em>', '</em>'], $formattedText);
-$formattedText = markUp("~~", ['<del>', '</del>'], $formattedText);
-$formattedText = markUp("__", ['<ins>', '</ins>'], $formattedText);
-$formattedText = markUp("^^", ['<sup>', '</sup>'], $formattedText);
-$formattedText = markUp("||", ['<mark>', '</mark>'], $formattedText);
-$formattedText = markUp("@@", ['<code>', '</code>'], $formattedText);
+function hold(&$string, $delimiter) {
+  $sections = explode($pattern, $text);
+  $inHold = [];
+  foreach ($sections as $pos => $valeur) {
+    if($pos % 2 == 1) {
+      array_push($inHold, $delimiter . $valeur . $delimiter);
+      $valeur = "%s";
+    }
+  }
+  return $inHold;
+}
+
+function formatEverything($string) {
+  $codeBlocks = hold($string, "@@");
+  $text = markUp("**", ['<strong>', '</strong>'], $string);
+  $text = markUp("//", ['<em>', '</em>'], $text);
+  $text = markUp("~~", ['<del>', '</del>'], $text);
+  $text = markUp("__", ['<ins>', '</ins>'], $text);
+  $text = markUp("^^", ['<sup>', '</sup>'], $text);
+  $text = markUp("##", ['<mark>', '</mark>'], $text);
+  $text = sprintf($text, $codeBlocks);
+  $text = markUp("@@", ['<code>', '</code>'], $text);
+  return $text;
+}
+
+$formattedText = formatEverything($_POST['contenu']);
 
 if(!empty(trim($_POST['specialite']))) {
   $sql = "SELECT COUNT(*) AS nb FROM specialite WHERE nom = :specialite;";

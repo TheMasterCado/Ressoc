@@ -63,3 +63,12 @@ code {
   white-space: pre-wrap;
   color: #303336;
 }
+
+quote {
+  padding: 2px 5px;
+  display: block;
+  background-color: #fed;
+  border-left: 2px solid #cba;
+  white-space: pre-wrap;
+  color: #000;
+}
