@@ -2,40 +2,36 @@
 session_start();
 require 'bd.php';
 
-function markUp($pattern, $replaceBy, $text) {
-  $sections = explode($pattern, $text);
+function markUp($pattern, $replaceBy, $text, $omit = []) {
   $newText = "";
-  foreach ($sections as $pos => $valeur) {
-    if($pos % 2 == 1)
-      $newText .= $replaceBy[0];
-    $newText .= $valeur;
-    if($pos % 2 == 1)
-      $newText .= $replaceBy[1];
+  foreach ($omit as $i => $o) {
+    $biggerSections = explode($o, $text);
+    foreach ($biggerSections as $pos => $section) {
+      if($i % 2 == 0) {
+        $sections = explode($pattern, $text);
+        foreach ($sections as $pospos => $valeur) {
+          if($pospos % 2 == 1)
+            $newText .= $replaceBy[0];
+          $newText .= $valeur;
+          if($pospos % 2 == 1)
+            $newText .= $replaceBy[1];
+        }
+      }
+      else {
+        $newText .= $section;
+      }
+    }
   }
   return $newText;
 }
 
-function hold(&$string, $delimiter) {
-  $sections = explode($pattern, $text);
-  $inHold = [];
-  foreach ($sections as $pos => $valeur) {
-    if($pos % 2 == 1) {
-      array_push($inHold, $delimiter . $valeur . $delimiter);
-      $valeur = "%s";
-    }
-  }
-  return $inHold;
-}
-
 function formatEverything($string) {
-  $codeBlocks = hold($string, "@@");
   $text = markUp("**", ['<strong>', '</strong>'], $string);
   $text = markUp("//", ['<em>', '</em>'], $text);
   $text = markUp("~~", ['<del>', '</del>'], $text);
   $text = markUp("__", ['<ins>', '</ins>'], $text);
   $text = markUp("^^", ['<sup>', '</sup>'], $text);
   $text = markUp("##", ['<mark>', '</mark>'], $text);
-  $text = sprintf($text, $codeBlocks);
   $text = markUp("@@", ['<code>', '</code>'], $text);
   return $text;
 }
