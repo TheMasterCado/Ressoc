@@ -16,7 +16,7 @@ $stmt->execute([':id' => $_GET['id']]);
 $publication = $stmt->fetch();
 //Tous les commentaires
 $sql = "SELECT * FROM publication
-        INNER JOIN type_publication ON fk_type_publication = pk_type_publication 
+        INNER JOIN type_publication ON fk_type_publication = pk_type_publication
         WHERE fk_publication = :id;";
 $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $_GET['id']]);
@@ -143,7 +143,7 @@ $titre = "Publication de";
             $voteCurrentUser = $vote['valeur'];
         }
       ?>
-      <div class='card'>
+      <div class='card<?= ($commentaire['description'] == 'BonneReponse') ? ' border-question' : '' ?>'>
         <div class="card-body">
           <h6 class="card-subtitle mb-3 text-muted">
             <strong><?= $points ?></strong> points - par <?= $auteur['prenom'] . " " . $auteur['nom'] ?>
