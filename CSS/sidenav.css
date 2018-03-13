@@ -40,9 +40,16 @@
   margin: 0;
   margin-left: 10px;
   padding: 2px 8px;
+}
+
+.hide-with-points {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow-x: hidden;
+}
+
+#sidenav-buttons {
+  margin-top : 20px;
 }
 
 .lien-feed-utilisateur:hover {
