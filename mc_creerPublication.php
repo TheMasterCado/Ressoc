@@ -12,10 +12,10 @@ function markUp($pattern, $replaceBy, $text, $omit = NULL) {
           $sections = explode($pattern, $section);
           foreach ($sections as $pospos => $valeur) {
             if($pospos % 2 == 1)
-            $newText .= $replaceBy[0];
+              $newText .= $replaceBy[0];
             $newText .= $valeur;
             if($pospos % 2 == 1)
-            $newText .= $replaceBy[1];
+              $newText .= $replaceBy[1];
           }
         }
         else {
@@ -25,12 +25,13 @@ function markUp($pattern, $replaceBy, $text, $omit = NULL) {
     }
   }
   else {
+    $sections = explode($pattern, $text);
     foreach ($sections as $pospos => $valeur) {
       if($pospos % 2 == 1)
-      $newText .= $replaceBy[0];
+        $newText .= $replaceBy[0];
       $newText .= $valeur;
       if($pospos % 2 == 1)
-      $newText .= $replaceBy[1];
+        $newText .= $replaceBy[1];
     }
   }
   return $newText;
