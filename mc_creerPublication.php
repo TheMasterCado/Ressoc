@@ -26,12 +26,12 @@ function markUp($pattern, $replaceBy, $text, $omit = []) {
 }
 
 function formatEverything($string) {
-  $text = markUp("**", ['<strong>', '</strong>'], $string);
-  $text = markUp("//", ['<em>', '</em>'], $text);
-  $text = markUp("~~", ['<del>', '</del>'], $text);
-  $text = markUp("__", ['<ins>', '</ins>'], $text);
-  $text = markUp("^^", ['<sup>', '</sup>'], $text);
-  $text = markUp("##", ['<mark>', '</mark>'], $text);
+  $text = markUp("**", ['<strong>', '</strong>'], $string, ["@@"]);
+  $text = markUp("//", ['<em>', '</em>'], $text, ["@@"]);
+  $text = markUp("~~", ['<del>', '</del>'], $text, ["@@"]);
+  $text = markUp("__", ['<ins>', '</ins>'], $text, ["@@"]);
+  $text = markUp("^^", ['<sup>', '</sup>'], $text, ["@@"]);
+  $text = markUp("##", ['<mark>', '</mark>'], $text, ["@@"]);
   $text = markUp("@@", ['<code>', '</code>'], $text);
   return $text;
 }
