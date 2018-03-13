@@ -21,7 +21,7 @@ $formattedText = markUp("~~", ['<del>', '</del>'], $formattedText);
 $formattedText = markUp("__", ['<ins>', '</ins>'], $formattedText);
 $formattedText = markUp("^^", ['<sup>', '</sup>'], $formattedText);
 $formattedText = markUp("||", ['<mark>', '</mark>'], $formattedText);
-$formattedText = markUp("@@", ['<pre>', '</pre>'], $formattedText);
+$formattedText = markUp("@@", ['<code>', '</code>'], $formattedText);
 
 if(!empty(trim($_POST['specialite']))) {
   $sql = "SELECT COUNT(*) AS nb FROM specialite WHERE nom = :specialite;";

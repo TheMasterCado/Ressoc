@@ -55,7 +55,7 @@ mark {
     color: black;
 }
 
-pre {
-  padding-left: 3px;
+code {
+  padding-left: 5px;
   border-left: 2px solid #ddd;
 }
