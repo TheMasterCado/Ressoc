@@ -137,6 +137,12 @@ $titre = "Publication de";
         </div>
       </div>
       <?php } ?>
+      <div class='card'>
+        <div class="card-body">
+          <textarea name="nouveauCom" rows="3" class="card-text" placeholder="Entrez votre commentaire."></textarea>
+          <button type="button" name="button" class="card-link stay-right">Répondre</button>
+        </div>
+      </div>
     </div>
   </div>
 
