@@ -9,7 +9,7 @@ else {
 }
 require 'bd.php';
 //Infos de l'utilisateur propriétaire du feed
-$sql = "SELECT prenom, nom, pk_utilisateur, image, specialite, nbSessions FROM utilisateur WHERE loginID = :id;";
+$sql = "SELECT prenom, nom, pk_utilisateur, image, fk_specialite, nbSessions FROM utilisateur WHERE loginID = :id;";
 $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $_GET['id']]);
 $feedDe = $stmt->fetch();

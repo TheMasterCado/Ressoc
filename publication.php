@@ -19,7 +19,7 @@ $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $_GET['id']]);
 $commentaires = $stmt->fetchAll(PDO::FETCH_ASSOC);
 //Infos sur OP
-$sql = "SELECT prenom, nom, pk_utilisateur, image, specialite, nbSessions FROM utilisateur WHERE pk_utilisateur =
+$sql = "SELECT prenom, nom, pk_utilisateur, image, fk_specialite, nbSessions FROM utilisateur WHERE pk_utilisateur =
         (SELECT fk_utilisateur FROM publication WHERE pk_publication = :id);";
 $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $_GET['id']]);
