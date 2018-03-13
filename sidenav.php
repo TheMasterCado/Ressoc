@@ -13,7 +13,7 @@ $specialiteUser = $db->query($sql)->fetch();
    <h6><?= $titre ?><br><?= $feedDe['prenom']." ".$feedDe['nom'] ?></h6>
    <img src="<?= $feedDe['image'] ?>">
    <p>Spécialité: <strong><?= $specialiteUser ?></strong></p>
-   <p>Nombre de sessions: <strong><?= $feedDe['nbSessions'] ?></strong></p>
+   <p>Nombre de sessions: <strong><?= $feedDe['nb_session'] ?></strong></p>
    <div id="sidenav-buttons">
      <?php if($_GET['id'] == $_SESSION['id']) { ?>
        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#nouvellePublication">Nouvelle publication</button>
