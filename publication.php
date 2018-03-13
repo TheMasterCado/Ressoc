@@ -15,7 +15,9 @@ $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $_GET['id']]);
 $publication = $stmt->fetch();
 //Tous les commentaires
-$sql = "SELECT * FROM publication WHERE fk_publication = :id;";
+$sql = "SELECT * FROM publication
+        INNER JOIN type_publication ON fk_type_publication = pk_type_publication 
+        WHERE fk_publication = :id;";
 $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $_GET['id']]);
 $commentaires = $stmt->fetchAll(PDO::FETCH_ASSOC);
