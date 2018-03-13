@@ -2,7 +2,7 @@
 session_start();
 require 'bd.php';
 
-function markUp($pattern, $replaceBy, $text, $omit = []) {
+function markUp($pattern, $replaceBy, $text, $omit) {
   $newText = "";
   foreach ($omit as $i => $o) {
     $biggerSections = explode($o, $text);
