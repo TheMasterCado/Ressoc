@@ -19,7 +19,7 @@ $currentUser = $db->query($sql)->fetch();
 </div>
   <div id="liste-utilisateurs">
     <?php foreach ($allUsers as $pos => $oneUser) { ?>
-      <a class="lien-feed-utilisateur" href="./feed.php?id=<?= $oneUser['loginID'] ?>"><?= $oneUser['prenom'] . " " . $oneUser['nom'] ?></a>
+      <a class="lien-feed-utilisateur hide-with-points" href="./feed.php?id=<?= $oneUser['loginID'] ?>"><?= $oneUser['prenom'] . " " . $oneUser['nom'] ?></a>
     <?php } ?>
   </div>
   <div id="sidenav-footer">
