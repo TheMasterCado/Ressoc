@@ -159,7 +159,7 @@ $titre = "Publication de";
       <div class='card'>
         <div class="card-body">
           <textarea id="nouveauCom" rows="3" class="card-text form-control" placeholder="Entrez votre commentaire."></textarea>
-          <a href="javascript:void(null);" class="card-link stay-right" onclick="">Répondre</a>
+          <a href="javascript:void(null);" class="card-link stay-right" onclick="traiterNouveauCom()">Répondre</a>
         </div>
       </div>
     </div>
