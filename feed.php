@@ -14,8 +14,8 @@ $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $_GET['id']]);
 $feedDe = $stmt->fetch();
 //Toutes les publications
-$sql = "SELECT * FROM publication WHERE
-        fk_utilisateur = :pk_utilisateur AND fk_publication IS NULL
+$sql = "SELECT * FROM publication INNER JOIN type_publication ON fk_type_publication = pk_type_publication
+        WHERE fk_utilisateur = :pk_utilisateur AND fk_publication IS NULL
         ORDER BY pk_publication DESC;";
 $stmt = $db->prepare($sql);
 $stmt->execute([':pk_utilisateur' => $feedDe['pk_utilisateur']]);
@@ -95,6 +95,8 @@ $titre = "Feed de";
             }
             else
               echo "Aucune";
+            if($publication['description'] == 'Question')
+              echo " | QUESTION"
             ?></strong></span>
             </h6>
         <p class="card-text"><?= str_replace("\n", "<br>", $publication['texte']) ?></p>
