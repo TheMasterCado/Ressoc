@@ -9,10 +9,10 @@ $stmt->execute([':id' => $_SESSION['id']]);
 $currentUser = $stmt->fetch();
 //Spécialité de l'utilisateur à qui le feed appartient
 if($feedDe['fk_specialite'] != NULL) {
-$sql = "SELECT nom FROM specialite WHERE pk_specialite = :specialite;";
-$stmt->prepare($sql);
-$stmt->execute([':specialite' => $feedDe['fk_specialite']]);
-$specialiteUser = $stmt->fetch();
+  $sql = "SELECT nom FROM specialite WHERE pk_specialite = :specialite;";
+  $stmt = $db->prepare($sql);
+  $stmt->execute([':specialite' => $feedDe['fk_specialite']]);
+  $specialiteUser = $stmt->fetch();
 }
  ?>
  <div id="sidenav">
