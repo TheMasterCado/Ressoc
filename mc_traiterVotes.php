@@ -22,5 +22,5 @@ $params = [
   ':pub' => $_POST['pub'],
   ':pk_utilisateur' => $utilisateur['pk_utilisateur']
 ];
-$stmt->execute();
+$stmt->execute($params);
 ?>
