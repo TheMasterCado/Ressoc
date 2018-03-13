@@ -99,7 +99,7 @@ $titre = "Feed de";
               echo " | QUESTION"
             ?></strong></span>
             </h6>
-        <p class="card-text"><?= str_replace("\n", "<br>", $publication['texte']) ?></p>
+        <p class="card-text"><?= $publication['texte'] ?></p>
         <span>
           <a href="javascript:void(null);" valeur="<?= ($voteCurrentUser == 1) ? "0" : "1" ?>" class="card-link vert <?= ($voteCurrentUser == 1) ? "selected" : "" ?>"
              onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Bien (+1)</a>
