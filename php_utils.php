@@ -46,7 +46,7 @@ function markUpLinks($patternStart, $patternEnd, $text, $omit = NULL) {
           $occ = explode($patternStart, $section);
           array_splice($occ, 0, 1);
           foreach ($occ as $pospos => $valeur) {
-            $link = explode($patternEnd, $occ);
+            $link = explode($patternEnd, $valeur);
             if(count($link) > 1) {
               $newText .= "<a href=\"" . $link[0] . "\">" .
                            $link[0] . "</a>";
@@ -54,7 +54,7 @@ function markUpLinks($patternStart, $patternEnd, $text, $omit = NULL) {
               $newText .= implode($link);
             }
             else
-              $newText .= $patternStart . $occ;
+              $newText .= $patternStart . $valeur;
           }
         }
         else {
