@@ -50,6 +50,10 @@ p.card-text {
   border: 2px solid #5bc0de;
 }
 
+.border-bonneReponse {
+  border: 2px solid green;
+}
+
 mark {
     background-color: yellow;
     color: black;
