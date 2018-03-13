@@ -33,6 +33,10 @@
   text-align: left;
 }
 
+#sidenav p {
+  margin: 0;
+}
+
 #liste-utilisateurs a.lien-feed-utilisateur {
   color: #5bc0de;
   display: block;
