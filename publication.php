@@ -139,7 +139,7 @@ $titre = "Publication de";
       <?php } ?>
       <div class='card'>
         <div class="card-body">
-          <textarea name="nouveauCom" rows="3" class="card-text" placeholder="Entrez votre commentaire."></textarea>
+          <textarea name="nouveauCom" rows="3" class="card-text form-control" placeholder="Entrez votre commentaire."></textarea>
           <a href="javascript:void(null);" class="card-link stay-right" onclick="">Répondre</a>
         </div>
       </div>
