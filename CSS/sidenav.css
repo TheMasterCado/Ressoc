@@ -11,19 +11,19 @@
   overflow-x: hidden;
   padding-top: 20px;
 
-  &::-webkit-scrollbar {
+  ::-webkit-scrollbar {
     width: 5px;
   }
 
-  &::-webkit-scrollbar-track {
+  ::-webkit-scrollbar-track {
     background: #333;
   }
 
-  &::-webkit-scrollbar-thumb {
+  ::-webkit-scrollbar-thumb {
     background: #222;
   }
 
-  &::-webkit-scrollbar-thumb:hover {
+  ::-webkit-scrollbar-thumb:hover {
     background: #111;
   }
 }
