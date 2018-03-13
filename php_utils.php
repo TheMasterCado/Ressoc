@@ -44,6 +44,7 @@ function markUpLinks($patternStart, $patternEnd, $text, $omit = NULL) {
       foreach ($biggerSections as $pos => $section) {
         if($pos % 2 == 0) {
           $occ = explode($patternStart, $section);
+          $newText .= $occ[0];
           array_splice($occ, 0, 1);
           foreach ($occ as $pospos => $valeur) {
             $link = explode($patternEnd, $valeur);
