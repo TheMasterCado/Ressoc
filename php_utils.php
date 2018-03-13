@@ -44,16 +44,24 @@ function markUpLinks($patternStart, $patternEnd, $text, $omit = NULL) {
       $biggerSections = explode($o, $text);
       foreach ($biggerSections as $pos => $section) {
         if($pos % 2 == 0) {
-          $occ = explode($patternStart, $section);
+          $occ = explode($patternStart[0], $section);
           $newText .= $occ[0];
           array_splice($occ, 0, 1);
           foreach ($occ as $pospos => $valeur) {
-            $link = explode($patternEnd, $valeur);
+            $link = explode($patternEnd[0], $valeur);
             if(count($link) > 1) {
-              $newText .= "<a href=\"" . $link[0] . "\">" .
-                           $link[0] . "</a>";
-              array_splice($link, 0, 1);
-              $newText .= implode($link);
+              $newText .= "<a href=\"" . $link[0] . "\">";
+              $linkText = explode($patternEnd[1], $link[1]);
+              if(count($linkText) > 1 && $linkText[0][0] == $patternStart[1]) {
+                $newText .=  substr($linkText[0], 1) . "</a>";
+                array_splice($linkText, 0, 1);
+                $newText .= implode($linkText);
+              }
+              else {
+                $newText .= $link[0] . "</a>";
+                array_splice($link, 0, 1);
+                $newText .= implode($link);
+              }
             }
             else
               $newText .= $patternStart . $valeur;
@@ -88,7 +96,7 @@ function formatEverything($string) {
   $text = markUp("__", ['<ins>', '</ins>'], $text, ["@@"]);
   $text = markUp("^^", ['<sup>', '</sup>'], $text, ["@@"]);
   $text = markUp("##", ['<mark>', '</mark>'], $text, ["@@"]);
-  $text = markUpLinks("[", "]", $text, ["@@"]);
+  $text = markUpLinks(["[", "("], ["]", ")"], $text, ["@@"]);
   $text = markUp("@@", ['<code>', '</code>'], $text);
   return $text;
 }
