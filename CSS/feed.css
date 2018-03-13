@@ -58,6 +58,7 @@ mark {
 code {
   padding-left: 5px;
   display: block;
+  background-color: #eee;
   border-left: 2px solid #ddd;
-  color: #431;
+  color: #303336;
 }
