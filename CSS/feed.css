@@ -54,3 +54,8 @@ mark {
     background-color: yellow;
     color: black;
 }
+
+pre {
+  padding-left: 3px;
+  border-left: 2px solid #ddd;
+}

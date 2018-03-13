@@ -10,6 +10,22 @@
   background-color: #333;
   overflow-x: hidden;
   padding-top: 20px;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #333;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #222;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #111;
+  }
 }
 
 #sidenav h6 {
@@ -69,23 +85,4 @@
   padding: 8px;
   width: 80%;
   margin: 10px;
-}
-
-#liste-utilisateurs {
-
-  &::-webkit-scrollbar {
-    width: 5px;
-  }
-  
-  &::-webkit-scrollbar-track {
-    background: #333;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: #222;
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background: #111;
-  }
 }
