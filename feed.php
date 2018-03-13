@@ -71,6 +71,10 @@ $titre = "Feed de";
   <div id="main">
     <?php
     foreach ($publications as $pos => $publication) {
+      $sql = "SELECT COUNT(*) AS nb FROM publication WHERE fk_publication = :pk_publication;";
+      $stmt = $db->prepare($sql);
+      $stmt->execute([':pk_publication' => $publication['pk_publication']]);
+      $nbComs = $stmt->fetch();
       $sql = "SELECT * FROM vote WHERE fk_publication = :pk_publication;";
       $stmt = $db->prepare($sql);
       $stmt->execute([':pk_publication' => $publication['pk_publication']]);
@@ -106,7 +110,9 @@ $titre = "Feed de";
           <a href="javascript:void(null);" valeur="<?= ($voteCurrentUser == -1) ? "0" : "-1" ?>" class="card-link rouge <?= ($voteCurrentUser == -1) ? "selected" : "" ?>"
              onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Mauvais (-1)</a>
         </span>
-            <a href="./publication.php?id=<?= $publication['pk_publication'] ?>" class="card-link stay-right">Commentaires</a>
+            <a href="./publication.php?id=<?= $publication['pk_publication'] ?>" class="card-link stay-right">
+              Commentaires<?= ($nbComs['nb'] > 0) ? " (" . $nbComs['nb'] . ")" : "" ?>
+            </a>
       </div>
     </div>
     <?php } ?>
