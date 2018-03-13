@@ -34,6 +34,7 @@ $titre = "Publication de";
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="./CSS/feed.css">
   <link rel="stylesheet" href="./CSS/sidenav.css">
+  <link rel="stylesheet" href="./CSS/publication.css">
 </head>
 <body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -73,33 +74,35 @@ $titre = "Publication de";
   </script>
   <?php require 'sidenav.php'; ?>
   <div id="main">
-    <div class='card'>
-      <div class="card-body">
-        <h6 class="card-subtitle mb-3 text-muted">
-          <?php
-          $sql = "SELECT * FROM vote WHERE fk_publication = :id;";
-          $stmt = $db->prepare($sql);
-          $stmt->execute([':id' => $_GET['id']]);
-          $votesPub = $stmt->fetchAll(PDO::FETCH_ASSOC);
-          $pointsPub = 0;
-          $voteCurrentUserPub = 0;
-          foreach ($votesPub as $pos => $vote) {
-            $pointsPub += $vote['valeur'];
-            if($vote['fk_utilisateur'] == $currentUser['pk_utilisateur'])
+    <div id="publication-originale">
+      <div class='card'>
+        <div class="card-body">
+          <h6 class="card-subtitle mb-3 text-muted">
+            <?php
+            $sql = "SELECT * FROM vote WHERE fk_publication = :id;";
+            $stmt = $db->prepare($sql);
+            $stmt->execute([':id' => $_GET['id']]);
+            $votesPub = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $pointsPub = 0;
+            $voteCurrentUserPub = 0;
+            foreach ($votesPub as $pos => $vote) {
+              $pointsPub += $vote['valeur'];
+              if($vote['fk_utilisateur'] == $currentUser['pk_utilisateur'])
               $voteCurrentUserPub = $vote['valeur'];
-          }
-           ?>
-          <strong><?= $pointsPub ?></strong> points - par <?= $feedDe['prenom'] . " " . $feedDe['nom'] ?>
-        </h6>
-        <p class="card-text"><?= str_replace("\n", "<br>", $publication['texte']) ?></p>
-        <span>
-          <a href="javascript:void(null);" valeur="<?= ($voteCurrentUserPub == 1) ? "0" : "1" ?>" class="card-link vert <?= ($voteCurrentUserPub == 1) ? "selected" : "" ?>"
-             onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Bien (+1)</a>
-          <a href="javascript:void(null);" valeur="<?= ($voteCurrentUserPub == -1) ? "0" : "-1" ?>" class="card-link rouge <?= ($voteCurrentUserPub == -1) ? "selected" : "" ?>"
-             onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Mauvais (-1)</a>
-        </span>
-      </div>
-    </div>
+            }
+            ?>
+            <strong><?= $pointsPub ?></strong> points - par <?= $feedDe['prenom'] . " " . $feedDe['nom'] ?>
+          </h6>
+          <p class="card-text"><?= str_replace("\n", "<br>", $publication['texte']) ?></p>
+          <span>
+            <a href="javascript:void(null);" valeur="<?= ($voteCurrentUserPub == 1) ? "0" : "1" ?>" class="card-link vert <?= ($voteCurrentUserPub == 1) ? "selected" : "" ?>"
+               onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Bien (+1)</a>
+              <a href="javascript:void(null);" valeur="<?= ($voteCurrentUserPub == -1) ? "0" : "-1" ?>" class="card-link rouge <?= ($voteCurrentUserPub == -1) ? "selected" : "" ?>"
+                 onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Mauvais (-1)</a>
+              </span>
+            </div>
+          </div>
+        </div>
     <div id="commentaires">
       <?php
       foreach ($commentaires as $pos => $commentaire) {
