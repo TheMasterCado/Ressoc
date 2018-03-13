@@ -7,7 +7,7 @@ function markUp($pattern, $replaceBy, $text, $omit) {
   foreach ($omit as $i => $o) {
     $biggerSections = explode($o, $text);
     foreach ($biggerSections as $pos => $section) {
-      if($i % 2 == 0) {
+      if($pos % 2 == 0) {
         $sections = explode($pattern, $section);
         foreach ($sections as $pospos => $valeur) {
           if($pospos % 2 == 1)
