@@ -75,7 +75,6 @@ function markUpLinks($patternStart, $patternEnd, $text, $omit = NULL) {
   }
   return $newText;
 }
-}
 
 function formatEverything($string) {
   $text = markUp("**", ['<strong>', '</strong>'], $string, ["@@"]);
