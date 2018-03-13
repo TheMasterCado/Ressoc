@@ -143,7 +143,7 @@ $titre = "Publication de";
             $voteCurrentUser = $vote['valeur'];
         }
       ?>
-      <div class='card<?= ($commentaire['description'] == 'BonneReponse') ? ' border-question' : '' ?>'>
+      <div class='card<?= ($commentaire['description'] == 'BonneReponse') ? ' border-bonneReponse' : '' ?>'>
         <div class="card-body">
           <h6 class="card-subtitle mb-3 text-muted">
             <strong><?= $points ?></strong> points - par <?= $auteur['prenom'] . " " . $auteur['nom'] ?>
