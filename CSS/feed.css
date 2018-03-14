@@ -11,6 +11,10 @@ body {
   max-width: 40%;
 }
 
+.timestamp {
+  color: #ddd;
+}
+
 #main {
   margin-left: 200px;
   padding-left: 120px;
