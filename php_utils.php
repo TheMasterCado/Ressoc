@@ -63,7 +63,6 @@ function markUpLinks($patternStart, $patternEnd, $text, $omit = NULL) {
       }
       else
         $newText .= $omit . $section . $omit;
-
     }
   }
   else {

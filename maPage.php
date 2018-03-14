@@ -4,7 +4,7 @@
     if ($("#contenu").val().trim().length == 0) {
       alert("Une publication ne doit pas être vide");
     } else {
-    $.post("./mc_creerPublication.php", $("#form_nouvellePublication").serialize(), function(data) {
+    $.post("./mc_creerPublication.php", {'contenu' : $("#contenu").val()}, function(data) {
       location.reload(true);
     });
    }
