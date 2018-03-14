@@ -9,13 +9,14 @@ if(isset($_SESSION['id'])) {
 else
   header("Location: ./index.php");
 require 'bd.php';
+$id = $_GET['id'];
 //publication
 $sql = "SELECT pk_publication, texte, description, specialite.nom AS specialite FROM publication
         INNER JOIN type_publication ON fk_type_publication = pk_type_publication
         LEFT JOIN specialite ON fk_specialite = fk_specialite
         WHERE pk_publication = :id;";
 $stmt = $db->prepare($sql);
-$stmt->execute([':id' => $_GET['id']]);
+$stmt->execute([':id' => $id]);
 $publicationRaw = $stmt->fetch();
 $sql = "SELECT * FROM vote
         WHERE fk_publication = :pub;";
