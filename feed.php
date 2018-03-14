@@ -133,25 +133,25 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
   <div id="main">
     <?php
     foreach ($publications as $pos => $publication) {
-      $sql = "SELECT prenom, nom FROM utilisateur WHERE pk_utilisateur = :fk_utilisateur;";
-      $stmt = $db->prepare($sql);
-      $stmt->execute([':fk_utilisateur' => $publication['fk_utilisateur']]);
-      $auteur = $stmt->fetch();
-      $sql = "SELECT COUNT(*) AS nb FROM publication WHERE fk_publication = :pk_publication;";
-      $stmt = $db->prepare($sql);
-      $stmt->execute([':pk_publication' => $publication['pk_publication']]);
-      $nbComs = $stmt->fetch();
-      $sql = "SELECT * FROM vote WHERE fk_publication = :pk_publication;";
-      $stmt = $db->prepare($sql);
-      $stmt->execute([':pk_publication' => $publication['pk_publication']]);
-      $votes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-      $points = 0;
-      $voteCurrentUser = 0;
-      foreach ($votes as $pos => $vote) {
-        $points += $vote['valeur'];
-        if($vote['fk_utilisateur'] == $currentUser['pk_utilisateur'])
-          $voteCurrentUser = $vote['valeur'];
-      }
+      // $sql = "SELECT prenom, nom FROM utilisateur WHERE pk_utilisateur = :fk_utilisateur;";
+      // $stmt = $db->prepare($sql);
+      // $stmt->execute([':fk_utilisateur' => $publication['fk_utilisateur']]);
+      // $auteur = $stmt->fetch();
+      // $sql = "SELECT COUNT(*) AS nb FROM publication WHERE fk_publication = :pk_publication;";
+      // $stmt = $db->prepare($sql);
+      // $stmt->execute([':pk_publication' => $publication['pk_publication']]);
+      // $nbComs = $stmt->fetch();
+      // $sql = "SELECT * FROM vote WHERE fk_publication = :pk_publication;";
+      // $stmt = $db->prepare($sql);
+      // $stmt->execute([':pk_publication' => $publication['pk_publication']]);
+      // $votes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      // $points = 0;
+      // $voteCurrentUser = 0;
+      // foreach ($votes as $pos => $vote) {
+      //   $points += $vote['valeur'];
+      //   if($vote['fk_utilisateur'] == $currentUser['pk_utilisateur'])
+      //     $voteCurrentUser = $vote['valeur'];
+      // }
     ?>
     <div class='card <?= ($publication['description'] == 'Question') ? 'border-question' : 'border-texte' ?>'>
       <div class="card-body">
