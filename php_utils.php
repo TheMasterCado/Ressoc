@@ -99,7 +99,10 @@ function formatEverything($string) {
 
  function time_ago( $time )
  {
-   setlocale(LC_TIME, 'fr_FR.utf8','fra');
+   date_default_timezone_set('America/Montreal');
+
+// PHP Linux
+setlocale(LC_ALL, 'fr_CA');
    $TIMEBEFORE_NOW = 'à l\'instant';
    $TIMEBEFORE_MINUTE = 'il y a {num} minute';
    $TIMEBEFORE_MINUTES = 'il y a {num} minutes';
