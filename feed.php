@@ -133,7 +133,8 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
         <h6 class="card-subtitle mb-3 text-muted">
           <strong><?= $publication['points'] ?></strong> points - par <?= $publication['prenom'] . " " . $publication['nom'] ?>
           <span class="stay-right">Catégorie: <strong><?=
-            (empty($publication['specialite']) ? "Aucune" : $publication['specialite']) . (($publication['description'] == 'Question') ? " | QUESTION" : "") ?>
+            (empty($publication['specialite']) ? "Aucune" : $publication['specialite']).
+              (($publication['description'] == 'Question') ? " | QUESTION" : "") ?>
             </strong>
           </span>
         </h6>

@@ -10,18 +10,73 @@ else
   header("Location: ./index.php");
 require 'bd.php';
 //publication
-$sql = "SELECT * FROM publication INNER JOIN type_publication ON
-        fk_type_publication = pk_type_publication WHERE pk_publication = :id;";
-$stmt = $db->prepare($sql);
-$stmt->execute([':id' => $_GET['id']]);
-$publication = $stmt->fetch();
-//Tous les commentaires
-$sql = "SELECT * FROM publication
+$sql = "SELECT pk_publication, texte, description, specialite.nom AS specialite FROM publication
         INNER JOIN type_publication ON fk_type_publication = pk_type_publication
-        WHERE fk_publication = :id;";
+        LEFT JOIN specialite ON specialite
+        WHERE pk_publication = :id;";
 $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $_GET['id']]);
-$commentaires = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$publicationRaw = $stmt->fetch();
+$sql = "SELECT * FROM vote
+        WHERE fk_publication = :pub;";
+$stmt = $db->prepare($sql);
+$stmt->execute([':pub' => $publicationRaw['pk_publication']]);
+$votes = $stmt->fetch();
+$points = 0;
+$voteCurrentUser = 0;
+foreach ($votes as $pos => $vote) {
+  $points += $vote['valeur'];
+  if($vote['fk_utilisateur'] == $currentUser['pk_utilisateur'])
+    $voteCurrentUser = $vote['valeur'];
+}
+$publication = [
+  'pk_publication' => $publicationRaw['pk_publication'],
+  'texte' => $publicationRaw['texte'],
+  'specialite' => $publicationRaw['specialite'],
+  'description' => $publicationRaw['description'],
+  'points' => $points,
+  'voteCurrentUser' => $voteCurrentUser 
+];
+//Tous les commentaires
+$sql = "SELECT pk_publication, fk_publication, description, texte, prenom, nom FROM publication
+        INNER JOIN type_publication ON fk_type_publication = pk_type_publication
+        INNER JOIN utilisateur ON fk_utilisateur = pk_utilisateur
+        WHERE fk_publication = :id
+        ORDER BY pk_publication DESC;";
+$stmt = $db->prepare($sql);
+$stmt->execute([':id' => $_GET['id']]);
+$commentairesRaw = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$commentaires = [];
+//Points des Commentaires
+foreach ($commentairesRaw as $i => $row) {
+  $sql = "SELECT * FROM vote
+          WHERE fk_publication = :pub;";
+  $stmt = $db->prepare($sql);
+  $stmt->execute([':pub' => $row['pk_publication']]);
+  $votes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  $points = 0;
+  $voteCurrentUser = 0;
+  foreach ($votes as $pos => $vote) {
+    $points += $vote['valeur'];
+    if($vote['fk_utilisateur'] == $currentUser['pk_utilisateur'])
+      $voteCurrentUser = $vote['valeur'];
+  }
+  $commentaires[] = [
+    'pk_publication' => $row['pk_publication'],
+    'texte' => $row['texte'],
+    'description' => $row['description'],
+    'prenom' => $row['prenom'],
+    'nom' => $row['nom'],
+    'points' => $points,
+    'voteCurrentUser' => $voteCurrentUser
+  ];
+}
+if(isset($_GET['ordre']))
+  switch ($_GET['ordre']) {
+    case 'points':
+      usort($publications, "compareRowsPoints");
+      break;
+  }
 //Infos sur OP
 $sql = "SELECT prenom, nom, pk_utilisateur, image, fk_specialite, nb_session FROM utilisateur WHERE pk_utilisateur =
         (SELECT fk_utilisateur FROM publication WHERE pk_publication = :id);";
@@ -95,39 +150,21 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
       <div class='card <?= ($publication['description'] == 'Question') ? 'border-question' : 'border-texte' ?>'>
         <div class="card-body">
           <h6 class="card-subtitle mb-3 text-muted">
-            <?php
-            $sql = "SELECT * FROM vote WHERE fk_publication = :id;";
-            $stmt = $db->prepare($sql);
-            $stmt->execute([':id' => $_GET['id']]);
-            $votesPub = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            $pointsPub = 0;
-            $voteCurrentUserPub = 0;
-            foreach ($votesPub as $pos => $vote) {
-              $pointsPub += $vote['valeur'];
-              if($vote['fk_utilisateur'] == $currentUser['pk_utilisateur'])
-              $voteCurrentUserPub = $vote['valeur'];
-            }
-            ?>
-            <strong><?= $pointsPub ?></strong> points - par <?= $feedDe['prenom'] . " " . $feedDe['nom'] ?>
+            <strong><?= $publication['points'] ?></strong> points - par <?= $feedDe['prenom'] . " " . $feedDe['nom'] ?>
             <span class="stay-right">Catégorie: <strong><?php
-              if(!empty($publication['fk_specialite'])) {
-                $sql = "SELECT nom FROM specialite WHERE pk_specialite = ".$publication['fk_specialite'].";";
-                $specialite = $db->query($sql)->fetch();
-                echo $specialite['nom'];
-              }
-              else
-                echo "Aucune";
-              if($publication['description'] == 'Question')
-                echo " | QUESTION"
-              ?></strong></span>
+              (empty($publication['specialite']) ? "Aucune" : $publication['specialite']).
+                (($publication['description'] == 'Question') ? " | QUESTION" : "") ?></strong>
+            </span>
           </h6>
           <hr>
           <p class="card-text"><?= str_replace("\n", "<br>", $publication['texte']) ?></p>
           <hr>
           <span>
-            <a href="javascript:void(null);" valeur="<?= ($voteCurrentUserPub == 1) ? "0" : "1" ?>" class="card-link vert <?= ($voteCurrentUserPub == 1) ? "selected" : "" ?>"
+            <a href="javascript:void(null);" valeur="<?= ($publication['voteCurrentUser'] == 1) ? "0" : "1" ?>"
+               class="card-link vert <?= ($publication['voteCurrentUser'] == 1) ? "selected" : "" ?>"
                onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Bien (+1)</a>
-              <a href="javascript:void(null);" valeur="<?= ($voteCurrentUserPub == -1) ? "0" : "-1" ?>" class="card-link rouge <?= ($voteCurrentUserPub == -1) ? "selected" : "" ?>"
+              <a href="javascript:void(null);" valeur="<?= ($publication['voteCurrentUser'] == -1) ? "0" : "-1" ?>"
+                 class="card-link rouge <?= ($publication['voteCurrentUser'] == -1) ? "selected" : "" ?>"
                  onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Mauvais (-1)</a>
               </span>
             </div>
@@ -136,34 +173,21 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
     <div id="commentaires">
       <?php
       foreach ($commentaires as $pos => $commentaire) {
-        $sql = "SELECT prenom, nom FROM utilisateur WHERE pk_utilisateur = :fk_utilisateur;";
-        $stmt = $db->prepare($sql);
-        $stmt->execute([':fk_utilisateur' => $commentaire['fk_utilisateur']]);
-        $auteur = $stmt->fetch();
-        $sql = "SELECT * FROM vote WHERE fk_publication = :pk_publication;";
-        $stmt = $db->prepare($sql);
-        $stmt->execute([':pk_publication' => $commentaire['pk_publication']]);
-        $votes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $points = 0;
-        $voteCurrentUser = 0;
-        foreach ($votes as $pos => $vote) {
-          $points += $vote['valeur'];
-          if($vote['fk_utilisateur'] == $currentUser['pk_utilisateur'])
-            $voteCurrentUser = $vote['valeur'];
-        }
       ?>
       <div class='card<?= ($commentaire['description'] == 'BonneReponse') ? ' border-bonneReponse' : '' ?>'>
         <div class="card-body">
           <h6 class="card-subtitle mb-3 text-muted">
-            <strong><?= $points ?></strong> points - par <?= $auteur['prenom'] . " " . $auteur['nom'] ?>
+            <strong><?= $commentaire['points'] ?></strong> points - par <?= $commentaire['prenom'] . " " . $commentaire['nom'] ?>
           </h6>
           <hr>
           <p class="card-text"><?= $commentaire['texte'] ?></p>
           <hr>
           <span>
-            <a href="javascript:void(null);" valeur="<?= ($voteCurrentUser == 1) ? "0" : "1" ?>" class="card-link vert <?= ($voteCurrentUser == 1) ? "selected" : "" ?>"
+            <a href="javascript:void(null);" valeur="<?= ($commentaire['voteCurrentUser'] == 1) ? "0" : "1" ?>"
+               class="card-link vert <?= ($commentaire['voteCurrentUser'] == 1) ? "selected" : "" ?>"
                onclick="traiterPoints(<?= $commentaire['pk_publication'] ?>, this)">Bien (+1)</a>
-            <a href="javascript:void(null);" valeur="<?= ($voteCurrentUser == -1) ? "0" : "-1" ?>" class="card-link rouge <?= ($voteCurrentUser == -1) ? "selected" : "" ?>"
+            <a href="javascript:void(null);" valeur="<?= ($commentaire['voteCurrentUser'] == -1) ? "0" : "-1" ?>"
+               class="card-link rouge <?= ($commentaire['voteCurrentUser'] == -1) ? "selected" : "" ?>"
                onclick="traiterPoints(<?= $commentaire['pk_publication'] ?>, this)">Mauvais (-1)</a>
           </span>
         </div>

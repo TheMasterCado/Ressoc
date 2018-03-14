@@ -31,5 +31,5 @@ $params = [
 $stmt->execute($params);
 session_start();
 unset($_SESSION['newUser']);
-header("Location: ./feed.php?id={$_SESSION['id']}");
+header("Location: ./feed.php");
 ?>
