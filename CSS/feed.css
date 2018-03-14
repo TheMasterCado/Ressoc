@@ -20,7 +20,7 @@ body {
 }
 
 .card-body {
-  padding-bottom: 15px; 
+  padding-bottom: 15px;
 }
 
 a.selected {
@@ -41,6 +41,8 @@ p.card-text {
   text-justify: inter-word;
   padding-left: 10px;
   margin-bottom: 12px
+  max-height: 30rem;
+  text-overflow: ellipsis;
 }
 
 .card hr {
