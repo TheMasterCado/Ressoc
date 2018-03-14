@@ -20,7 +20,7 @@ $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $_SESSION['id']]);
 $currentUser = $stmt->fetch();
 //Toutes les publications
-  $sql = "SELECT pk_publication, fk_publication, specialite.nom AS specialite, description, texte, utilisateur.prenom, utilisateur.nom
+  $sql = "SELECT pk_publication, fk_publication, specialite.nom AS specialite, UNIX_TIMESTAMP(timestamp) AS timestamp, description, texte, utilisateur.prenom, utilisateur.nom
           FROM publication
           INNER JOIN type_publication ON fk_type_publication = pk_type_publication
           INNER JOIN utilisateur ON fk_utilisateur = pk_utilisateur
@@ -59,6 +59,7 @@ foreach ($publicationsRaw as $i => $row) {
     'texte' => $row['texte'],
     'specialite' => $row['specialite'],
     'description' => $row['description'],
+    'timestamp' => $publicationRaw['timestamp'],
     'prenom' => $row['prenom'],
     'nom' => $row['nom'],
     'points' => $points,
@@ -132,6 +133,7 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
       <div class="card-body">
         <h6 class="card-subtitle mb-3 text-muted">
           <strong><?= $publication['points'] ?></strong> points - par <?= $publication['prenom'] . " " . $publication['nom'] ?>
+          <span><?php echo time_ago($publication['timestamp']); ?></span>
           <span class="stay-right">Catégorie: <strong><?=
             (empty($publication['specialite']) ? "Aucune" : $publication['specialite']).
               (($publication['description'] == 'Question') ? " | QUESTION" : "") ?>

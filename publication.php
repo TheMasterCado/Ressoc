@@ -17,7 +17,7 @@ $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $_SESSION['id']]);
 $currentUser = $stmt->fetch();
 //publication
-$sql = "SELECT pk_publication, texte, description, specialite.nom AS specialite FROM publication
+$sql = "SELECT pk_publication, texte, UNIX_TIMESTAMP(timestamp) AS timestamp, description, specialite.nom AS specialite FROM publication
         INNER JOIN type_publication ON fk_type_publication = pk_type_publication
         LEFT JOIN specialite ON fk_specialite = pk_specialite
         WHERE pk_publication = :id;";
@@ -41,11 +41,13 @@ $publication = [
   'texte' => $publicationRaw['texte'],
   'specialite' => $publicationRaw['specialite'],
   'description' => $publicationRaw['description'],
+  'timestamp' => $publicationRaw['timestamp'],
   'points' => $points,
   'voteCurrentUser' => $voteCurrentUser
 ];
 //Tous les commentaires
-$sql = "SELECT pk_publication, fk_publication, description, texte, prenom, nom FROM publication
+$sql = "SELECT pk_publication, fk_publication, UNIX_TIMESTAMP(timestamp) AS timestamp, description, texte, prenom, nom
+        FROM publication
         INNER JOIN type_publication ON fk_type_publication = pk_type_publication
         INNER JOIN utilisateur ON fk_utilisateur = pk_utilisateur
         WHERE fk_publication = :id
@@ -72,6 +74,7 @@ foreach ($commentairesRaw as $i => $row) {
     'pk_publication' => $row['pk_publication'],
     'texte' => $row['texte'],
     'description' => $row['description'],
+    'timestamp' => $publicationRaw['timestamp'],
     'prenom' => $row['prenom'],
     'nom' => $row['nom'],
     'points' => $points,
