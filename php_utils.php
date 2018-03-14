@@ -99,18 +99,15 @@ function formatEverything($string) {
 
  function time_ago( $time )
  {
-   date_default_timezone_set('America/Montreal');
-
-// PHP Linux
-setlocale(LC_ALL, 'fr_CA');
    $TIMEBEFORE_NOW = 'à l\'instant';
    $TIMEBEFORE_MINUTE = 'il y a {num} minute';
    $TIMEBEFORE_MINUTES = 'il y a {num} minutes';
    $TIMEBEFORE_HOUR = 'il y a {num} heure';
    $TIMEBEFORE_HOURS = 'il y a {num} heures';
    $TIMEBEFORE_YESTERDAY = 'hier';
-   $TIMEBEFORE_FORMAT = '%e %B';
-   $TIMEBEFORE_FORMAT_YEAR = '%e %B, %Y';
+   $TIMEBEFORE_FORMAT = '%d %s';
+   $TIMEBEFORE_FORMAT_YEAR = '%d %s, %d';
+   $mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
    $out    = ''; // what we will print out
    $now    = time(); // current time
    $diff   = $now - $time; // difference between the current and the provided dates
@@ -127,7 +124,9 @@ setlocale(LC_ALL, 'fr_CA');
    elseif( $diff < 3600 * 24 * 2 ) // it happened yesterday
     return $TIMEBEFORE_YESTERDAY;
 
-   else // falling back on a usual date format as it happened later than yesterday
-    return strftime( date( 'A', $time ) == date( 'A' ) ? $TIMEBEFORE_FORMAT : $TIMEBEFORE_FORMAT_YEAR, $time );
+   elseif(date( 'Y', $time ) == date( 'Y' ))
+    return sprintf($TIMEBEFORE_FORMAT, date( 'j', $time ), mois[date( 'n', $time ) + 1]);
+   else
+    return sprintf($TIMEBEFORE_FORMAT_YEAR, date( 'j', $time ), mois[date( 'n', $time ) + 1], date( 'Y' ));
  }
  ?>
