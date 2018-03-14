@@ -125,8 +125,10 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
             if($publication['description'] == 'Question')
               echo " | QUESTION";
             ?></strong></span>
-            </h6>
+        </h6>
+            <hr>
         <p class="card-text"><?= $publication['texte'] ?></p>
+        <hr>
         <span>
           <a href="javascript:void(null);" valeur="<?= ($voteCurrentUser == 1) ? "0" : "1" ?>" class="card-link vert <?= ($voteCurrentUser == 1) ? "selected" : "" ?>"
              onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Bien (+1)</a>

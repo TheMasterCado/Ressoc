@@ -120,7 +120,9 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
                 echo " | QUESTION"
               ?></strong></span>
           </h6>
+          <hr>
           <p class="card-text"><?= str_replace("\n", "<br>", $publication['texte']) ?></p>
+          <hr>
           <span>
             <a href="javascript:void(null);" valeur="<?= ($voteCurrentUserPub == 1) ? "0" : "1" ?>" class="card-link vert <?= ($voteCurrentUserPub == 1) ? "selected" : "" ?>"
                onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Bien (+1)</a>
@@ -154,7 +156,9 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
           <h6 class="card-subtitle mb-3 text-muted">
             <strong><?= $points ?></strong> points - par <?= $auteur['prenom'] . " " . $auteur['nom'] ?>
           </h6>
+          <hr>
           <p class="card-text"><?= $commentaire['texte'] ?></p>
+          <hr>
           <span>
             <a href="javascript:void(null);" valeur="<?= ($voteCurrentUser == 1) ? "0" : "1" ?>" class="card-link vert <?= ($voteCurrentUser == 1) ? "selected" : "" ?>"
                onclick="traiterPoints(<?= $commentaire['pk_publication'] ?>, this)">Bien (+1)</a>
@@ -167,6 +171,7 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
       <div class='card'>
         <div class="card-body">
           <textarea id="nouveauCom" rows="3" class="card-text form-control" placeholder="Entrez votre commentaire."></textarea>
+          <hr>
           <a href="javascript:void(null);" class="card-link stay-right" onclick="traiterNouveauCom()">Répondre</a>
         </div>
       </div>

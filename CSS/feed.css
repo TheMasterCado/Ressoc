@@ -38,6 +38,10 @@ p.card-text {
   padding-left: 10px;
 }
 
+.card hr {
+  margin: 5px 0;
+}
+
 .stay-right {
   float: right;
 }
