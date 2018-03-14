@@ -8,7 +8,7 @@ body {
 }
 
 .modal-dialog {
-  width: 50%;
+  max-width: 40%;
 }
 
 #main {
