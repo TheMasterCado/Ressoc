@@ -31,7 +31,7 @@ $currentUser = $stmt->fetch();
   $stmt = $db->prepare($sql);
   $params = [];
   if($id != "ALL")
-    $params + [":pk_utilisateur" => $feedDe['pk_utilisateur']];
+    $params += [":pk_utilisateur" => $feedDe['pk_utilisateur']];
   $stmt->execute($params);
 $publicationsRaw = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $publications = [];
