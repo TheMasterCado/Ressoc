@@ -16,7 +16,7 @@ if(!empty(trim($_POST['specialite']))) {
   $specialite = $stmt->fetch();
 }
 $sql = "INSERT INTO utilisateur (utilisateur.nom, utilisateur.prenom, utilisateur.nb_session,
-        utilisateur.loginID, utilisateur.image, utilisateur.email, publication.fk_specialite)
+        utilisateur.loginID, utilisateur.image, utilisateur.email, utilisateur.fk_specialite)
         VALUES (:nom, :prenom, :nbSessions, :id, :image, :email, :fk_specialite);";
 $stmt = $db->prepare($sql);
 $params = [
