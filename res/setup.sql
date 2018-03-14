@@ -30,6 +30,7 @@ CREATE TABLE `publication` (
   `fk_type_publication` int(10) unsigned NOT NULL,
   `fk_utilisateur` int(10) unsigned NOT NULL,
   `fk_specialite` int(10) unsigned DEFAULT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`pk_publication`),
   KEY `fk_publication` (`fk_publication`),
   KEY `fk_type_publication` (`fk_type_publication`),
