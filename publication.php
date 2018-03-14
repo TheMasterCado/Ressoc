@@ -81,7 +81,7 @@ foreach ($commentairesRaw as $i => $row) {
 if(isset($_GET['ordre']))
   switch ($_GET['ordre']) {
     case 'points':
-      usort($publications, "compareRowsPoints");
+      usort($commentaires, "compareRowsPoints");
       break;
   }
 //Infos sur OP
