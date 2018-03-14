@@ -8,14 +8,11 @@ function markUp($pattern, $replaceBy, $text, $omit = NULL) {
         if($pos % 2 == 0) {
           $sections = explode($pattern, $section);
           foreach ($sections as $pospos => $valeur) {
-            if($pospos % 2 == 1) {
-              $valeur = str_replace(["<", ">"], ["&"."lt;", "&gt;"], $string);
+            if($pospos % 2 == 1)
               $newText .= $replaceBy[0];
-            }
             $newText .= $valeur;
-            if($pospos % 2 == 1) {
+            if($pospos % 2 == 1)
               $newText .= $replaceBy[1];
-            }
           }
         }
         else {
