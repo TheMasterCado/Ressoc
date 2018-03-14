@@ -94,6 +94,6 @@ function formatEverything($string) {
 }
 
  function compareRowsPoints($a, $b) {
-   return $a['points'] - $b['points'];
+   return $b['points'] - $a['points'];
  }
 ?>
