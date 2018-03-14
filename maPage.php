@@ -6,7 +6,7 @@
     } else {
     $.post("./mc_creerPublication.php", {
       'contenu' : $("#contenu").val(),
-      'specialite' : $("#specialite").val()
+      'specialite' : $("#specialite").val(),
       'estQuestion' : ($("#estQuestion").is(':checked') ? "oui" : "non")}, function(data) {
         location.reload(true);
     });
