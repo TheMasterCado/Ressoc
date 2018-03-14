@@ -21,7 +21,7 @@ if($feedDe['fk_specialite'] != NULL) {
    <p class="hide-with-points">Spécialité: <strong><?= (isset($specialiteUser['nom']) ? $specialiteUser['nom'] : "Aucune") ?></strong></p>
    <p>Nombre de sessions: <strong><?= $feedDe['nb_session'] ?></strong></p>
    <div id="sidenav-buttons">
-     <?php if($_GET['id'] == $_SESSION['id']) { ?>
+     <?php if($_GET['id'] == $_SESSION['id'] || $_GET['id'] == "ALL") { ?>
        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#nouvellePublication">Nouvelle publication</button>
      <?php } ?>
      <a class="btn btn-info btn-sm" href="./feed.php?id=<?= $_SESSION['id'] ?>">Mon feed</a>

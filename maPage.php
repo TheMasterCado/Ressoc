@@ -1,4 +1,4 @@
-<?php if($_GET['id'] == $_SESSION['id']) { ?>
+<?php if($_GET['id'] == $_SESSION['id'] || $_GET['id'] == "ALL") { ?>
   <script>
   function traiterNouvellePub() {
     if ($("#contenu").val().trim().length == 0) {
