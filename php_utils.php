@@ -1,6 +1,4 @@
 <?php
-setlocale (LC_TIME, 'fr_FR.utf8','fra');
-
 function markUp($pattern, $replaceBy, $text, $omit = NULL) {
   $newText = "";
   if(!empty($omit)) {
@@ -101,6 +99,7 @@ function formatEverything($string) {
 
  function time_ago( $time )
  {
+   setlocale(LC_TIME, 'fr_FR.utf8','fra');
    $TIMEBEFORE_NOW = 'à l\'instant';
    $TIMEBEFORE_MINUTE = 'il y a {num} minute';
    $TIMEBEFORE_MINUTES = 'il y a {num} minutes';
