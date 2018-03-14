@@ -1,9 +1,13 @@
 <?php if($_GET['id'] == $_SESSION['id']) { ?>
   <script>
   function traiterNouvellePub() {
+    if ($("#contenu").val().trim().length == 0) {
+      alert("Une publication ne doit pas être vide");
+    } else {
     $.post("./mc_creerPublication.php", $("#form_nouvellePublication").serialize(), function(data) {
       location.reload(true);
     });
+   }
   }
   </script>
   <div class="modal fade" id="nouvellePublication" role="dialog">
@@ -15,7 +19,7 @@
         </div>
         <div class="modal-body">
           <form id="form_nouvellePublication">
-            <textarea class="form-control" name="contenu" rows="4" placeholder="Entrez votre publication." required></textarea>
+            <textarea class="form-control" id="contenu" name="contenu" rows="4" placeholder="Entrez votre publication." required></textarea>
             <br>
             <input class="form-control" type="text" name="specialite" placeholder="Catégorie de la publication(facultatif)">
             <br>
