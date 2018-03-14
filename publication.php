@@ -75,9 +75,9 @@ $titre = "Publication de";
   }
 
   function traiterNouveauCom() {
-    if (/^\s*$/.test($("#nouveauCom").val()))
+    if (/^\s*$/.test($("#nouveauCom").val())){
       alert("Un commentaire ne doit pas être vide");
-    else {
+    } else {
     $.post("./mc_creerPublication.php", {
            'contenu' : $("#nouveauCom").val(),
            'parent'  : <?= $publication['pk_publication'] ?>}, function(data) {
