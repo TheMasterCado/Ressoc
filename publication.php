@@ -10,6 +10,11 @@ else
   header("Location: ./index.php");
 require 'bd.php';
 $id = $_GET['id'];
+//Infos de l'utilisateur connecté
+$sql = "SELECT prenom, nom, pk_utilisateur FROM utilisateur WHERE loginID = :id;";
+$stmt = $db->prepare($sql);
+$stmt->execute([':id' => $_SESSION['id']]);
+$currentUser = $stmt->fetch();
 //publication
 $sql = "SELECT pk_publication, texte, description, specialite.nom AS specialite FROM publication
         INNER JOIN type_publication ON fk_type_publication = pk_type_publication
