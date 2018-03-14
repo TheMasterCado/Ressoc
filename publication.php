@@ -75,11 +75,11 @@ $titre = "Publication de";
   }
 
   function traiterNouveauCom() {
-    if ($("#nouveauCom").val().trim().length == 0) {
-      alert("Un commentaire ne doit pas être vide");
-    } else {
-      return;
-    }
+    // if ($("#nouveauCom").val().trim().length == 0) {
+    //   alert("Un commentaire ne doit pas être vide");
+    // } else {
+    //   return;
+    // }
       $.post("./mc_creerPublication.php", {
            'contenu' : $("#nouveauCom").val(),
            'parent'  : <?= $publication['pk_publication'] ?>}, function(data) {
