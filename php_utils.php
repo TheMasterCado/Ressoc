@@ -87,14 +87,14 @@ function formatEverything($string) {
   $text = htmlspecialchars($string, ENT_NOQUOTES);
   $text = str_replace("\n", "<br>", $text);
   $text = str_replace(["@@<br>", "<br>@@"], "@@", $text);
-  $text = markUp("**", ['<strong>', '</strong>'], $text, ["@@", "=;;"]);
-  $text = markUp("\"\"", ['<em>', '</em>'], $text, ["@@", "=;;"]);
-  $text = markUp("~~", ['<del>', '</del>'], $text, ["@@", "=;;"]);
-  $text = markUp("__", ['<ins>', '</ins>'], $text, ["@@", "=;;"]);
-  $text = markUp("^^", ['<sup>', '</sup>'], $text, ["@@", "=;;"]);
-  $text = markUp("##", ['<mark>', '</mark>'], $text, ["@@", "=;;"]);
-  $text = markUpLinks(["[", "("], ["]", ")"], $text, ["@@", "=;;"]);
-  $text = markUp("@@", ['<code>', '</code>'], $text, ["=;;"]);
+  $text = markUp("**", ['<strong>', '</strong>'], $text, ["@@"]);
+  $text = markUp("\"\"", ['<em>', '</em>'], $text, ["@@"]);
+  $text = markUp("~~", ['<del>', '</del>'], $text, ["@@"]);
+  $text = markUp("__", ['<ins>', '</ins>'], $text, ["@@"]);
+  $text = markUp("^^", ['<sup>', '</sup>'], $text, ["@@"]);
+  $text = markUp("##", ['<mark>', '</mark>'], $text, ["@@"]);
+  $text = markUpLinks(["[", "("], ["]", ")"], $text, ["@@"]);
+  $text = markUp("@@", ['<code>', '</code>'], $text);
   return $text;
 }
 ?>
