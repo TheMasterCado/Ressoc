@@ -18,6 +18,7 @@
 --
 -- Table structure for table `publication`
 --
+use alecado;
 
 DROP TABLE IF EXISTS `publication`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
