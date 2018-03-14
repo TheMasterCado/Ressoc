@@ -26,7 +26,7 @@ $params = [
   ':id' => $_POST['id'],
   ':image' => $_POST['image'],
   ':email' => $_POST['email'],
-  ':fk_specialite' => ((isset($specialite))) ? $specialite['pk_specialite'] : NULL)
+  ':fk_specialite' => (isset($specialite) ? $specialite['pk_specialite'] : NULL)
 ];
 $stmt->execute($params);
 session_start();
