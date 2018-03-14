@@ -43,7 +43,7 @@ foreach ($publicationsRaw as $i => $row) {
           WHERE fk_publication = :pub;";
   $stmt = $db->prepare($sql);
   $stmt->execute([':pub' => $row['pk_publication']]);
-  end($publications)['points'] = $stmt->fecth()['points'];
+  end($publications)['points'] = $stmt->fetch()['points'];
 }
 if($_GET['id'] == "ALL")
   $titre = "Feed général";
