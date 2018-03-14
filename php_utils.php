@@ -2,7 +2,7 @@
 function markUp($pattern, $replaceBy, $text, $omit = NULL) {
   $newText = "";
   if(!empty($omit)) {
-    $biggerSections = preg_split( "/ ".$omit." /", $text);
+    $biggerSections = explode($omit, $text);
     foreach ($biggerSections as $pos => $section) {
       if($pos % 2 == 0) {
         $sections = explode($pattern, $section);
@@ -15,7 +15,8 @@ function markUp($pattern, $replaceBy, $text, $omit = NULL) {
         }
       }
       else
-        $newText .= $o . $section . $o;
+        $newText .= $omit . $section . $omit;
+
     }
   }
   else {
@@ -34,7 +35,7 @@ function markUp($pattern, $replaceBy, $text, $omit = NULL) {
 function markUpLinks($patternStart, $patternEnd, $text, $omit = NULL) {
   $newText = "";
   if(!empty($omit)) {
-    $biggerSections = preg_split( "/ ".$omit." /", $text);
+    $biggerSections = explode($omit, $text);
     foreach ($biggerSections as $pos => $section) {
       if($pos % 2 == 0) {
         $occ = explode($patternStart[0], $section);
@@ -60,8 +61,9 @@ function markUpLinks($patternStart, $patternEnd, $text, $omit = NULL) {
             $newText .= $patternStart . $valeur;
         }
       }
-      else 
-        $newText .= $o . $section . $o;
+      else
+        $newText .= $omit . $section . $omit;
+
     }
   }
   else {
@@ -81,14 +83,14 @@ function formatEverything($string) {
   $text = htmlspecialchars($string, ENT_NOQUOTES);
   $text = str_replace("\n", "<br>", $text);
   $text = str_replace(["@@<br>", "<br>@@"], "@@", $text);
-  $text = markUp("**", ['<strong>', '</strong>'], $text, ["@@"]);
-  $text = markUp("\"\"", ['<em>', '</em>'], $text, "(@@|=;;)");
-  $text = markUp("~~", ['<del>', '</del>'], $text, "(@@|=;;)");
-  $text = markUp("__", ['<ins>', '</ins>'], $text, "(@@|=;;)");
-  $text = markUp("^^", ['<sup>', '</sup>'], $text, "(@@|=;;)");
-  $text = markUp("##", ['<mark>', '</mark>'], $text, "(@@|=;;)");
-  $text = markUpLinks(["[", "("], ["]", ")"], $text, "(@@|=;;)");
-  $text = markUp("@@", ['<code>', '</code>'], $text, "(=;;)");
+  $text = markUp("**", ['<strong>', '</strong>'], $text, "@@");
+  $text = markUp("\"\"", ['<em>', '</em>'], $text, "@@");
+  $text = markUp("~~", ['<del>', '</del>'], $text, "@@");
+  $text = markUp("__", ['<ins>', '</ins>'], $text, "@@");
+  $text = markUp("^^", ['<sup>', '</sup>'], $text, "@@");
+  $text = markUp("##", ['<mark>', '</mark>'], $text, "@@");
+  $text = markUpLinks(["[", "("], ["]", ")"], $text, "@@");
+  $text = markUp("@@", ['<code>', '</code>'], $text, "@@");
   return $text;
 }
 ?>

@@ -7,6 +7,10 @@ body {
   float: left;
 }
 
+.modal-dialog {
+  width: 50%;
+}
+
 #main {
   margin-left: 200px;
   padding-left: 120px;
