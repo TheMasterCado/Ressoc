@@ -8,26 +8,44 @@ else {
   header("Location: ./index.php");
 }
 require 'bd.php';
+if($_GET['id'] == "ALL")
+  $id = $_SESSION['id'];
+else
+  $id = $_GET['id'];
 //Infos de l'utilisateur propriétaire du feed
 $sql = "SELECT prenom, nom, pk_utilisateur, image, fk_specialite, nb_session FROM utilisateur WHERE loginID = :id;";
 $stmt = $db->prepare($sql);
-$stmt->execute([':id' => $_GET['id']]);
+$stmt->execute([':id' => $id);
 $feedDe = $stmt->fetch();
 //Toutes les publications
-$sql = "SELECT * FROM publication
-        INNER JOIN type_publication ON fk_type_publication = pk_type_publication
-        WHERE fk_utilisateur = :pk_utilisateur AND fk_publication IS NULL
-        ORDER BY pk_publication DESC;";
-$stmt = $db->prepare($sql);
-$stmt->execute([':pk_utilisateur' => $feedDe['pk_utilisateur']]);
+if($_GET['id'] == "ALL") {
+  $sql = "SELECT * FROM publication
+          INNER JOIN type_publication ON fk_type_publication = pk_type_publication
+          WHERE fk_publication IS NULL
+          ORDER BY pk_publication DESC;";
+  $stmt = $db->prepare($sql);
+  $stmt->execute();
+}
+else
+  $sql = "SELECT * FROM publication
+          INNER JOIN type_publication ON fk_type_publication = pk_type_publication
+          WHERE fk_utilisateur = :pk_utilisateur AND fk_publication IS NULL
+          ORDER BY pk_publication DESC;";
+  $stmt = $db->prepare($sql);
+  $stmt->execute([':pk_utilisateur' => $feedDe['pk_utilisateur']]);
+}
 $publications = $stmt->fetchAll(PDO::FETCH_ASSOC);
-$titre = "Feed de";
+if($_GET['id'] == "ALL")
+  $titre = "Feed général";
+else
+  $titre = "Feed de";
+$titre2 = $feedDe['prenom']." ".$feedDe['nom'];
 ?>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
-  <title><?= $titre." ".$feedDe['prenom']." ".$feedDe['nom'] ?></title>
+  <title><?= $titre." ".$titre2 ?></title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="./CSS/feed.css">
   <link rel="stylesheet" href="./CSS/sidenav.css">
@@ -72,6 +90,10 @@ $titre = "Feed de";
   <div id="main">
     <?php
     foreach ($publications as $pos => $publication) {
+      $sql = "SELECT prenom, nom FROM utilisateur WHERE pk_utilisateur = :fk_utilisateur;";
+      $stmt = $db->prepare($sql);
+      $stmt->execute([':fk_utilisateur' => $publication['fk_utilisateur']]);
+      $auteur = $stmt->fetch();
       $sql = "SELECT COUNT(*) AS nb FROM publication WHERE fk_publication = :pk_publication;";
       $stmt = $db->prepare($sql);
       $stmt->execute([':pk_publication' => $publication['pk_publication']]);
@@ -91,7 +113,7 @@ $titre = "Feed de";
     <div class='card <?= ($publication['description'] == 'Question') ? 'border-question' : 'border-texte' ?>'>
       <div class="card-body">
         <h6 class="card-subtitle mb-3 text-muted">
-          <strong><?= $points ?></strong> points - par <?= $feedDe['prenom'] . " " . $feedDe['nom'] ?>
+          <strong><?= $points ?></strong> points - par <?= $auteur['prenom'] . " " . $auteur['nom'] ?>
           <span class="stay-right">Catégorie: <strong><?php
             if(!empty($publication['fk_specialite'])) {
               $sql = "SELECT nom FROM specialite WHERE pk_specialite = ".$publication['fk_specialite'].";";

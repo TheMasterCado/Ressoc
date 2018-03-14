@@ -28,12 +28,13 @@ $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $_GET['id']]);
 $feedDe = $stmt->fetch();
 $titre = "Publication de";
+$titre2 = $feedDe['prenom']." ".$feedDe['nom'];
 ?>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
-  <title><?= $titre." ".$feedDe['prenom']." ".$feedDe['nom'] ?></title>
+  <title><?= $titre." ".$titre2 ?></title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="./CSS/feed.css">
   <link rel="stylesheet" href="./CSS/sidenav.css">
