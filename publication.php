@@ -9,6 +9,7 @@ if(isset($_SESSION['id'])) {
 else
   header("Location: ./index.php");
 require 'bd.php';
+require 'php_utils.php';
 $id = $_GET['id'];
 //Infos de l'utilisateur connecté
 $sql = "SELECT prenom, nom, pk_utilisateur FROM utilisateur WHERE loginID = :id;";
