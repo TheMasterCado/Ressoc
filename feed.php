@@ -42,7 +42,7 @@ foreach ($publicationsRaw as $i => $row) {
   $sql = "SELECT SUM(valeur) AS points FROM vote
           WHERE fk_publication = :pub;";
   $stmt = $db->prepare($sql);
-  $stmt->execute([':pub' => $row['pk_utilisateur']]);
+  $stmt->execute([':pub' => $row['pk_publication']]);
   end($publications)['points'] = $stmt->fecth()['points'];
 }
 if($_GET['id'] == "ALL")
