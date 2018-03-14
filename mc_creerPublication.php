@@ -24,7 +24,7 @@ if(!empty(trim($_POST['specialite']))) {
 
 $sql = "SELECT pk_type_publication FROM type_publication WHERE description = :estQuestion;";
 $stmt = $db->prepare($sql);
-$stmt->execute([':estQuestion' => ((isset($_POST['estQuestion'])) ? "Question" : "Texte")]);
+$stmt->execute([':estQuestion' => (($_POST['estQuestion'] == "oui") ? "Question" : "Texte")]);
 $fk_type_publication = $stmt->fetch();
 
 $sql = "SELECT pk_utilisateur FROM utilisateur WHERE loginID = :id;";
