@@ -94,7 +94,6 @@ function formatEverything($string) {
 }
 
  function compareRowsPoints($a, $b) {
-   return (($a['points'] == $b['points']) ? 0 :
-          (($a['points'] < $b['points']) ? -1 : 1));
+   return (($a['points'] == $b['points']) ? 0 : (($a['points'] < $b['points']) ? -1 : 1));
  }
 ?>
