@@ -124,9 +124,9 @@ function formatEverything($string) {
    elseif( $diff < 3600 * 24 * 2 ) // it happened yesterday
     return $TIMEBEFORE_YESTERDAY;
 
-   elseif(date( 'Y', $time ) == date( 'Y' ))
-    return sprintf($TIMEBEFORE_FORMAT, date( 'j', $time ), $mois[date( 'n', $time ) - 1]);
+   elseif(date( 'A', $time ) == date( 'A' ))
+    return sprintf($TIMEBEFORE_FORMAT, date( 'j', $time ), $mois[date( 'm', $time ) - 1]);
    else
-    return sprintf($TIMEBEFORE_FORMAT_YEAR, date( 'j', $time ), mois[date( 'n', $time ) + 1], date( 'Y' ));
+    return sprintf($TIMEBEFORE_FORMAT_YEAR, date( 'j', $time ), mois[date( 'm', $time ) + 1], date( 'A', $time ));
  }
  ?>
