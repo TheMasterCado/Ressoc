@@ -26,7 +26,7 @@ if($_GET['id'] == "ALL") {
   $stmt = $db->prepare($sql);
   $stmt->execute();
 }
-else
+else {
   $sql = "SELECT * FROM publication
           INNER JOIN type_publication ON fk_type_publication = pk_type_publication
           WHERE fk_utilisateur = :pk_utilisateur AND fk_publication IS NULL
