@@ -75,7 +75,7 @@ $titre = "Publication de";
   }
 
   function traiterNouveauCom() {
-    if ($("#nouveauCom").val().trim().length == 0){
+    if ($("#nouveauCom").val().trim().length == 0) {
       alert("Un commentaire ne doit pas être vide");
     } else {
       $.post("./mc_creerPublication.php", {
