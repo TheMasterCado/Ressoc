@@ -47,7 +47,7 @@ function markUpLinks($patternStart, $patternEnd, $text, $omit = NULL) {
           foreach ($occ as $pospos => $valeur) {
             $link = explode($patternEnd[0], $valeur);
             if(count($link) > 1) {
-              $newText .= "<a target="_blank" href=\"" . $link[0] . "\">";
+              $newText .= "<a target=\"_blank\" href=\"" . $link[0] . "\">";
               $linkText = explode($patternEnd[1], $link[1]);
               if(count($linkText) > 1 && $linkText[0][0] == $patternStart[1]) {
                 $newText .=  substr($linkText[0], 1) . "</a>";
