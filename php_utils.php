@@ -90,7 +90,7 @@ function formatEverything($string) {
   $text = markUp("^^", ['<sup>', '</sup>'], $text, "@@");
   $text = markUp("##", ['<mark>', '</mark>'], $text, "@@");
   $text = markUpLinks(["[", "("], ["]", ")"], $text, "@@");
-  $text = markUp("@@", ['<code>', '</code>'], $text, "@@");
+  $text = markUp("@@", ['<code>', '</code>'], $text);
   return $text;
 }
 ?>
