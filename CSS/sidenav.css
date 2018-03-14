@@ -24,7 +24,7 @@
 }
 
 #liste-utilisateurs {
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   margin: auto;
   margin-top: 25px;
@@ -81,7 +81,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #222;
+  background: #eee;
 }
 
 ::-webkit-scrollbar-thumb:hover {

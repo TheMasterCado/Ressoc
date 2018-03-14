@@ -41,7 +41,7 @@ p.card-text {
   padding-left: 10px;
   margin-bottom: 12px;
   max-height: 30rem;
-  text-overflow: ellipsis;
+  overflow-y: auto;
 }
 
 .card hr {
@@ -72,6 +72,7 @@ mark {
 code {
   padding: 2px 5px;
   display: block;
+  overflow-x: auto;
   background-color: #eee;
   border-left: 2px solid #bbb;
   white-space: pre-wrap;
