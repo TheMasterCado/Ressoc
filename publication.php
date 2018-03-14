@@ -76,7 +76,7 @@ $titre = "Publication de";
 
   function traiterNouveauCom() {
     if (/^\s*$/.test($("#nouveauCom").val()))
-      alert("Un commentaire ne doit pas être vide")
+      alert("Un commentaire ne doit pas être vide");
     else {
     $.post("./mc_creerPublication.php", {
            'contenu' : $("#nouveauCom").val(),
