@@ -15,7 +15,7 @@ else
 //Infos de l'utilisateur propriétaire du feed
 $sql = "SELECT prenom, nom, pk_utilisateur, image, fk_specialite, nb_session FROM utilisateur WHERE loginID = :id;";
 $stmt = $db->prepare($sql);
-$stmt->execute([':id' => $id);
+$stmt->execute([':id' => $id]);
 $feedDe = $stmt->fetch();
 //Toutes les publications
 if($_GET['id'] == "ALL") {
