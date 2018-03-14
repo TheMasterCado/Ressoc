@@ -125,7 +125,7 @@ function formatEverything($string) {
     return $TIMEBEFORE_YESTERDAY;
 
    elseif(date( 'Y', $time ) == date( 'Y' ))
-    return sprintf($TIMEBEFORE_FORMAT, date( 'j', $time ), mois[date( 'n', $time ) + 1]);
+    return sprintf($TIMEBEFORE_FORMAT, date( 'j', $time ), $mois[date( 'n', $time ) - 1]);
    else
     return sprintf($TIMEBEFORE_FORMAT_YEAR, date( 'j', $time ), mois[date( 'n', $time ) + 1], date( 'Y' ));
  }
