@@ -12,7 +12,7 @@ require 'bd.php';
 //publication
 $sql = "SELECT pk_publication, texte, description, specialite.nom AS specialite FROM publication
         INNER JOIN type_publication ON fk_type_publication = pk_type_publication
-        LEFT JOIN specialite ON specialite
+        LEFT JOIN specialite ON fk_specialite = fk_specialite
         WHERE pk_publication = :id;";
 $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $_GET['id']]);
@@ -30,9 +30,9 @@ foreach ($votes as $pos => $vote) {
     $voteCurrentUser = $vote['valeur'];
 }
 $publication = [];
-$publication += [
-    'pk_publication' => $publicationRaw['pk_publication'],
-    'texte' => $publicationRaw['texte'],
+$publication = [
+  'pk_publication' => $publicationRaw['pk_publication'],
+  'texte' => $publicationRaw['texte'],
   'specialite' => $publicationRaw['specialite'],
   'description' => $publicationRaw['description'],
   'points' => $points,
