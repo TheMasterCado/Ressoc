@@ -2,11 +2,6 @@
 //Tous les utilisateurs
 $sql = "SELECT prenom, nom, loginID FROM utilisateur ORDER BY prenom ASC;";
 $allUsers = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-//Infos de l'utilisateur connecté
-$sql = "SELECT prenom, nom, pk_utilisateur FROM utilisateur WHERE loginID = :id;";
-$stmt = $db->prepare($sql);
-$stmt->execute([':id' => $_SESSION['id']]);
-$currentUser = $stmt->fetch();
 //Spécialité de l'utilisateur à qui le feed appartient
 if($feedDe['fk_specialite'] != NULL) {
   $sql = "SELECT nom FROM specialite WHERE pk_specialite = :specialite;";

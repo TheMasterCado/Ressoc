@@ -17,18 +17,29 @@ $sql = "SELECT prenom, nom, pk_utilisateur, image, fk_specialite, nb_session FRO
 $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $id]);
 $feedDe = $stmt->fetch();
+//Infos de l'utilisateur connecté
+$sql = "SELECT prenom, nom, pk_utilisateur FROM utilisateur WHERE loginID = :id;";
+$stmt = $db->prepare($sql);
+$stmt->execute([':id' => $_SESSION['id']]);
+$currentUser = $stmt->fetch();
 //Toutes les publications
 if($_GET['id'] == "ALL") {
-  $sql = "SELECT * FROM publication
+  $sql = "SELECT pk_publication, fk_publication, specialite.nom AS specialite, description, texte, utilisateur.prenom, utilisateur.nom
+          FROM publication
           INNER JOIN type_publication ON fk_type_publication = pk_type_publication
+          INNER JOIN utilisateur ON fk_utilisateur = pk_utilisateur
+          LEFT JOIN specialite ON publication.fk_specialite = pk_specialite
           WHERE fk_publication IS NULL
           ORDER BY pk_publication DESC;";
   $stmt = $db->prepare($sql);
   $stmt->execute();
 }
 else {
-  $sql = "SELECT * FROM publication
+  $sql = "SELECT pk_publication, fk_publication, specialite.nom AS specialite, description, texte, utilisateur.prenom, utilisateur.nom
+          FROM publication
           INNER JOIN type_publication ON fk_type_publication = pk_type_publication
+          INNER JOIN utilisateur ON fk_utilisateur = pk_utilisateur
+          LEFT JOIN specialite ON publication.fk_specialite = pk_specialite
           WHERE fk_utilisateur = :pk_utilisateur AND fk_publication IS NULL
           ORDER BY pk_publication DESC;";
   $stmt = $db->prepare($sql);
@@ -36,14 +47,36 @@ else {
 }
 $publicationsRaw = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $publications = [];
-//Points et spécialité pour les publications
+//Points et nb de coms pour les publications
 foreach ($publicationsRaw as $i => $row) {
-  array_push($publications, $row);
-  $sql = "SELECT SUM(valeur) AS points FROM vote
+  $sql = "SELECT * FROM vote
           WHERE fk_publication = :pub;";
   $stmt = $db->prepare($sql);
   $stmt->execute([':pub' => $row['pk_publication']]);
-  end($publications)['points'] = $stmt->fetch()['points'];
+  $votes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  $points = 0;
+  $voteCurrentUser = 0;
+  foreach ($votes as $pos => $vote) {
+    $points += $vote['valeur'];
+    if($vote['fk_utilisateur'] == $currentUser['pk_utilisateur'])
+      $voteCurrentUser = $vote['valeur'];
+  }
+  $sql = "SELECT COUNT(*) AS nb FROM publication
+          WHERE fk_publication = :pub;";
+  $stmt = $db->prepare($sql);
+  $stmt->execute([':pub' => $row['pk_publication']]);
+  $nbComs = $stmt->fetch();
+  array_push($publications, [
+    'pk_publication' => $row['pk_publication'],
+    'texte' => $row['texte'],
+    'specialite' => $row['specialite'],
+    'description' => $row['description'],
+    'prenom' => $row['prenom'],
+    'nom' => $row['nom'],
+    'points' => $points,
+    'voteCurrentUser' => $voteCurrentUser,
+    'nbComs' => $nbComs['nb']
+  ]);
 }
 if($_GET['id'] == "ALL")
   $titre = "Feed général";
@@ -123,30 +156,25 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
     <div class='card <?= ($publication['description'] == 'Question') ? 'border-question' : 'border-texte' ?>'>
       <div class="card-body">
         <h6 class="card-subtitle mb-3 text-muted">
-          <strong><?= $publication['points'] ?></strong> points - par <?= $auteur['prenom'] . " " . $auteur['nom'] ?>
-          <span class="stay-right">Catégorie: <strong><?php
-            if(!empty($publication['fk_specialite'])) {
-              $sql = "SELECT nom FROM specialite WHERE pk_specialite = ".$publication['fk_specialite'].";";
-              $specialite = $db->query($sql)->fetch();
-              echo $specialite['nom'];
-            }
-            else
-              echo "Aucune";
-            if($publication['description'] == 'Question')
-              echo " | QUESTION";
-            ?></strong></span>
+          <strong><?= $publication['points'] ?></strong> points - par <?= $publication'prenom'] . " " . $publication['nom'] ?>
+          <span class="stay-right">Catégorie: <strong><?=
+            (empty($publication['specialite']) ? "Aucune" : $publication['specialite']) . (($publication['description'] == 'Question') ? " | QUESTION" : "") ?>
+            </strong>
+          </span>
         </h6>
             <hr>
         <p class="card-text"><?= $publication['texte'] ?></p>
         <hr>
         <span>
-          <a href="javascript:void(null);" valeur="<?= ($voteCurrentUser == 1) ? "0" : "1" ?>" class="card-link vert <?= ($voteCurrentUser == 1) ? "selected" : "" ?>"
+          <a href="javascript:void(null);" valeur="<?= ($publication['voteCurrentUser'] == 1) ? "0" : "1" ?>"
+             class="card-link vert <?= ($publication['voteCurrentUser'] == 1) ? "selected" : "" ?>"
              onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Bien (+1)</a>
-          <a href="javascript:void(null);" valeur="<?= ($voteCurrentUser == -1) ? "0" : "-1" ?>" class="card-link rouge <?= ($voteCurrentUser == -1) ? "selected" : "" ?>"
+          <a href="javascript:void(null);" valeur="<?= ($publication['voteCurrentUser'] == -1) ? "0" : "-1" ?>"
+             class="card-link rouge <?= ($publication['voteCurrentUser'] == -1) ? "selected" : "" ?>"
              onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Mauvais (-1)</a>
         </span>
             <a href="./publication.php?id=<?= $publication['pk_publication'] ?>" class="card-link stay-right">
-              Commentaires<?= ($nbComs['nb'] > 0) ? " (" . $nbComs['nb'] . ")" : "" ?>
+              Commentaires<?= ($publication['nbComs'] > 0) ? " (" . $publication['nbComs'] . ")" : "" ?>
             </a>
       </div>
     </div>
