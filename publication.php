@@ -159,12 +159,11 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
           <h6 class="card-subtitle mb-3 text-muted">
             <strong><?= $publication['points'] ?></strong> points - par <?= $feedDe['prenom'] . " " . $feedDe['nom'] ?>
             <span class="stay-right">Catégorie: <strong><?php
-              (empty($publication['specialite']) ? "Aucune" : $publication['specialite']).
-                (($publication['description'] == 'Question') ? " | QUESTION" : "") ?></strong>
+              (empty($publication['specialite']) ? "Aucune" : $publication['specialite']) . (($publication['description'] == 'Question') ? " | QUESTION" : "") ?></strong>
             </span>
           </h6>
           <hr>
-          <p class="card-text"><?= str_replace("\n", "<br>", $publication['texte']) ?></p>
+          <p class="card-text"><?= $publication['texte'] ?></p>
           <hr>
           <span>
             <a href="javascript:void(null);" valeur="<?= ($publication['voteCurrentUser'] == 1) ? "0" : "1" ?>"
