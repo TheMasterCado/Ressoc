@@ -75,6 +75,6 @@ code {
   overflow-x: auto;
   background-color: #eee;
   border-left: 2px solid #bbb;
-  white-space: pre-wrap;
+  white-space: pre;
   color: #303336 !important;
 }
