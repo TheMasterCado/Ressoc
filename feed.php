@@ -34,7 +34,17 @@ else {
   $stmt = $db->prepare($sql);
   $stmt->execute([':pk_utilisateur' => $feedDe['pk_utilisateur']]);
 }
-$publications = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$publicationsRaw = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$publications = [];
+//Points et spécialité pour les publications
+foreach ($publicationsRaw as $i => $row) {
+  array_push($publications, $row);
+  $sql = "SELECT SUM(valeur) AS points FROM vote
+          WHERE fk_publication = :pub;";
+  $stmt = $db->prepare($sql);
+  $stmt->execute([':pub' => $row['pk_utilisateur']]);
+  end($publications)['points'] = $stmt->fecth()['points'];
+}
 if($_GET['id'] == "ALL")
   $titre = "Feed général";
 else
@@ -113,7 +123,7 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
     <div class='card <?= ($publication['description'] == 'Question') ? 'border-question' : 'border-texte' ?>'>
       <div class="card-body">
         <h6 class="card-subtitle mb-3 text-muted">
-          <strong><?= $points ?></strong> points - par <?= $auteur['prenom'] . " " . $auteur['nom'] ?>
+          <strong><?= $publication['points'] ?></strong> points - par <?= $auteur['prenom'] . " " . $auteur['nom'] ?>
           <span class="stay-right">Catégorie: <strong><?php
             if(!empty($publication['fk_specialite'])) {
               $sql = "SELECT nom FROM specialite WHERE pk_specialite = ".$publication['fk_specialite'].";";
