@@ -14,11 +14,13 @@ $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $_GET['id']]);
 $feedDe = $stmt->fetch();
 //Toutes les publications
-$sql = "SELECT * FROM publication INNER JOIN type_publication ON fk_type_publication = pk_type_publication
-        WHERE fk_utilisateur = :pk_utilisateur AND fk_publication IS NULL
-        ORDER BY pk_publication DESC;";
+$sql = "SELECT * FROM publication
+        INNER JOIN type_publication ON fk_type_publication = pk_type_publication
+        INNER JOIN vote ON pk_publication = vote.fk_publication
+        WHERE publication.fk_utilisateur = :pk_utilisateur AND publication.fk_publication IS NULL
+        ORDER BY :ordre DESC;";
 $stmt = $db->prepare($sql);
-$stmt->execute([':pk_utilisateur' => $feedDe['pk_utilisateur']]);
+$stmt->execute([':pk_utilisateur' => $feedDe['pk_utilisateur'], ':ordre' => (isset($_GET['ordre']) ? $_GET['ordre'] : "pk_publication")]);
 $publications = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $titre = "Feed de";
 ?>
@@ -69,8 +71,16 @@ $titre = "Feed de";
   </script>
   <?php require 'sidenav.php'; ?>
   <div id="main">
+    <select class="form-control" id="ordre">
+      <option>Date</option>
+      <option value=""></option>
+    </select>
     <?php
     foreach ($publications as $pos => $publication) {
+      $sql = "SELECT COUNT(*) AS nb FROM publication WHERE fk_publication = :pk_publication;";
+      $stmt = $db->prepare($sql);
+      $stmt->execute([':pk_publication' => $publication['pk_publication']]);
+      $nbComs = $stmt->fetch();
       $sql = "SELECT * FROM vote WHERE fk_publication = :pk_publication;";
       $stmt = $db->prepare($sql);
       $stmt->execute([':pk_publication' => $publication['pk_publication']]);
@@ -96,7 +106,7 @@ $titre = "Feed de";
             else
               echo "Aucune";
             if($publication['description'] == 'Question')
-              echo " | QUESTION"
+              echo " | QUESTION";
             ?></strong></span>
             </h6>
         <p class="card-text"><?= $publication['texte'] ?></p>
@@ -106,7 +116,9 @@ $titre = "Feed de";
           <a href="javascript:void(null);" valeur="<?= ($voteCurrentUser == -1) ? "0" : "-1" ?>" class="card-link rouge <?= ($voteCurrentUser == -1) ? "selected" : "" ?>"
              onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Mauvais (-1)</a>
         </span>
-            <a href="./publication.php?id=<?= $publication['pk_publication'] ?>" class="card-link stay-right">Commentaires</a>
+            <a href="./publication.php?id=<?= $publication['pk_publication'] ?>" class="card-link stay-right">
+              Commentaires<?= ($nbComs['nb'] > 0) ? " (" . $nbComs['nb'] . ")" : "" ?>
+            </a>
       </div>
     </div>
     <?php } ?>
