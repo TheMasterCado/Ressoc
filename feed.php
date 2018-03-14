@@ -27,7 +27,7 @@ $currentUser = $stmt->fetch();
           LEFT JOIN specialite ON publication.fk_specialite = pk_specialite
           WHERE fk_publication IS NULL ".
           (($id == "ALL") ? "" : "AND fk_utilisateur = :pk_utilisateur ").
-          "ORDER BY pk_publication DESC;";
+          "ORDER BY timestamp DESC;";
   $stmt = $db->prepare($sql);
   $params = [];
   if($id != "ALL")

@@ -51,7 +51,7 @@ $sql = "SELECT pk_publication, fk_publication, UNIX_TIMESTAMP(timestamp) AS time
         INNER JOIN type_publication ON fk_type_publication = pk_type_publication
         INNER JOIN utilisateur ON fk_utilisateur = pk_utilisateur
         WHERE fk_publication = :id
-        ORDER BY pk_publication DESC;";
+        ORDER BY timestamp DESC;";
 $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $_GET['id']]);
 $commentairesRaw = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -190,7 +190,7 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
         <div class="card-body">
           <h6 class="card-subtitle mb-3 text-muted">
             <strong><?= $commentaire['points'] ?></strong> points - par <?= $commentaire['prenom'] . " " . $commentaire['nom'] . " - " ?>
-            <span class="timestamp"><?= time_ago($publication['timestamp']) ?></span>
+            <span class="timestamp"><?= time_ago($commentaire['timestamp']) ?></span>
           </h6>
           <hr>
           <p class="card-text"><?= $commentaire['texte'] ?></p>
