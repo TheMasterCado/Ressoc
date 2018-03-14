@@ -30,9 +30,9 @@ foreach ($votes as $pos => $vote) {
     $voteCurrentUser = $vote['valeur'];
 }
 $publication = [];
-$publication += [
-  'pk_publication' => $publicationRaw['pk_publication'],
-  'texte' => $publicationRaw['texte'],
+$publication += [
+    'pk_publication' => $publicationRaw['pk_publication'],
+    'texte' => $publicationRaw['texte'],
   'specialite' => $publicationRaw['specialite'],
   'description' => $publicationRaw['description'],
   'points' => $points,
