@@ -19,7 +19,7 @@ $currentUser = $stmt->fetch();
 //publication
 $sql = "SELECT pk_publication, texte, description, specialite.nom AS specialite FROM publication
         INNER JOIN type_publication ON fk_type_publication = pk_type_publication
-        LEFT JOIN specialite ON fk_specialite = fk_specialite
+        LEFT JOIN specialite ON fk_specialite = pk_specialite
         WHERE pk_publication = :id;";
 $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $id]);
@@ -44,8 +44,6 @@ $publication = [
   'points' => $points,
   'voteCurrentUser' => $voteCurrentUser
 ];
-echo (empty($publication['specialite']) ? "Aucune" : $publication['specialite']).
-  (($publication['description'] == 'Question') ? " | QUESTION" : "") ;
 //Tous les commentaires
 $sql = "SELECT pk_publication, fk_publication, description, texte, prenom, nom FROM publication
         INNER JOIN type_publication ON fk_type_publication = pk_type_publication
