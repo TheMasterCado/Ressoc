@@ -14,7 +14,7 @@ $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $_GET['id']]);
 $feedDe = $stmt->fetch();
 //Toutes les publications
-$sql = "SELECT pk_publication, texte, description, fk_specialite, publication.fk_utilisateur, vote.fk_utilisateur, SUM(valeur) AS points FROM publication
+$sql = "SELECT pk_publication, texte, description, fk_specialite, publication.fk_utilisateur, SUM(valeur) AS points FROM publication
         INNER JOIN type_publication ON fk_type_publication = pk_type_publication
         INNER JOIN vote ON pk_publication = vote.fk_publication
         WHERE publication.fk_utilisateur = :pk_utilisateur AND publication.fk_publication IS NULL
