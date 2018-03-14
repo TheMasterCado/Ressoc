@@ -16,11 +16,10 @@ $feedDe = $stmt->fetch();
 //Toutes les publications
 $sql = "SELECT * FROM publication
         INNER JOIN type_publication ON fk_type_publication = pk_type_publication
-        INNER JOIN vote ON pk_publication = vote.fk_publication
-        WHERE publication.fk_utilisateur = :pk_utilisateur AND publication.fk_publication IS NULL
-        ORDER BY :ordre DESC;";
+        WHERE fk_utilisateur = :pk_utilisateur AND fk_publication IS NULL
+        ORDER BY pk_publication DESC;";
 $stmt = $db->prepare($sql);
-$stmt->execute([':pk_utilisateur' => $feedDe['pk_utilisateur'], ':ordre' => (isset($_GET['ordre']) ? $_GET['ordre'] : "pk_publication")]);
+$stmt->execute([':pk_utilisateur' => $feedDe['pk_utilisateur']]);
 $publications = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $titre = "Feed de";
 ?>
@@ -71,10 +70,6 @@ $titre = "Feed de";
   </script>
   <?php require 'sidenav.php'; ?>
   <div id="main">
-    <select class="form-control" id="ordre">
-      <option>Date</option>
-      <option value=""></option>
-    </select>
     <?php
     foreach ($publications as $pos => $publication) {
       $sql = "SELECT COUNT(*) AS nb FROM publication WHERE fk_publication = :pk_publication;";
