@@ -160,7 +160,8 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
       <div class='card <?= ($publication['description'] == 'Question') ? 'border-question' : 'border-texte' ?>'>
         <div class="card-body">
           <h6 class="card-subtitle mb-3 text-muted">
-            <strong><?= $publication['points'] ?></strong> points - par <?= $feedDe['prenom'] . " " . $feedDe['nom'] ?>
+            <strong><?= $publication['points'] ?></strong> points - par <?= $feedDe['prenom'] . " " . $feedDe['nom'] . " - " ?>
+            <span class="timestamp"><?= time_ago($publication['timestamp']) ?></span>
             <span class="stay-right">Catégorie: <strong><?=
               (empty($publication['specialite']) ? "Aucune" : $publication['specialite']).
                 (($publication['description'] == 'Question') ? " | QUESTION" : "") ?>
@@ -188,7 +189,8 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
       <div class='card<?= ($commentaire['description'] == 'BonneReponse') ? ' border-bonneReponse' : '' ?>'>
         <div class="card-body">
           <h6 class="card-subtitle mb-3 text-muted">
-            <strong><?= $commentaire['points'] ?></strong> points - par <?= $commentaire['prenom'] . " " . $commentaire['nom'] ?>
+            <strong><?= $commentaire['points'] ?></strong> points - par <?= $commentaire['prenom'] . " " . $commentaire['nom'] . " - " ?>
+            <span class="timestamp"><?= time_ago($publication['timestamp']) ?></span>
           </h6>
           <hr>
           <p class="card-text"><?= $commentaire['texte'] ?></p>
