@@ -35,7 +35,7 @@ $publication = [
   'specialite' => $publicationRaw['specialite'],
   'description' => $publicationRaw['description'],
   'points' => $points,
-  'voteCurrentUser' => $voteCurrentUser 
+  'voteCurrentUser' => $voteCurrentUser
 ];
 //Tous les commentaires
 $sql = "SELECT pk_publication, fk_publication, description, texte, prenom, nom FROM publication
