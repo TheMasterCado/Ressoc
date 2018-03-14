@@ -88,7 +88,7 @@ if(isset($_GET['ordre']))
 $sql = "SELECT prenom, nom, pk_utilisateur, image, fk_specialite, nb_session FROM utilisateur WHERE pk_utilisateur =
         (SELECT fk_utilisateur FROM publication WHERE pk_publication = :id);";
 $stmt = $db->prepare($sql);
-$stmt->execute([':id' => $_GET['id']]);
+$stmt->execute([':id' => $id]);
 $feedDe = $stmt->fetch();
 $titre = "Publication de";
 $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
