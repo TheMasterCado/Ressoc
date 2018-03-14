@@ -1,21 +1,18 @@
 <?php
 session_start();
-if(isset($_SESSION['id']) && isset($_GET['id'])) {
+if(isset($_SESSION['id'])) {
   if(isset($_SESSION['newUser']))
-  header("Location: ./nouvelUtilisateur.php");
+    header("Location: ./nouvelUtilisateur.php");
 }
-else {
-  header("Location: ./index.php");
-}
-require 'bd.php';
-if($_GET['id'] == "ALL")
-  $id = $_SESSION['id'];
 else
-  $id = $_GET['id'];
+  header("Location: ./index.php");
+require 'bd.php';
+require 'php_utils.php';
+$id = (isset($_GET['id']) ? $_GET['id'] : "ALL");
 //Infos de l'utilisateur propriétaire du feed
 $sql = "SELECT prenom, nom, pk_utilisateur, image, fk_specialite, nb_session FROM utilisateur WHERE loginID = :id;";
 $stmt = $db->prepare($sql);
-$stmt->execute([':id' => $id]);
+$stmt->execute([':id' => (($id == "ALL") ? $_SESSION['id'] : $id)]);
 $feedDe = $stmt->fetch();
 //Infos de l'utilisateur connecté
 $sql = "SELECT prenom, nom, pk_utilisateur FROM utilisateur WHERE loginID = :id;";
@@ -23,28 +20,19 @@ $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $_SESSION['id']]);
 $currentUser = $stmt->fetch();
 //Toutes les publications
-if($_GET['id'] == "ALL") {
   $sql = "SELECT pk_publication, fk_publication, specialite.nom AS specialite, description, texte, utilisateur.prenom, utilisateur.nom
           FROM publication
           INNER JOIN type_publication ON fk_type_publication = pk_type_publication
           INNER JOIN utilisateur ON fk_utilisateur = pk_utilisateur
           LEFT JOIN specialite ON publication.fk_specialite = pk_specialite
-          WHERE fk_publication IS NULL
-          ORDER BY pk_publication DESC;";
+          WHERE fk_publication IS NULL ".
+          (($id == "ALL") ? "" : "AND fk_utilisateur = :pk_utilisateur ").
+          "ORDER BY pk_publication DESC;";
   $stmt = $db->prepare($sql);
-  $stmt->execute();
-}
-else {
-  $sql = "SELECT pk_publication, fk_publication, specialite.nom AS specialite, description, texte, utilisateur.prenom, utilisateur.nom
-          FROM publication
-          INNER JOIN type_publication ON fk_type_publication = pk_type_publication
-          INNER JOIN utilisateur ON fk_utilisateur = pk_utilisateur
-          LEFT JOIN specialite ON publication.fk_specialite = pk_specialite
-          WHERE fk_utilisateur = :pk_utilisateur AND fk_publication IS NULL
-          ORDER BY pk_publication DESC;";
-  $stmt = $db->prepare($sql);
-  $stmt->execute([':pk_utilisateur' => $feedDe['pk_utilisateur']]);
-}
+  $params = [];
+  if($id != "ALL")
+    $params + [":pk_utilisateur" => $feedDe['pk_utilisateur']];
+  $stmt->execute($params);
 $publicationsRaw = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $publications = [];
 //Points et nb de coms pour les publications
@@ -66,7 +54,7 @@ foreach ($publicationsRaw as $i => $row) {
   $stmt = $db->prepare($sql);
   $stmt->execute([':pub' => $row['pk_publication']]);
   $nbComs = $stmt->fetch();
-  array_push($publications, [
+  $publications[] = [
     'pk_publication' => $row['pk_publication'],
     'texte' => $row['texte'],
     'specialite' => $row['specialite'],
@@ -76,9 +64,15 @@ foreach ($publicationsRaw as $i => $row) {
     'points' => $points,
     'voteCurrentUser' => $voteCurrentUser,
     'nbComs' => $nbComs['nb']
-  ]);
+  ];
 }
-if($_GET['id'] == "ALL")
+if(isset($_GET['ordre']))
+  switch ($_GET['ordre']) {
+    case 'points':
+      usort($publications, "compareRowsPoints");
+      break;
+  }
+if($id == "ALL")
   $titre = "Feed général";
 else
   $titre = "Feed de";
@@ -133,25 +127,6 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
   <div id="main">
     <?php
     foreach ($publications as $pos => $publication) {
-      // $sql = "SELECT prenom, nom FROM utilisateur WHERE pk_utilisateur = :fk_utilisateur;";
-      // $stmt = $db->prepare($sql);
-      // $stmt->execute([':fk_utilisateur' => $publication['fk_utilisateur']]);
-      // $auteur = $stmt->fetch();
-      // $sql = "SELECT COUNT(*) AS nb FROM publication WHERE fk_publication = :pk_publication;";
-      // $stmt = $db->prepare($sql);
-      // $stmt->execute([':pk_publication' => $publication['pk_publication']]);
-      // $nbComs = $stmt->fetch();
-      // $sql = "SELECT * FROM vote WHERE fk_publication = :pk_publication;";
-      // $stmt = $db->prepare($sql);
-      // $stmt->execute([':pk_publication' => $publication['pk_publication']]);
-      // $votes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-      // $points = 0;
-      // $voteCurrentUser = 0;
-      // foreach ($votes as $pos => $vote) {
-      //   $points += $vote['valeur'];
-      //   if($vote['fk_utilisateur'] == $currentUser['pk_utilisateur'])
-      //     $voteCurrentUser = $vote['valeur'];
-      // }
     ?>
     <div class='card <?= ($publication['description'] == 'Question') ? 'border-question' : 'border-texte' ?>'>
       <div class="card-body">

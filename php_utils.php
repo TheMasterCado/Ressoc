@@ -92,4 +92,9 @@ function formatEverything($string) {
   $text = markUp("@@", ['<code>', '</code>'], $text);
   return $text;
 }
+
+ function compareRowsPoints($a, $b) {
+   return (($a['points'] == $b['points']) ? 0 :
+          (($a['points'] < $b['points']) ? -1 : 1));
+ }
 ?>

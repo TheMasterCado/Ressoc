@@ -1,12 +1,13 @@
 <?php
 session_start();
-if(isset($_SESSION['id']) && isset($_GET['id'])) {
+if(isset($_SESSION['id'])) {
+  if(!isset($_GET['id']))
+    header("Location: ./feed.php");
   if(isset($_SESSION['newUser']))
-  header("Location: ./nouvelUtilisateur.php");
+    header("Location: ./nouvelUtilisateur.php");
 }
-else {
+else
   header("Location: ./index.php");
-}
 require 'bd.php';
 //publication
 $sql = "SELECT * FROM publication INNER JOIN type_publication ON
