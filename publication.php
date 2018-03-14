@@ -44,6 +44,8 @@ $publication = [
   'points' => $points,
   'voteCurrentUser' => $voteCurrentUser
 ];
+echo (empty($publication['specialite']) ? "Aucune" : $publication['specialite']).
+  (($publication['description'] == 'Question') ? " | QUESTION" : "") ;
 //Tous les commentaires
 $sql = "SELECT pk_publication, fk_publication, description, texte, prenom, nom FROM publication
         INNER JOIN type_publication ON fk_type_publication = pk_type_publication
