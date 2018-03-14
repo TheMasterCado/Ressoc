@@ -29,7 +29,9 @@ foreach ($votes as $pos => $vote) {
   if($vote['fk_utilisateur'] == $currentUser['pk_utilisateur'])
     $voteCurrentUser = $vote['valeur'];
 }
-$publication = ['pk_publication' => $publicationRaw['pk_publication'],
+$publication = [];
+$publication += [
+  'pk_publication' => $publicationRaw['pk_publication'],
   'texte' => $publicationRaw['texte'],
   'specialite' => $publicationRaw['specialite'],
   'description' => $publicationRaw['description'],
