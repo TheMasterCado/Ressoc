@@ -27,7 +27,7 @@ $sql = "SELECT pk_publication, fk_publication, specialite.nom AS specialite, UNI
         LEFT JOIN specialite ON publication.fk_specialite = pk_specialite
         WHERE fk_publication IS NULL ".
         (($id == "ALL") ? "" : "AND fk_utilisateur = :pk_utilisateur ").
-        (isset($_GET['specialite']) ? "AND specialite = :specialite " : "").
+        (isset($_GET['specialite']) ? "AND specialite.nom = :specialite " : "").
         "ORDER BY timestamp DESC;";
 $stmt = $db->prepare($sql);
 $params = [];
