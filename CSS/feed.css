@@ -86,3 +86,12 @@ code {
   white-space: pre;
   color: #303336 !important;
 }
+
+quote::before {
+  content: "- ";
+}
+
+quote {
+  font-style: italic;
+  font-family: "Italianno", cursive;
+}

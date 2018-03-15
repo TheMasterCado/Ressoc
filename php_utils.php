@@ -87,6 +87,7 @@ function formatEverything($string) {
   $text = markUp("~~", ['<del>', '</del>'], $text, "@@");
   $text = markUp("__", ['<ins>', '</ins>'], $text, "@@");
   $text = markUp("^^", ['<sup>', '</sup>'], $text, "@@");
+  $text = markUp("--", ['<quote>', '</quote>'], $text, "@@");
   $text = markUp("##", ['<mark>', '</mark>'], $text, "@@");
   $text = markUpLinks(["[", "("], ["]", ")"], $text, "@@");
   $text = markUp("@@", ['<code>', '</code>'], $text);
