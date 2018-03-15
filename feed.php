@@ -164,7 +164,7 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
             </strong>
           </span>
           <a href="javascript:void(null);" onclick="traiterSuppression(<?= $publication['pk_publication'] ?>)">
-            <img src="./Images/glyphicons/png/glyphicons-17-bin.png" alt="">
+            <img src="./Images/glyphicons/png/glyphicons-17-bin.png" class="glyph">
           </a>
         </h6>
             <hr>

@@ -43,6 +43,10 @@ body {
   font-size: 0.8rem;
 }
 
+.glyph {
+  height: 1em;
+}
+
 #emptyFeed {
   text-align: center;
   width: 100%;
