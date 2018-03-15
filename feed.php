@@ -144,7 +144,6 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
                          ? '&specialite=' + $('#categorie').val() : ''));">Appliquer</button>
       </div>
     </div>
-    <span class="halflings halflings-trash"></span>
     <?php if(empty($publications)) { ?>
     <div id="emptyFeed">
       <h1 class="display-4">Aucune publication</h1>
