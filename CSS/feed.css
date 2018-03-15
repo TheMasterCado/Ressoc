@@ -19,8 +19,13 @@ body {
   margin-left: 200px;
   padding-left: 120px;
   padding-right: 120px;
-  padding-top: 30px;
+  padding-top: 20px;
   padding-bottom: 30px;
+}
+
+#filter {
+  float: right;
+  padding-bottom: 20px; 
 }
 
 .card {
@@ -50,6 +55,14 @@ p.card-text {
   margin-bottom: 12px;
   max-height: 30rem;
   overflow-y: auto;
+}
+
+select.discreet-dropdown {
+  background-color: transparent;
+  border: 0;
+  height: 20px;
+  padding: 0 2px;
+  font-size: 0.8rem;
 }
 
 .card hr {

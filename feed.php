@@ -85,6 +85,7 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
   <meta charset="utf-8">
   <title><?= $titre." ".$titre2 ?></title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Italianno" rel="stylesheet">
   <link rel="stylesheet" href="./CSS/feed.css">
   <link rel="stylesheet" href="./CSS/sidenav.css">
 </head>
@@ -126,12 +127,14 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
   </script>
   <?php require 'sidenav.php'; ?>
   <div id="main">
-    <select class="form-control">
-      <option value="volvo">Volvo</option>
-      <option value="saab">Saab</option>
-      <option value="mercedes">Mercedes</option>
-      <option value="audi">Audi</option>
-    </select>
+    <div id="filter">
+      <select class="form-control discreet-dropdown">
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="mercedes">Mercedes</option>
+        <option value="audi">Audi</option>
+      </select>
+    </div>
     <?php
     foreach ($publications as $pos => $publication) {
     ?>
