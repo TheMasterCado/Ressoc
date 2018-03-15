@@ -23,6 +23,11 @@ body {
   padding-bottom: 30px;
 }
 
+img.mini {
+  vertical-align: middle;
+  width: 1.2rem;
+}
+
 .card {
   margin-bottom: 25px;
 }
