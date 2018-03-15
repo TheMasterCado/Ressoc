@@ -67,12 +67,12 @@ foreach ($publicationsRaw as $i => $row) {
     'nbComs' => $nbComs['nb']
   ];
 }
-if(isset($_GET['ordre']))
-  switch ($_GET['ordre']) {
-    case 'points':
-      usort($publications, "compareRowsPoints");
-      break;
-  }
+$ordre = isset($_GET['ordre']) ? $_GET['ordre'] : "date";
+switch ($ordre) {
+  case 'points':
+  usort($publications, "compareRowsPoints");
+  break;
+}
 if($id == "ALL")
   $titre = "Feed général";
 else
@@ -129,11 +129,11 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
     <div id="filter">
       <div class="stay-right">
         <label for="ordre">Classer par</label>
-        <select name="ordre" class="discreet-dropdown">
-          <option value="date">Date</option>
-          <option value="points">Points</option>
-          <option value="m" selected>m</option>
+        <select name="ordre" class="discreet-dropdown" id="ordre">
+          <option value="date" <?= ($ordre == "date") ? "selected" : "" ?>>Date</option>
+          <option value="points" <?= ($ordre == "points") ? "selected" : "" ?>>Points</option>
         </select>
+        <button onclick"window.location.replace("./feed.php?id=" + <?= $id ?> + "&ordre=" + $("#ordre").val());"><span class="glyphicon glyphicon-refresh"></span></button>
       </div>
     </div>
     <?php
