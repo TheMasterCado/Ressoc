@@ -46,11 +46,13 @@ body {
 #emptyFeed {
   margin: auto;
   width: 100%;
+  padding-top: 20%;
 }
 
 #emptyFeed img {
-  width: 40%;
-  border-radius: 4px;
+  margin-top: 50px;
+  width: 35%;
+  border-radius: 6px;
 }
 
 .card {
