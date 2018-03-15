@@ -133,7 +133,9 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
           <option value="date" <?= ($ordre == "date") ? "selected" : "" ?>>Date</option>
           <option value="points" <?= ($ordre == "points") ? "selected" : "" ?>>Points</option>
         </select>
-        <button class="button-link-small btn-link" onclick="window.location.replace('./feed.php?id=' + '<?= $id ?>' + '&ordre=' + $('#ordre').val());">Appliquer</button>
+        <input type="text" placeholder="Catégorie" id="categorie">
+        <button class="button-link-small btn-link"
+                onclick="window.location.replace('./feed.php?id=' + '<?= $id ?>' + '&ordre=' + $('#ordre').val());">Appliquer</button>
       </div>
     </div>
     <?php
