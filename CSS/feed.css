@@ -45,9 +45,10 @@ body {
 
 #emptyFeed {
   margin: auto;
+  width: 100%;
 }
 
-#empty img {
+#emptyFeed img {
   width: 40%;
   border-radius: 4px;
 }
