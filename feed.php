@@ -128,12 +128,13 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
   <div id="main">
     <div id="filter">
       <div class="stay-right">
-      <select class="form-control discreet-dropdown">
-        <option value="date">Date</option>
-        <option value="points">Points</option>
-        <option value="m" selected>m</option>
-      </select>
-            </div>
+        <label for="ordre">Classer par </label>
+        <select name="ordre" class="form-control discreet-dropdown">
+          <option value="date">Date</option>
+          <option value="points">Points</option>
+          <option value="m" selected>m</option>
+        </select>
+      </div>
     </div>
     <?php
     foreach ($publications as $pos => $publication) {

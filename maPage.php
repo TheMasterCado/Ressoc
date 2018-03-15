@@ -25,7 +25,7 @@
           <br>
           <input id="specialite" class="form-control" type="text" placeholder="Catégorie de la publication(facultatif)">
           <br>
-          <input id="estQuestion" type="checkbox" value="oui">
+          <input id="estQuestion" name="estQuestion" type="checkbox" value="oui">
           <label for="estQuestion">Ceci est une question.</label>
         </div>
         <div class="modal-footer">
