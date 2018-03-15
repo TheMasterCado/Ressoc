@@ -53,7 +53,7 @@ a.rouge {
 p.card-text {
   text-align: justify;
   padding-left: 10px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   max-height: 30rem;
   overflow-y: auto;
 }
