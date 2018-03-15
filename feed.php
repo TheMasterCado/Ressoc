@@ -144,6 +144,7 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
                          ? '&specialite=' + $('#categorie').val() : ''));">Appliquer</button>
       </div>
     </div>
+    <span class="halflings halflings-trash"></span>
     <?php if(empty($publications)) { ?>
     <div id="emptyFeed">
       <h1 class="display-4">Aucune publication</h1>
@@ -164,7 +165,7 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
             </strong>
           </span>
           <a href="javascript:void(null);" onclick="traiterSuppression(<?= $publication['pk_publication'] ?>)">
-            <span class="glyphicon glyphicon-trash"></span>
+            <img src="./Images/glyphicons/png/glyphicons-17-bin.png" alt="">
           </a>
         </h6>
             <hr>

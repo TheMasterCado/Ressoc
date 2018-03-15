@@ -36,9 +36,9 @@ CREATE TABLE `publication` (
   KEY `fk_type_publication` (`fk_type_publication`),
   KEY `fk_utilisateur` (`fk_utilisateur`),
   KEY `fk_specialite` (`fk_specialite`),
-  CONSTRAINT `publication_ibfk_1` FOREIGN KEY (`fk_publication`) REFERENCES `publication` (`pk_publication`),
+  CONSTRAINT `publication_ibfk_1` FOREIGN KEY (`fk_publication`) REFERENCES `publication` (`pk_publication`) ON DELETE CASCADE,
   CONSTRAINT `publication_ibfk_2` FOREIGN KEY (`fk_type_publication`) REFERENCES `type_publication` (`pk_type_publication`),
-  CONSTRAINT `publication_ibfk_3` FOREIGN KEY (`fk_utilisateur`) REFERENCES `utilisateur` (`pk_utilisateur`),
+  CONSTRAINT `publication_ibfk_3` FOREIGN KEY (`fk_utilisateur`) REFERENCES `utilisateur` (`pk_utilisateur`) ON DELETE CASCADE,
   CONSTRAINT `publication_ibfk_4` FOREIGN KEY (`fk_specialite`) REFERENCES `specialite` (`pk_specialite`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -139,8 +139,8 @@ CREATE TABLE `vote` (
   `valeur` int(11) NOT NULL,
   PRIMARY KEY (`fk_publication`,`fk_utilisateur`),
   KEY `fk_utilisateur` (`fk_utilisateur`),
-  CONSTRAINT `vote_ibfk_1` FOREIGN KEY (`fk_publication`) REFERENCES `publication` (`pk_publication`),
-  CONSTRAINT `vote_ibfk_2` FOREIGN KEY (`fk_utilisateur`) REFERENCES `utilisateur` (`pk_utilisateur`)
+  CONSTRAINT `vote_ibfk_1` FOREIGN KEY (`fk_publication`) REFERENCES `publication` (`pk_publication`) ON DELETE CASCADE,
+  CONSTRAINT `vote_ibfk_2` FOREIGN KEY (`fk_utilisateur`) REFERENCES `utilisateur` (`pk_utilisateur`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
