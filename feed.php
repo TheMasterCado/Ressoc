@@ -27,14 +27,14 @@ $sql = "SELECT pk_publication, fk_publication, specialite.nom AS nom_specialite,
         LEFT JOIN specialite ON publication.fk_specialite = pk_specialite
         WHERE fk_publication IS NULL ".
         (($id == "ALL") ? "" : "AND fk_utilisateur = :pk_utilisateur ").
-        (isset($_GET['specialite']) ? "AND nom_specialite = :specialite " : "").
+        (isset($_GET['specialite']) ? "AND nom_specialite LIKE :specialite " : "").
         "ORDER BY timestamp DESC;";
 $stmt = $db->prepare($sql);
 $params = [];
 if($id != "ALL")
   $params += [":pk_utilisateur" => $feedDe['pk_utilisateur']];
 if(isset($_GET['specialite']))
-  $params += [":specialite" => $_GET['specialite']];
+  $params += [":specialite" => "%".$_GET['specialite']."%"];
 $stmt->execute($params);
 $publicationsRaw = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $publications = [];
