@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8">
     <meta name="google-signin-client_id" content="374009514589-ie80vs5damvpplc85uni3ep2emi64f0b.apps.googleusercontent.com">
-    <link rel="shortcut icon" type="image/ico" href="./Images/favicon.ico"/>
     <title>Sign out</title>
   </head>
   <body>

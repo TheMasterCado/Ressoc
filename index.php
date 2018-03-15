@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8">
   <meta name="google-signin-client_id" content="374009514589-ie80vs5damvpplc85uni3ep2emi64f0b.apps.googleusercontent.com">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="shortcut icon" type="image/ico" href="./Images/favicon.ico"/>
   <link rel="stylesheet" type="text/css" href="./CSS/index.css">
   <title>Login Ressoc</title>

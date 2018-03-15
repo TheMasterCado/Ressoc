@@ -13,7 +13,6 @@ header("Location: ./index.php");
   <meta charset="utf-8">
   <title>Nouvel utilisateur</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <link rel="shortcut icon" type="image/ico" href="./Images/favicon.ico"/>
   <link rel="stylesheet" type="text/css" href="./CSS/nouvelUtilisateur.css">
 </head>
 <body>
