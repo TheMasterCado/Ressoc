@@ -143,7 +143,11 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
                          ? '&specialite=' + $('#categorie').val() : ''));">Appliquer</button>
       </div>
     </div>
+    <?php if(empty($publications)) { ?>
+    <h4>Aucune publication</h4>
+    <img src="https://media.giphy.com/media/3t7RAFhu75Wwg/giphy.gif" alt="Screaming Dwight">
     <?php
+    }
     foreach ($publications as $pos => $publication) {
     ?>
     <div class='card <?= ($publication['description'] == 'Question') ? 'border-question' : (($publication['description'] == 'BonneReponse') ? 'border-bonneReponse' :'border-texte') ?>'>
