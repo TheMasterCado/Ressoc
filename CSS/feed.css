@@ -43,6 +43,15 @@ body {
   font-size: 0.8rem;
 }
 
+#emptyFeed {
+  margin: auto;
+}
+
+#empty img {
+  width: 40%;
+  border-radius: 4px;
+}
+
 .card {
   margin-bottom: 25px;
 }

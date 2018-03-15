@@ -144,11 +144,12 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
       </div>
     </div>
     <?php if(empty($publications)) { ?>
-    <h4>Aucune publication</h4>
-    <img src="https://media.giphy.com/media/3t7RAFhu75Wwg/giphy.gif" alt="Screaming Dwight">
+    <div id="emptyFeed">
+      <h1 class="display-4">Aucune publication</h1>
+      <img src="https://media.giphy.com/media/3t7RAFhu75Wwg/giphy.gif" alt="Screaming Dwight">
+    </div>
     <?php
     }
-    echo empty($publication);
     foreach ($publications as $pos => $publication) {
     ?>
     <div class='card <?= ($publication['description'] == 'Question') ? 'border-question' : (($publication['description'] == 'BonneReponse') ? 'border-bonneReponse' :'border-texte') ?>'>
