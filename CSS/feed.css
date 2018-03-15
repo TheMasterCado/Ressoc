@@ -44,7 +44,14 @@ body {
 }
 
 .glyph {
-  height: 1em;
+  height: 1.1em;
+  float: right;
+  vertical-align: bottom;
+  margin-left: 10px;
+}
+
+.glyph:hover {
+  height: 1.3em;
 }
 
 #emptyFeed {
