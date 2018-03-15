@@ -135,7 +135,9 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
         </select>
         <input type="text" placeholder="Catégorie" id="categorie">
         <button class="button-link-small btn-link"
-                onclick="window.location.replace('./feed.php?id=' + '<?= $id ?>' + '&ordre=' + $('#ordre').val());">Appliquer</button>
+                onclick="window.location.replace('./feed.php?id=' + '<?= $id ?>' +
+                          '&ordre=' + $('#ordre').val() + (($('#categorie').val().trim() != '')
+                           ? '&specialite=' + $('#categorie').val() : ''));">Appliquer</button>
       </div>
     </div>
     <?php
