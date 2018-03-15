@@ -126,6 +126,12 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
   </script>
   <?php require 'sidenav.php'; ?>
   <div id="main">
+    <select>
+      <option value="volvo">Volvo</option>
+      <option value="saab">Saab</option>
+      <option value="mercedes">Mercedes</option>
+      <option value="audi">Audi</option>
+    </select>
     <?php
     foreach ($publications as $pos => $publication) {
     ?>
