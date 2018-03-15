@@ -148,6 +148,8 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
     <img src="https://media.giphy.com/media/3t7RAFhu75Wwg/giphy.gif" alt="Screaming Dwight">
     <?php
     }
+    echo empty($publication);
+    echo $publications.length == 0;
     foreach ($publications as $pos => $publication) {
     ?>
     <div class='card <?= ($publication['description'] == 'Question') ? 'border-question' : (($publication['description'] == 'BonneReponse') ? 'border-bonneReponse' :'border-texte') ?>'>
