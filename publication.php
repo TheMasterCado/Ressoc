@@ -102,7 +102,6 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
   <meta charset="utf-8">
   <title><?= $titre." ".$titre2 ?></title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Qwigley" rel="stylesheet">
   <link rel="stylesheet" href="./CSS/feed.css">
   <link rel="stylesheet" href="./CSS/sidenav.css">
   <link rel="stylesheet" href="./CSS/publication.css">

@@ -25,7 +25,9 @@ body {
 
 #filter {
   float: right;
-  padding-bottom: 20px;
+  width: 100%;
+  height: 40px;
+  margin-bottom: 20px;
   clear: both;
 }
 
@@ -61,7 +63,7 @@ p.card-text {
 select.discreet-dropdown {
   background-color: transparent;
   border: 0;
-  height: 20px;
+  height: 20px !important;
   padding: 0 2px;
   font-size: 0.8rem;
 }
@@ -106,5 +108,6 @@ quote::before {
 }
 
 quote {
-  font-family: "Qwigley", cursive;
+  font-family: "Times New Roman";
+  font-style: italic;
 }
