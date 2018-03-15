@@ -126,7 +126,7 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
   </script>
   <?php require 'sidenav.php'; ?>
   <div id="main">
-    <select>
+    <select class="form-control">
       <option value="volvo">Volvo</option>
       <option value="saab">Saab</option>
       <option value="mercedes">Mercedes</option>
