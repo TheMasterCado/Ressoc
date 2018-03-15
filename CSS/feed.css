@@ -15,6 +15,10 @@ body {
   color: #aaaaaa;
 }
 
+.button-link-small {
+  border: 0;
+}
+
 #main {
   margin-left: 200px;
   padding-left: 120px;
