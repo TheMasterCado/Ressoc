@@ -15,6 +15,11 @@ body {
   color: #aaaaaa;
 }
 
+.floating-element {
+  background-color: #bbb;
+  border-radius: 3px;
+}
+
 .button-link-small {
   border: 0;
 }

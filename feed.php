@@ -127,7 +127,7 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
   <?php require 'sidenav.php'; ?>
   <div id="main">
     <div id="filter">
-      <div class="stay-right">
+      <div class="stay-right floating-element">
         <label for="ordre">Classer par</label>
         <select name="ordre" class="discreet-dropdown" id="ordre">
           <option value="date" <?= ($ordre == "date") ? "selected" : "" ?>>Date</option>
