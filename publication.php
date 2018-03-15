@@ -203,6 +203,9 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
           <h6 class="card-subtitle mb-3 text-muted">
             <strong><?= $commentaire['points'] ?></strong> points - par <?= $commentaire['prenom'] . " " . $commentaire['nom'] . " - " ?>
             <span class="timestamp"><?= time_ago($commentaire['timestamp']) ?></span>
+            <a href="javascript:void(null);" onclick="traiterBonneReponse(<?= $commentaire ?>)">
+              <img src="./Images/glyphicons/png/glyphicons-153-check.png" class="glyph">
+            </a>
           </h6>
           <hr>
           <p class="card-text"><?= $commentaire['texte'] ?></p>
