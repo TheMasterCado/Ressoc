@@ -20,14 +20,14 @@ $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $_SESSION['id']]);
 $currentUser = $stmt->fetch();
 //Toutes les publications
-$sql = "SELECT pk_publication, fk_publication, specialite.nom AS specialite, UNIX_TIMESTAMP(timestamp) AS timestamp, description, texte, utilisateur.prenom, utilisateur.nom
+$sql = "SELECT pk_publication, fk_publication, specialite.nom AS nom_specialite, UNIX_TIMESTAMP(timestamp) AS timestamp, description, texte, utilisateur.prenom, utilisateur.nom
         FROM publication
         INNER JOIN type_publication ON fk_type_publication = pk_type_publication
         INNER JOIN utilisateur ON fk_utilisateur = pk_utilisateur
         LEFT JOIN specialite ON publication.fk_specialite = pk_specialite
         WHERE fk_publication IS NULL ".
         (($id == "ALL") ? "" : "AND fk_utilisateur = :pk_utilisateur ").
-        (isset($_GET['specialite']) ? "AND specialite.nom = :specialite " : "").
+        (isset($_GET['specialite']) ? "AND nom_specialite = :specialite " : "").
         "ORDER BY timestamp DESC;";
 $stmt = $db->prepare($sql);
 $params = [];
@@ -60,7 +60,7 @@ foreach ($publicationsRaw as $i => $row) {
   $publications[] = [
     'pk_publication' => $row['pk_publication'],
     'texte' => $row['texte'],
-    'specialite' => $row['specialite'],
+    'specialite' => $row['nom_specialite'],
     'description' => $row['description'],
     'timestamp' => $row['timestamp'],
     'prenom' => $row['prenom'],
