@@ -25,7 +25,8 @@ body {
 
 #filter {
   float: right;
-  padding-bottom: 20px; 
+  padding-bottom: 20px;
+  clear: both;
 }
 
 .card {
@@ -105,6 +106,5 @@ quote::before {
 }
 
 quote {
-  font-style: italic;
-  font-family: "Italianno", cursive;
+  font-family: "Qwigley", cursive;
 }
