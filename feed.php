@@ -149,7 +149,6 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
     <?php
     }
     echo empty($publication);
-    echo $publications.length == 0;
     foreach ($publications as $pos => $publication) {
     ?>
     <div class='card <?= ($publication['description'] == 'Question') ? 'border-question' : (($publication['description'] == 'BonneReponse') ? 'border-bonneReponse' :'border-texte') ?>'>
