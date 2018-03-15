@@ -81,12 +81,12 @@ foreach ($commentairesRaw as $i => $row) {
     'voteCurrentUser' => $voteCurrentUser
   ];
 }
-if(isset($_GET['ordre']))
-  switch ($_GET['ordre']) {
+$ordre = isset($_GET['ordre']) ? $_GET['ordre'] : "date";
+switch ($ordre) {
     case 'points':
       usort($commentaires, "compareRowsPoints");
       break;
-  }
+}
 //Infos sur OP
 $sql = "SELECT prenom, nom, pk_utilisateur, image, fk_specialite, nb_session FROM utilisateur WHERE pk_utilisateur =
         (SELECT fk_utilisateur FROM publication WHERE pk_publication = :id);";
@@ -157,7 +157,7 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
   <?php require 'sidenav.php'; ?>
   <div id="main">
     <div id="publication-originale">
-      <div class='card <?= ($publication['description'] == 'Question') ? 'border-question' : 'border-texte' ?>'>
+      <div class='card <?= ($publication['description'] == 'Question') ? 'border-question' : (($publication['description'] == 'BonneReponse') ? 'border-bonneReponse' :'border-texte') ?>'>
         <div class="card-body">
           <h6 class="card-subtitle mb-3 text-muted">
             <strong><?= $publication['points'] ?></strong> points - par <?= $feedDe['prenom'] . " " . $feedDe['nom'] . " - " ?>

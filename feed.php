@@ -139,14 +139,14 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
         <input type="text" placeholder="Catégorie" id="categorie" value="<?= isset($_GET['specialite']) ? $_GET['specialite'] : "" ?>">
         <button class="button-link-small btn-link"
                 onclick="window.location.replace('./feed.php?id=' + '<?= $id ?>' +
-                          '&ordre=' + $('#ordre').val() + (($('#categorie').val().trim() != '')
-                           ? '&specialite=' + $('#categorie').val() : ''));">Appliquer</button>
+                        '&ordre=' + $('#ordre').val() + (($('#categorie').val().trim() != '')
+                         ? '&specialite=' + $('#categorie').val() : ''));">Appliquer</button>
       </div>
     </div>
     <?php
     foreach ($publications as $pos => $publication) {
     ?>
-    <div class='card <?= ($publication['description'] == 'Question') ? 'border-question' : 'border-texte' ?>'>
+    <div class='card <?= ($publication['description'] == 'Question') ? 'border-question' : (($publication['description'] == 'BonneReponse') ? 'border-bonneReponse' :'border-texte') ?>'>
       <div class="card-body">
         <h6 class="card-subtitle mb-3 text-muted">
           <strong><?= $publication['points'] ?></strong> points - par <?= $publication['prenom'] . " " . $publication['nom'] . " - " ?>
