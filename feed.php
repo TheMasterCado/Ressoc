@@ -118,7 +118,7 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
   }
 
   function  traiterSuppression(pk_publication) {
-    
+
   }
 
   function deselectionner(el) {
@@ -162,9 +162,11 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
         <h6 class="card-subtitle mb-3 text-muted">
           <strong><?= $publication['points'] ?></strong> points - par <?= $publication['prenom'] . " " . $publication['nom'] . " - " ?>
           <span class="timestamp"><?= time_ago($publication['timestamp']) ?></span>
+          <?php if($publication['loginID'] == $id) { ?>
           <a href="javascript:void(null);" onclick="traiterSuppression(<?= $publication['pk_publication'] ?>)">
             <img src="./Images/glyphicons/png/glyphicons-17-bin.png" class="glyph">
           </a>
+        <?php } ?>
           <span class="stay-right">Catégorie: <strong><?=
             (empty($publication['specialite']) ? "Aucune" : $publication['specialite']).
               (($publication['description'] == 'Question') ? " | QUESTION" : "") ?>
