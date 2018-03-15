@@ -20,7 +20,7 @@ $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $_SESSION['id']]);
 $currentUser = $stmt->fetch();
 //Toutes les publications
-$sql = "SELECT pk_publication, fk_publication, specialite.nom AS nom_specialite, UNIX_TIMESTAMP(timestamp) AS timestamp, description, texte, utilisateur.prenom, utilisateur.nom
+$sql = "SELECT pk_publication, fk_publication, specialite.nom AS nom_specialite, UNIX_TIMESTAMP(timestamp) AS timestamp, description, texte, utilisateur.prenom, utilisateur.nom, utilisateur.loginID
         FROM publication
         INNER JOIN type_publication ON fk_type_publication = pk_type_publication
         INNER JOIN utilisateur ON fk_utilisateur = pk_utilisateur
@@ -65,6 +65,7 @@ foreach ($publicationsRaw as $i => $row) {
     'timestamp' => $row['timestamp'],
     'prenom' => $row['prenom'],
     'nom' => $row['nom'],
+    'loginID' => $row['loginID'],
     'points' => $points,
     'voteCurrentUser' => $voteCurrentUser,
     'nbComs' => $nbComs['nb']
@@ -162,6 +163,9 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
               (($publication['description'] == 'Question') ? " | QUESTION" : "") ?>
             </strong>
           </span>
+          <a href="javascript:void(null);" onclick="traiterSuppression(<?= $publication['pk_publication'] ?>)">
+            <span class="glyphicon glyphicon-trash"></span>
+          </a>
         </h6>
             <hr>
         <p class="card-text"><?= $publication['texte'] ?></p>
