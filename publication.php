@@ -182,7 +182,19 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
             </div>
           </div>
         </div>
-    <div id="commentaires">
+        <div id="filter">
+          <div class="stay-right floating-element">
+            <label for="ordre">Classer par</label>
+            <select name="ordre" class="discreet-dropdown" id="ordre">
+              <option value="date" <?= ($ordre == "date") ? "selected" : "" ?>>Date</option>
+              <option value="points" <?= ($ordre == "points") ? "selected" : "" ?>>Points</option>
+            </select>
+            <button class="button-link-small btn-link"
+            onclick="window.location.replace('./publication.php?id=' + '<?= $id ?>' +
+                    '&ordre=' + $('#ordre').val());">Appliquer</button>
+          </div>
+        </div>
+        <div id="commentaires">
       <?php
       foreach ($commentaires as $pos => $commentaire) {
       ?>

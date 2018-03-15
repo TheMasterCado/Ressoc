@@ -20,19 +20,22 @@ $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $_SESSION['id']]);
 $currentUser = $stmt->fetch();
 //Toutes les publications
-  $sql = "SELECT pk_publication, fk_publication, specialite.nom AS specialite, UNIX_TIMESTAMP(timestamp) AS timestamp, description, texte, utilisateur.prenom, utilisateur.nom
-          FROM publication
-          INNER JOIN type_publication ON fk_type_publication = pk_type_publication
-          INNER JOIN utilisateur ON fk_utilisateur = pk_utilisateur
-          LEFT JOIN specialite ON publication.fk_specialite = pk_specialite
-          WHERE fk_publication IS NULL ".
-          (($id == "ALL") ? "" : "AND fk_utilisateur = :pk_utilisateur ").
-          "ORDER BY timestamp DESC;";
-  $stmt = $db->prepare($sql);
-  $params = [];
-  if($id != "ALL")
-    $params += [":pk_utilisateur" => $feedDe['pk_utilisateur']];
-  $stmt->execute($params);
+$sql = "SELECT pk_publication, fk_publication, specialite.nom AS specialite, UNIX_TIMESTAMP(timestamp) AS timestamp, description, texte, utilisateur.prenom, utilisateur.nom
+        FROM publication
+        INNER JOIN type_publication ON fk_type_publication = pk_type_publication
+        INNER JOIN utilisateur ON fk_utilisateur = pk_utilisateur
+        LEFT JOIN specialite ON publication.fk_specialite = pk_specialite
+        WHERE fk_publication IS NULL ".
+        (($id == "ALL") ? "" : "AND fk_utilisateur = :pk_utilisateur ").
+        (isset($_GET['specialite']) ? "AND specialite = :specialite " : "").
+        "ORDER BY timestamp DESC;";
+$stmt = $db->prepare($sql);
+$params = [];
+if($id != "ALL")
+  $params += [":pk_utilisateur" => $feedDe['pk_utilisateur']];
+if(isset($_GET['specialite']))
+  $params += [":specialite" => $_GET['specialite']];
+$stmt->execute($params);
 $publicationsRaw = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $publications = [];
 //Points et nb de coms pour les publications
