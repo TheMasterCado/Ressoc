@@ -154,6 +154,15 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
         });
       }
   }
+
+  function traiterBonneReponse(pk_commentaire){
+    $sql = "UPDATE publication SET fk_type_publication = (SELECT pk_type_publication from type_publication WHERE description = 'BonneReponse') WHERE fk_publication = :pub";
+    $stmt = $db->prepare($sql);
+    $params = [
+      ':pub' => pk_commentaire
+    ];
+    $stmt->execute($params);
+  }
   </script>
   <?php require 'sidenav.php'; ?>
   <div id="main">
@@ -207,7 +216,7 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
             <?php
             if($currentUser['pk_utilisateur'] == $publication['fk_utilisateur']){
               ?>
-            <a href="javascript:void(null);" onclick="traiterBonneReponse(<?= $commentaire ?>)">
+            <a href="javascript:void(null);" onclick="traiterBonneReponse(<?= $commentaire['pk_publication'] ?>)">
               <img src="./Images/glyphicons/png/glyphicons-153-check.png" class="glyph">
             </a>
             <?php
