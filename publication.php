@@ -205,11 +205,14 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
             <strong><?= $commentaire['points'] ?></strong> points - par <?= $commentaire['prenom'] . " " . $commentaire['nom'] . " - " ?>
             <span class="timestamp"><?= time_ago($commentaire['timestamp']) ?></span>
             <?php
-            if($currentUser['pk_utilisateur'] == $publication['fk_utilisateur'])
+            if($currentUser['pk_utilisateur'] == $publication['fk_utilisateur']){
+              ?>
             <a href="javascript:void(null);" onclick="traiterBonneReponse(<?= $commentaire ?>)">
               <img src="./Images/glyphicons/png/glyphicons-153-check.png" class="glyph">
             </a>
-            ?>
+            <?php
+          }
+             ?>
           </h6>
           <hr>
           <p class="card-text"><?= $commentaire['texte'] ?></p>
