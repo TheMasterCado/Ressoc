@@ -164,6 +164,7 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
     ];
     $stmt->execute($params);
     ?>
+    location.reload(true);
   }
   </script>
   <?php require 'sidenav.php'; ?>
