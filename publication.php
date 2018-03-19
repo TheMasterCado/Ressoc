@@ -17,7 +17,7 @@ $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $_SESSION['id']]);
 $currentUser = $stmt->fetch();
 //publication
-$sql = "SELECT pk_publication, texte, UNIX_TIMESTAMP(timestamp) AS timestamp, description, specialite.nom AS specialite FROM publication
+$sql = "SELECT pk_publication, texte, fk_utilisateur, UNIX_TIMESTAMP(timestamp) AS timestamp, description, specialite.nom AS specialite FROM publication
         INNER JOIN type_publication ON fk_type_publication = pk_type_publication
         LEFT JOIN specialite ON fk_specialite = pk_specialite
         WHERE pk_publication = :id;";
@@ -42,6 +42,7 @@ $publication = [
   'specialite' => $publicationRaw['specialite'],
   'description' => $publicationRaw['description'],
   'timestamp' => $publicationRaw['timestamp'],
+  'fk_utilisateur' => $publicationRaw['fk_utilisateur'],
   'points' => $points,
   'voteCurrentUser' => $voteCurrentUser
 ];
@@ -203,9 +204,12 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
           <h6 class="card-subtitle mb-3 text-muted">
             <strong><?= $commentaire['points'] ?></strong> points - par <?= $commentaire['prenom'] . " " . $commentaire['nom'] . " - " ?>
             <span class="timestamp"><?= time_ago($commentaire['timestamp']) ?></span>
+            <?php
+            if($currentUser['pk_utilisateur'] == $publication['fk_utilisateur'])
             <a href="javascript:void(null);" onclick="traiterBonneReponse(<?= $commentaire ?>)">
               <img src="./Images/glyphicons/png/glyphicons-153-check.png" class="glyph">
             </a>
+            ?>
           </h6>
           <hr>
           <p class="card-text"><?= $commentaire['texte'] ?></p>
