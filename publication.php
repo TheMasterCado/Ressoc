@@ -155,7 +155,7 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
       }
   }
 
-  function traiterBonneReponse(pk_commentaire){
+  function traiterBonneReponse(pk_commentaire, el){
     $sql = "UPDATE publication SET fk_type_publication = (SELECT pk_type_publication from type_publication WHERE description = 'BonneReponse') WHERE fk_publication = :pub";
     $stmt = $db->prepare($sql);
     $params = [
