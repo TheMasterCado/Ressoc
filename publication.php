@@ -156,12 +156,14 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
   }
 
   function traiterBonneReponse(pk_commentaire, el){
+    <?php
     $sql = "UPDATE publication SET fk_type_publication = (SELECT pk_type_publication from type_publication WHERE description = 'BonneReponse') WHERE fk_publication = :pub";
     $stmt = $db->prepare($sql);
     $params = [
       ':pub' => pk_commentaire
     ];
     $stmt->execute($params);
+    ?>
   }
   </script>
   <?php require 'sidenav.php'; ?>
