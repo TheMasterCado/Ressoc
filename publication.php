@@ -91,10 +91,10 @@ switch ($ordre) {
 $sql = "SELECT COUNT(*)
         FROM publication
         INNER JOIN type_publication ON fk_type_publication = pk_type_publication
-        WHERE fk_publication = :id AND description == 'BonneReponse';";
+        WHERE fk_publication = :id AND description = 'BonneReponse';";
 $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $_GET['id']]);
-$bonneReponse = $stmt->fetch();
+$nbBonneReponse = $stmt->fetch();
 //Infos sur OP
 $sql = "SELECT prenom, nom, pk_utilisateur, image, fk_specialite, nb_session FROM utilisateur WHERE pk_utilisateur =
         (SELECT fk_utilisateur FROM publication WHERE pk_publication = :id);";
