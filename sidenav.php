@@ -19,6 +19,7 @@ if($feedDe['fk_specialite'] != NULL) {
      <?php if($id == $_SESSION['id'] || $id == "ALL") { ?>
        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#nouvellePublication">Nouvelle publication</button>
      <?php } ?>
+     <a class="btn btn-info btn-sm" href="./feed.php">Feed général</a>
      <a class="btn btn-info btn-sm" href="./feed.php?id=<?= $_SESSION['id'] ?>">Mon feed</a>
      <a class="btn btn-info btn-sm" href="./signOut.php">Se déconnecter</a>
    </div>

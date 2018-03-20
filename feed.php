@@ -20,7 +20,8 @@ $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $_SESSION['id']]);
 $currentUser = $stmt->fetch();
 //Toutes les publications
-$sql = "SELECT pk_publication, fk_publication, specialite.nom AS nom_specialite, UNIX_TIMESTAMP(timestamp) AS timestamp, description, texte, utilisateur.prenom, utilisateur.nom, utilisateur.loginID
+$sql = "SELECT pk_publication, fk_publication, specialite.nom AS nom_specialite, UNIX_TIMESTAMP(timestamp) AS timestamp,
+          description, texte, utilisateur.prenom, utilisateur.nom, utilisateur.loginID
         FROM publication
         INNER JOIN type_publication ON fk_type_publication = pk_type_publication
         INNER JOIN utilisateur ON fk_utilisateur = pk_utilisateur
@@ -164,8 +165,9 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
           <strong><?= $publication['points'] ?></strong> points - par <?= $publication['prenom'] . " " . $publication['nom'] . " - " ?>
           <span class="timestamp"><?= time_ago($publication['timestamp']) ?></span>
           <?php if($publication['loginID'] == $_SESSION['id']) { ?>
-          <a href="javascript:void(null);" onclick="traiterSuppression(<?= $publication['pk_publication'] ?>)">
-            <img src="./Images/glyphicons/png/glyphicons-17-bin.png" class="glyph" data-toggle="modal" data-target="#confirmationSuppression">
+          <a href="javascript:void(null);" onclick="preparerSuppression(<?= $publication['pk_publication'] ?>)">
+            <img src="./Images/glyphicons/png/glyphicons-17-bin.png" class="glyph"
+                data-toggle="modal" data-target="#confirmationSuppression">
           </a>
           <?php } ?>
           <span class="stay-right">Catégorie: <strong><?=

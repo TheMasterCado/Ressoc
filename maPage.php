@@ -1,5 +1,7 @@
 <?php if($id == $_SESSION['id'] || $id == "ALL") { ?>
   <script>
+  var toDelete = null;
+
   function traiterNouvellePub() {
     if ($("#contenu").val().trim().length == 0) {
       alert("Une publication ne doit pas être vide");
@@ -11,6 +13,20 @@
         location.reload(true);
     });
    }
+  }
+
+  function traiterSuppression() {
+    if(toDelete != null) {
+      $.post("./mc_traiterSuppression.php", {
+        'id' : <?= $_SESSION['id'] ?>,
+        'pk_publication' : toDelete}, function(data) {
+          location.reload(true);
+      });
+    }
+  }
+
+  function preparerSuppression(pk_publication) {
+    toDelete = pk_publication;
   }
   </script>
   <div class="modal fade" id="nouvellePublication" role="dialog">
