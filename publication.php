@@ -88,7 +88,7 @@ switch ($ordre) {
       usort($commentaires, "compareRowsPoints");
       break;
 }
-$sql = "SELECT COUNT(*)
+$sql = "SELECT COUNT(*) AS nb
         FROM publication
         INNER JOIN type_publication ON fk_type_publication = pk_type_publication
         WHERE fk_publication = :id AND description = 'BonneReponse';";
@@ -221,7 +221,7 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
             <strong><?= $commentaire['points'] ?></strong> points - par <?= $commentaire['prenom'] . " " . $commentaire['nom'] . " - " ?>
             <span class="timestamp"><?= time_ago($commentaire['timestamp']) ?></span>
             <?php
-            if($currentUser['pk_utilisateur'] == $publication['fk_utilisateur'] && ($nbBonneReponse == 0 || $commentaire['description'] == 'BonneReponse')){
+            if($currentUser['pk_utilisateur'] == $publication['fk_utilisateur'] && ($nbBonneReponse['nb'] == 0 || $commentaire['description'] == 'BonneReponse')){
               ?>
             <a href="javascript:void(null);" onclick="traiterBonneReponse(<?= $commentaire['pk_publication'] ?>, '<?= $commentaire['description'] ?>')">
               <img src=<?= ($commentaire['description'] == 'BonneReponse') ? "./Images/glyphicons/png/glyphicons-208-remove.png" : "./Images/glyphicons/png/glyphicons-153-check.png" ?> class="glyph">
