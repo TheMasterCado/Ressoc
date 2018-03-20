@@ -1,5 +1,9 @@
 <?php
 require 'bd.php';
+session_start();
+if(!isset($_SESSION['id'])) {
+  header("Location: ./index.php");
+}
 if(!empty(trim($_POST['specialite']))) {
   $sql = "SELECT COUNT(*) AS nb FROM specialite WHERE nom = :specialite;";
   $stmt = $db->prepare($sql);
@@ -29,7 +33,6 @@ $params = [
   ':fk_specialite' => (isset($specialite) ? $specialite['pk_specialite'] : NULL)
 ];
 $stmt->execute($params);
-session_start();
 unset($_SESSION['newUser']);
 header("Location: ./feed.php");
 ?>

@@ -1,5 +1,8 @@
 <?php
 session_start();
+if(!isset($_SESSION['id'])) {
+  header("Location: ./index.php");
+}
 require 'bd.php';
 
 require 'php_utils.php';

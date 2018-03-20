@@ -1,5 +1,8 @@
 <?php
 session_start();
+if(!isset($_SESSION['id'])) {
+  header("Location: ./index.php");
+}
 require 'bd.php';
 $sql = "SELECT pk_utilisateur FROM utilisateur WHERE loginID = :id;";
 $stmt = $db->prepare($sql);
