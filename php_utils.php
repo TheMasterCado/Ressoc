@@ -129,6 +129,6 @@ function formatEverything($string) {
    elseif(date( 'A', $time ) == date( 'A' ))
     return sprintf($TIMEBEFORE_FORMAT, date( 'j', $time ), $mois[date( 'm', $time ) - 1]);
    else
-    return sprintf($TIMEBEFORE_FORMAT_YEAR, date( 'j', $time ), $mois[date( 'm', $time ) + 1], date( 'A', $time ));
+    return sprintf($TIMEBEFORE_FORMAT_YEAR, date( 'j', $time ), $mois[date( 'm', $time ) + 1], date( 'Y', $time ));
  }
  ?>
