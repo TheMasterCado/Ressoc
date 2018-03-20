@@ -44,4 +44,18 @@ $params = [
   ':fk_publication' => ((isset($_POST['parent'])) ? $_POST['parent'] : NULL)
 ];
 $stmt->execute($params);
+if(isset($_POST['parent'])){
+  $sql = "SELECT email
+          FROM utilisateur
+          INNER JOIN publication
+          ON fk_utilisateur = pk_utilisateur
+          WHERE pk_publication = :pk;";
+  $stmt = $db->prepare($sql);
+  $params = [
+    ':pk' => $_POST['parent']
+  ];
+  $stmt->execute([':id' => $_SESSION['id']]);
+  $email = $stmt->execute($params);
+  mail($email['email'], 'Nouveau commentaire', 'test')
+}
 ?>
