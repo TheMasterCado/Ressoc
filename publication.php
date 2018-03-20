@@ -155,10 +155,11 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
       }
   }
 
-  function traiterBonneReponse(pk_commentaire, el){
+  function traiterBonneReponse(pk_commentaire, description, el){
     $.post("./mc_traiterReponse.php", {
-      'commentaire' : pk_commentaire,
-      'parent'  : <?= $publication['pk_publication'] ?>}, function(data) {
+      'pk_commentaire' : pk_commentaire,
+      'type_publication' : description,
+      'pk_publication'  : <?= $publication['pk_publication'] ?>}, function(data) {
         location.reload(true);
       });
   }
@@ -215,7 +216,7 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
             <?php
             if($currentUser['pk_utilisateur'] == $publication['fk_utilisateur']){
               ?>
-            <a href="javascript:void(null);" onclick="traiterBonneReponse(<?= $commentaire['pk_publication'] ?>)">
+            <a href="javascript:void(null);" onclick="traiterBonneReponse(<?= $commentaire['pk_publication'] ?>, <?= $commentaire['description'] ?>)">
               <img src="./Images/glyphicons/png/glyphicons-153-check.png" class="glyph">
             </a>
             <?php
