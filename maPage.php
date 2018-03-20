@@ -60,7 +60,7 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
-          Voulez-vous vraiment supprimer cette publication?
+          Voulez-vous vraiment supprimer cela?
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger stay-left" data-dismiss="modal">Non</button>
