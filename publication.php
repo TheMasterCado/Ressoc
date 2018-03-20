@@ -156,7 +156,7 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
     else {
       $.post("./mc_creerPublication.php", {
         'contenu' : $("#nouveauCom").val(),
-        'parent'  : <?= $publication['pk_publication'] ?>}, function(data) {
+        'parent'  : '<?= $publication['pk_publication'] ?>'}, function(data) {
           location.reload(true);
         });
       }
