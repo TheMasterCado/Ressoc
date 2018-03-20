@@ -12,8 +12,8 @@ $params = [
 ];
 $stmt->execute($params);
 $author = $stmt->fetch();
-if($stmt['loginID'] != $_SESSION['id'])
-  header("Location: ./index.php");  
+if($author['loginID'] != $_SESSION['id'])
+  header("Location: ./index.php");
 $sql = "DELETE FROM publication WHERE pk_publication = :pub;";
 $stmt = $db->prepare($sql);
 $params = [
