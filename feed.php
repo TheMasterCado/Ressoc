@@ -171,7 +171,7 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
           <span class="stay-right">Catégorie: <strong><?=
             (empty($publication['specialite']) ? "Aucune" : $publication['specialite']).
               (($publication['description'] == 'Question' ||
-                ($publication['description'] == 'QuestionRepondue') ? " | QUESTION" : "") ?>
+                $publication['description'] == 'QuestionRepondue') ? " | QUESTION" : "") ?>
             </strong>
           </span>
         </h6>
