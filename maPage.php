@@ -47,8 +47,8 @@
           Voulez-vous vraiment supprimer cette publication?
         </div>
         <div class="modal-footer">
+          <button type="button" class="btn btn-danger stay-left" data-dismiss="modal">Non</button>
           <button type="button" class="btn btn-success" data-dismiss="modal" onclick="traiterSuppression()">Oui</button>
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Non</button>
         </div>
       </div>
 

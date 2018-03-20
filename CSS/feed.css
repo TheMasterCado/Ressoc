@@ -11,6 +11,14 @@ body {
   max-width: 40%;
 }
 
+#confirmationSuppression .modal-dialog {
+  max-width: 20%;
+}
+
+#confirmationSuppression .btn {
+  width: 31px;
+}
+
 .timestamp {
   color: #aaaaaa;
 }
@@ -108,6 +116,10 @@ select.discreet-dropdown {
 }
 
 .stay-right {
+  float: right;
+}
+
+.stay-left {
   float: right;
 }
 
