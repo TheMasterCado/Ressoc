@@ -136,7 +136,7 @@ DROP TABLE IF EXISTS `vote`;
 CREATE TABLE `vote` (
   `fk_publication` int(10) unsigned NOT NULL,
   `fk_utilisateur` int(10) unsigned NOT NULL,
-  `valeur` int(11) NOT NULL,
+  `valeur` int(11) NOT NULL CHECK (valeur>=-1 AND valeur<=1),
   PRIMARY KEY (`fk_publication`,`fk_utilisateur`),
   KEY `fk_utilisateur` (`fk_utilisateur`),
   CONSTRAINT `vote_ibfk_1` FOREIGN KEY (`fk_publication`) REFERENCES `publication` (`pk_publication`) ON DELETE CASCADE,

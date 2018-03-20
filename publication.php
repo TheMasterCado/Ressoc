@@ -254,7 +254,7 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
             <strong><?= $commentaire['points'] ?></strong> points - par <?= $commentaire['prenom'] . " " . $commentaire['nom'] . " - " ?>
             <span class="timestamp"><?= time_ago($commentaire['timestamp']) ?></span>
             <?php if($commentaire['loginID'] == $_SESSION['id']) { ?>
-            <a href="javascript:void(null);" onclick="preparerSuppression(<?= $publication['pk_publication'] ?>, false)">
+            <a href="javascript:void(null);" onclick="preparerSuppression(<?= $commentaire['pk_publication'] ?>, false)">
               <img src="./Images/glyphicons/png/glyphicons-17-bin.png" class="glyph"
                   data-toggle="modal" data-target="#confirmationSuppression">
             </a>
