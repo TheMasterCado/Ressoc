@@ -123,6 +123,10 @@ select.discreet-dropdown {
   border: 2px solid #32CD32;
 }
 
+.border-questionRepondue {
+  border: 2px solid #32CD32;
+}
+
 mark {
     background-color: yellow;
     color: black;
