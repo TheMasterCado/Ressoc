@@ -47,7 +47,7 @@ $publication = [
   'voteCurrentUser' => $voteCurrentUser
 ];
 //Tous les commentaires
-$sql = "SELECT pk_publication, fk_publication, UNIX_TIMESTAMP(timestamp) AS timestamp, description, texte, prenom, nom
+$sql = "SELECT pk_publication, fk_publication, UNIX_TIMESTAMP(timestamp) AS timestamp, description, texte, prenom, nom, loginID
         FROM publication
         INNER JOIN type_publication ON fk_type_publication = pk_type_publication
         INNER JOIN utilisateur ON fk_utilisateur = pk_utilisateur
@@ -78,6 +78,7 @@ foreach ($commentairesRaw as $i => $row) {
     'timestamp' => $row['timestamp'],
     'prenom' => $row['prenom'],
     'nom' => $row['nom'],
+    'loginID' => $row['loginID'],
     'points' => $points,
     'voteCurrentUser' => $voteCurrentUser
   ];
@@ -96,7 +97,7 @@ $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $_GET['id']]);
 $nbBonneReponse = $stmt->fetch();
 //Infos sur OP
-$sql = "SELECT prenom, nom, pk_utilisateur, image, fk_specialite, nb_session FROM utilisateur WHERE pk_utilisateur =
+$sql = "SELECT prenom, nom, loginID, pk_utilisateur, image, fk_specialite, nb_session FROM utilisateur WHERE pk_utilisateur =
         (SELECT fk_utilisateur FROM publication WHERE pk_publication = :id);";
 $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $id]);
@@ -170,6 +171,25 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
         location.reload(true);
       });
   }
+  var toDelete = null;
+  var goAway = false;
+  function traiterSuppression() {
+    if(toDelete != null) {
+      $.post("./mc_traiterSuppression.php", {
+        'id' : '<?= $_SESSION['id'] ?>',
+        'pk_publication' : toDelete}, function(data) {
+          if(goAway)
+            window.location.replace("./feed.php");
+          else
+            location.reload(true);
+      });
+    }
+  }
+
+  function preparerSuppression(pk_publication, goaw) {
+    toDelete = pk_publication;
+    goAway = goaw;
+  }
   </script>
   <?php require 'sidenav.php'; ?>
   <div id="main">
@@ -180,6 +200,12 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
           <h6 class="card-subtitle mb-3 text-muted">
             <strong><?= $publication['points'] ?></strong> points - par <?= $feedDe['prenom'] . " " . $feedDe['nom'] . " - " ?>
             <span class="timestamp"><?= time_ago($publication['timestamp']) ?></span>
+            <?php if($feedDe['loginID'] == $_SESSION['id']) { ?>
+            <a href="javascript:void(null);" onclick="preparerSuppression(<?= $publication['pk_publication'] ?>, true)">
+              <img src="./Images/glyphicons/png/glyphicons-17-bin.png" class="glyph"
+                  data-toggle="modal" data-target="#confirmationSuppression">
+            </a>
+            <?php } ?>
             <span class="stay-right">Catégorie: <strong><?=
               (empty($publication['specialite']) ? "Aucune" : $publication['specialite']).
                 (($publication['description'] == 'Question' ||
@@ -227,6 +253,12 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
           <h6 class="card-subtitle mb-3 text-muted">
             <strong><?= $commentaire['points'] ?></strong> points - par <?= $commentaire['prenom'] . " " . $commentaire['nom'] . " - " ?>
             <span class="timestamp"><?= time_ago($commentaire['timestamp']) ?></span>
+            <?php if($commentaire['loginID'] == $_SESSION['id']) { ?>
+            <a href="javascript:void(null);" onclick="preparerSuppression(<?= $publication['pk_publication'] ?>, false)">
+              <img src="./Images/glyphicons/png/glyphicons-17-bin.png" class="glyph"
+                  data-toggle="modal" data-target="#confirmationSuppression">
+            </a>
+            <?php } ?>
             <span class="stay-right"><strong><?= (($publication['description'] == 'BonneReponse') ? "Bonne réponse" : "") ?></strong></span>
             <?php
             if(($publication['description'] == 'Question' || $publication['description'] == 'QuestionRepondue') &&
@@ -264,7 +296,23 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
       </div>
     </div>
   </div>
+  <div class="modal fade" id="confirmationSuppression" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Confirmation de la suppression</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          Voulez-vous vraiment supprimer cette publication?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger stay-left" data-dismiss="modal">Non</button>
+          <button type="button" class="btn btn-success" data-dismiss="modal" onclick="traiterSuppression()">Oui</button>
+        </div>
+      </div>
 
-  <?php require "maPage.php"; ?>
+    </div>
+  </div>
 </body>
 </html>
