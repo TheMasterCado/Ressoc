@@ -71,6 +71,10 @@ foreach ($commentairesRaw as $i => $row) {
     if($vote['fk_utilisateur'] == $currentUser['pk_utilisateur'])
       $voteCurrentUser = $vote['valeur'];
   }
+  $bonneReponse = false;
+  if($row('description') == 'BonneReponse'){
+    $bonneReponse = true;
+  }
   $commentaires[] = [
     'pk_publication' => $row['pk_publication'],
     'texte' => $row['texte'],
@@ -206,10 +210,6 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
         </div>
         <div id="commentaires">
       <?php
-      foreach ($commentaires as $pos => $commentaire){
-        if($commentaire['description'] = 'BonneReponse')
-          $bonneReponse = $commentaire;
-      }
       foreach ($commentaires as $pos => $commentaire) {
       ?>
       <div class='card<?= ($commentaire['description'] == 'BonneReponse') ? ' border-bonneReponse' : '' ?>'>
@@ -218,7 +218,7 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
             <strong><?= $commentaire['points'] ?></strong> points - par <?= $commentaire['prenom'] . " " . $commentaire['nom'] . " - " ?>
             <span class="timestamp"><?= time_ago($commentaire['timestamp']) ?></span>
             <?php
-            if($currentUser['pk_utilisateur'] == $publication['fk_utilisateur'] && (isset($bonneReponse) || $commentaire == $bonneReponse)){
+            if($currentUser['pk_utilisateur'] == $publication['fk_utilisateur'] && ($bonneReponse || $commentaire['description'] == 'BonneReponse'])){
               ?>
             <a href="javascript:void(null);" onclick="traiterBonneReponse(<?= $commentaire['pk_publication'] ?>, '<?= $commentaire['description'] ?>')">
               <img src=<?= ($commentaire['description'] == 'BonneReponse') ? "./Images/glyphicons/png/glyphicons-208-remove.png" : "./Images/glyphicons/png/glyphicons-153-check.png" ?> class="glyph">
