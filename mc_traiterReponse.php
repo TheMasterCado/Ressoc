@@ -15,7 +15,7 @@ $sql = "UPDATE publication SET fk_type_publication = (SELECT pk_type_publication
 $stmt = $db->prepare($sql);
 $params = [
   ':pub' => $_POST['pk_publication'],
-  ':description' => ($_POST['type_publication'] == 'Texte') ? 'QuestionRepondue' : 'Texte'
+  ':description' => ($_POST['type_publication'] == 'Texte') ? 'QuestionRepondue' : 'Question'
 ];
 $stmt->execute($params);
  ?>
