@@ -217,7 +217,7 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
             if($currentUser['pk_utilisateur'] == $publication['fk_utilisateur']){
               ?>
             <a href="javascript:void(null);" onclick="traiterBonneReponse(<?= $commentaire['pk_publication'] ?>, '<?= $commentaire['description'] ?>')">
-              <img src="./Images/glyphicons/png/glyphicons-153-check.png" class="glyph">
+              <img src="./Images/glyphicons/png/<?= ($commentaire['description'] == 'BonneReponse') ? glyphicons-208-remove.png : glyphicons-153-check.png ?>" class="glyph">
             </a>
             <?php
           }
