@@ -174,14 +174,16 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
   <?php require 'sidenav.php'; ?>
   <div id="main">
     <div id="publication-originale">
-      <div class='card <?= ($publication['description'] == 'Question') ? 'border-question' : (($publication['description'] == 'QuestionRepondue') ? 'border-bonneReponse' : 'border-texte') ?>'>
+      <div class='card <?= ($publication['description'] == 'Question') ? 'border-question' :
+                              (($publication['description'] == 'QuestionRepondue') ? 'border-bonneReponse' : 'border-texte') ?>'>
         <div class="card-body">
           <h6 class="card-subtitle mb-3 text-muted">
             <strong><?= $publication['points'] ?></strong> points - par <?= $feedDe['prenom'] . " " . $feedDe['nom'] . " - " ?>
             <span class="timestamp"><?= time_ago($publication['timestamp']) ?></span>
             <span class="stay-right">Catégorie: <strong><?=
               (empty($publication['specialite']) ? "Aucune" : $publication['specialite']).
-                (($publication['description'] == 'Question') ? " | QUESTION" : "") ?>
+                (($publication['description'] == 'Question' ||
+                    ($publication['description'] == 'QuestionRepondue') ? " | QUESTION" : "") ?>
               </strong>
             </span>
           </h6>
@@ -190,41 +192,50 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
           <hr>
           <span>
             <a href="javascript:void(null);" valeur="<?= ($publication['voteCurrentUser'] == 1) ? "0" : "1" ?>"
-               class="card-link vert <?= ($publication['voteCurrentUser'] == 1) ? "selected" : "" ?>"
-               onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Bien (+1)</a>
-              <a href="javascript:void(null);" valeur="<?= ($publication['voteCurrentUser'] == -1) ? "0" : "-1" ?>"
-                 class="card-link rouge <?= ($publication['voteCurrentUser'] == -1) ? "selected" : "" ?>"
-                 onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Mauvais (-1)</a>
-              </span>
-            </div>
+              class="card-link vert <?= ($publication['voteCurrentUser'] == 1) ? "selected" : "" ?>"
+              onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Bien (+1)</a>
+            <a href="javascript:void(null);" valeur="<?= ($publication['voteCurrentUser'] == -1) ? "0" : "-1" ?>"
+              class="card-link rouge <?= ($publication['voteCurrentUser'] == -1) ? "selected" : "" ?>"
+              onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Mauvais (-1)</a>
+            </span>
+            <?php if($publication['description'] == 'QuestionRepondue') { ?>
+            <a href="#bonne-reponse" class="card-link stay-right">
+              Aller à la bonne réponse
+            </a>
+            <?php } ?>
+          </div>
           </div>
         </div>
         <div id="filter">
-          <div class="stay-right floating-element">
-            <label for="ordre">Classer par</label>
-            <select name="ordre" class="discreet-dropdown" id="ordre">
-              <option value="date" <?= ($ordre == "date") ? "selected" : "" ?>>Date</option>
-              <option value="points" <?= ($ordre == "points") ? "selected" : "" ?>>Points</option>
-            </select>
+           <div class="stay-right floating-element">
+             <label for="ordre">Classer par</label>
+             <select name="ordre" class="discreet-dropdown" id="ordre">
+               <option value="date" <?= ($ordre == "date") ? "selected" : "" ?>>Date</option>
+               <option value="points" <?= ($ordre == "points") ? "selected" : "" ?>>Points</option>
+             </select>
             <button class="button-link-small btn-link"
-            onclick="window.location.replace('./publication.php?id=' + '<?= $id ?>' +
-                    '&ordre=' + $('#ordre').val());">Appliquer</button>
+                onclick="window.location.replace('./publication.php?id=' + '<?= $id ?>' +
+                        '&ordre=' + $('#ordre').val());">Appliquer</button>
           </div>
         </div>
         <div id="commentaires">
       <?php
       foreach ($commentaires as $pos => $commentaire) {
       ?>
-      <div class='card<?= ($commentaire['description'] == 'BonneReponse') ? ' border-bonneReponse' : '' ?>'>
+      <div class='card<?= ($commentaire['description'] == 'BonneReponse') ? ' border-bonneReponse\' id=\'bonne-reponse' : '' ?>'>
         <div class="card-body">
           <h6 class="card-subtitle mb-3 text-muted">
             <strong><?= $commentaire['points'] ?></strong> points - par <?= $commentaire['prenom'] . " " . $commentaire['nom'] . " - " ?>
             <span class="timestamp"><?= time_ago($commentaire['timestamp']) ?></span>
+            <span class="stay-right"><strong><?= (($publication['description'] == 'BonneReponse') ? "Bonne réponse" : "") ?></strong></span>
             <?php
-            if(($publication['description'] == 'Question' || $publication['description'] == 'QuestionRepondue') && $currentUser['pk_utilisateur'] == $publication['fk_utilisateur'] && ($nbBonneReponse['nb'] == 0 || $commentaire['description'] == 'BonneReponse')){
+            if(($publication['description'] == 'Question' || $publication['description'] == 'QuestionRepondue') &&
+                $currentUser['pk_utilisateur'] == $publication['fk_utilisateur'] && ($nbBonneReponse['nb'] == 0 ||
+                $commentaire['description'] == 'BonneReponse')){
               ?>
             <a href="javascript:void(null);" onclick="traiterBonneReponse(<?= $commentaire['pk_publication'] ?>, '<?= $commentaire['description'] ?>')">
-              <img src=<?= ($commentaire['description'] == 'BonneReponse') ? "./Images/glyphicons/png/glyphicons-208-remove.png" : "./Images/glyphicons/png/glyphicons-153-check.png" ?> class="glyph">
+              <img src=<?= ($commentaire['description'] == 'BonneReponse') ? "./Images/glyphicons/png/glyphicons-208-remove.png" :
+                        "./Images/glyphicons/png/glyphicons-153-check.png" ?> class="glyph">
             </a>
             <?php
           }

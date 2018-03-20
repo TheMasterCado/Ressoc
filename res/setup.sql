@@ -99,7 +99,7 @@ CREATE TABLE `type_publication` (
 
 LOCK TABLES `type_publication` WRITE;
 /*!40000 ALTER TABLE `type_publication` DISABLE KEYS */;
-INSERT INTO `type_publication` VALUES (1,'Question'),(2,'Texte'),(3,'BonneReponse');
+INSERT INTO `type_publication` VALUES (1,'Question'),(2,'Texte'),(3,'BonneReponse'),(4,'QuestionRepondue');
 /*!40000 ALTER TABLE `type_publication` ENABLE KEYS */;
 UNLOCK TABLES;
 

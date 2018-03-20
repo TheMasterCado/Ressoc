@@ -157,7 +157,8 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
     }
     foreach ($publications as $pos => $publication) {
     ?>
-    <div class='card <?= ($publication['description'] == 'Question') ? 'border-question' : (($publication['description'] == 'QuestionRepondue') ? 'border-bonneReponse' :'border-texte') ?>'>
+    <div class='card <?= ($publication['description'] == 'Question') ? 'border-question' :
+                            (($publication['description'] == 'QuestionRepondue') ? 'border-bonneReponse' :'border-texte') ?>'>
       <div class="card-body">
         <h6 class="card-subtitle mb-3 text-muted">
           <strong><?= $publication['points'] ?></strong> points - par <?= $publication['prenom'] . " " . $publication['nom'] . " - " ?>
@@ -169,7 +170,8 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
           <?php } ?>
           <span class="stay-right">Catégorie: <strong><?=
             (empty($publication['specialite']) ? "Aucune" : $publication['specialite']).
-              (($publication['description'] == 'Question') ? " | QUESTION" : "") ?>
+              (($publication['description'] == 'Question' ||
+                ($publication['description'] == 'QuestionRepondue') ? " | QUESTION" : "") ?>
             </strong>
           </span>
         </h6>
