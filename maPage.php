@@ -18,7 +18,6 @@
   function traiterSuppression() {
     if(toDelete != null) {
       $.post("./mc_traiterSuppression.php", {
-        'id' : '<?= $_SESSION['id'] ?>',
         'pk_publication' : toDelete}, function(data) {
           location.reload(true);
       });

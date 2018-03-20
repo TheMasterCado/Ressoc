@@ -176,7 +176,6 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
   function traiterSuppression() {
     if(toDelete != null) {
       $.post("./mc_traiterSuppression.php", {
-        'id' : '<?= $_SESSION['id'] ?>',
         'pk_publication' : toDelete}, function(data) {
           if(goAway)
             window.location.replace("./feed.php");
