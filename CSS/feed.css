@@ -12,11 +12,11 @@ body {
 }
 
 #confirmationSuppression .modal-dialog {
-  max-width: 20%;
+  max-width: 32%;
 }
 
 #confirmationSuppression .btn {
-  width: 31px;
+  width: 57px;
 }
 
 .timestamp {
@@ -116,10 +116,6 @@ select.discreet-dropdown {
 }
 
 .stay-right {
-  float: right;
-}
-
-.stay-left {
   float: right;
 }
 
