@@ -118,10 +118,6 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
       });
   }
 
-  function  traiterSuppression(pk_publication) {
-
-  }
-
   function deselectionner(el) {
     $(el).toggleClass("selected", false);
     $(el).attr("valeur", $(el).hasClass("vert") ? 1 : -1);
