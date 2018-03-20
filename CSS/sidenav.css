@@ -40,7 +40,8 @@
 #sidenav img {
   margin-bottom: 7px;
   margin-top: -10px;
-  border-radius: 5px
+  border-radius: 5px;
+  width: 96px;
 }
 
 #liste-utilisateurs a.lien-feed-utilisateur {

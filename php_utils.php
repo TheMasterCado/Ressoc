@@ -83,6 +83,9 @@ function formatEverything($string) {
   $text = htmlspecialchars($string, ENT_NOQUOTES);
   $text = str_replace("\n", "<br>", $text);
   $text = str_replace(["@@<br>", "<br>@@"], "@@", $text);
+  $text = str_replace(";;=", "@@;;=", $text);
+  $text = str_replace("=;;", "=;;@@", $text);
+  $text = markUp("!!", ['<h3>', '</h3>'], $text, "@@");
   $text = markUp("**", ['<strong>', '</strong>'], $text, "@@");
   $text = markUp("\"\"", ['<em>', '</em>'], $text, "@@");
   $text = markUp("~~", ['<del>', '</del>'], $text, "@@");
@@ -91,6 +94,8 @@ function formatEverything($string) {
   $text = markUp("--", ['<quote>', '</quote>'], $text, "@@");
   $text = markUp("##", ['<mark>', '</mark>'], $text, "@@");
   $text = markUpLinks(["[", "("], ["]", ")"], $text, "@@");
+  $text = str_replace("@@;;=", "", $text);
+  $text = str_replace("=;;@@", "", $text);
   $text = markUp("@@", ['<code>', '</code>'], $text);
   return $text;
 }

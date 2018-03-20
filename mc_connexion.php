@@ -1,7 +1,7 @@
 <?php
   require('bd.php');
   session_start();
-  $id = $_POST['id'];
+  $id = hash("sha256", $_POST['id']);
   $_SESSION['id'] = $id;
   $sql = "SELECT count(*) AS nb FROM utilisateur WHERE loginID = :id;";
   $stmt = $db->prepare($sql);
