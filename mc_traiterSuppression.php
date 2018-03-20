@@ -2,7 +2,7 @@
 session_start();
 require 'bd.php';
 echo $_SESSION['id'] != $_POST['id'];
-if(!isset($_POST['pk_publication']) || $_SESSION['id'] != $_POST['id']){
+if(!isset($_POST['pk_publication']) || ($_SESSION['id'] != $_POST['id'])){
   header("Location: ./index.php");
 }
 
