@@ -165,7 +165,7 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
           <span class="timestamp"><?= time_ago($publication['timestamp']) ?></span>
           <?php if($publication['loginID'] == $_SESSION['id']) { ?>
           <a href="javascript:void(null);" onclick="traiterSuppression(<?= $publication['pk_publication'] ?>)">
-            <img src="./Images/glyphicons/png/glyphicons-17-bin.png" class="glyph">
+            <img src="./Images/glyphicons/png/glyphicons-17-bin.png" class="glyph" data-toggle="modal" data-target="#confirmationSuppression">
           </a>
           <?php } ?>
           <span class="stay-right">Catégorie: <strong><?=

@@ -36,4 +36,23 @@
     </div>
   </div>
 
+  <div class="modal fade" id="confirmationSuppression" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Confirmation de la suppression</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          Voulez-vous vraiment supprimer cette publication?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal" onclick="traiterSuppression()">Oui</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Non</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 <?php } ?>
