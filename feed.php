@@ -29,6 +29,7 @@ $sql = "SELECT pk_publication, fk_publication, specialite.nom AS nom_specialite,
         WHERE fk_publication IS NULL ".
         (($id == "ALL") ? "" : "AND fk_utilisateur = :pk_utilisateur ").
         (isset($_GET['specialite']) ? "AND specialite.nom LIKE :specialite " : "").
+        (isset($_GET['onlyQuestions']) ? "AND (description = Question OR description = QuestionRepondue)" : "").
         "ORDER BY timestamp DESC;";
 $stmt = $db->prepare($sql);
 $params = [];
