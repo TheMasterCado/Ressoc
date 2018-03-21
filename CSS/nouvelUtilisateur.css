@@ -20,7 +20,9 @@ input {
 }
 
 #submit {
-  text-align: center;
+  margin-left: 15%;
+  float: none;
+  width: 30%;
 }
 
 label {
