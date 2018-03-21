@@ -49,7 +49,7 @@ function markUpLinks($patternStart, $patternEnd, $text, $omit = NULL) {
             if(count($linkText) > 1 && $linkText[0][0] == $patternStart[1]) {
               $newText .=  substr($linkText[0], 1) . "</a>";
               array_splice($linkText, 0, 1);
-              $newText .= implode($linkText);
+              $newText .= implode($patternEnd[1], $linkText);
             }
             else {
               $newText .= $link[0] . "</a>";

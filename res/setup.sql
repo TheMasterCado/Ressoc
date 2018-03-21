@@ -79,6 +79,12 @@ CREATE TABLE `specialite` (
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+LOCK TABLES `specialite` WRITE;
+/*!40000 ALTER TABLE `type_publication` DISABLE KEYS */;
+INSERT INTO `specialite` VALUES (1,'Information');
+/*!40000 ALTER TABLE `type_publication` ENABLE KEYS */;
+UNLOCK TABLES;
+
 --
 -- Table structure for table `type_publication`
 --
@@ -163,3 +169,40 @@ CREATE TABLE `vote` (
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2018-03-11 13:13:25
+
+
+/*
+!!Aide formatage du texte!!
+Voici les balises à utiliser pour les différents styles de texte:
+
+@ @texte@ @(sans l'espace) -> Bloc de code
+@@Ce bloc conservera l'indentation du code@@
+
+;;=!!texte!!=;; -> Titre
+!!Voici un titre!!
+;;=**texte**=;; -> Texte en gras
+**Texte en gras**
+
+;;=""texte""=;; -> Texte en italique
+""Texte en italique""
+
+;;=~~texte~~=;; -> Texte ""strikethrough""
+~~Texte strikethrough~~
+
+;;=__texte__=;; -> Texte souligné
+__Texte souligné__
+
+;;=texte^^texte^^=;; -> Texte en "exposant"
+Texte en^^exposant^^
+
+;;=--texte--=;; -> Citation
+--Citation--
+
+;;=##texte##=;; -> Texte surligné
+##Texte surligné##
+
+;;=[lien](texte)=;; -> Lien (le texte entre parenthèses est optionnel)
+[http://cegepthetford.ca](Site du Cegep)
+
+;; =texte= ;;;;=(sans l'espace)=;; -> Permet d'échapper des marqueurs
+*/
