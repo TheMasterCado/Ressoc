@@ -79,7 +79,7 @@ function markUpImages($patternStart, $patternEnd, $text, $omit = NULL) {
         array_splice($occ, 0, 1);
         foreach ($occ as $pospos => $valeur) {
           $img = explode($patternEnd, $valeur);
-          if(count($link) > 1) {
+          if(count($img) > 1) {
             $newText .= "<img class=\"postedImage\" src=\"" . $img[0] . "\">";
           }
           else
