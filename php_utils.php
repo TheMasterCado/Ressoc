@@ -58,21 +58,36 @@ function markUpLinks($patternStart, $patternEnd, $text, $omit = NULL) {
             }
           }
           else
-            $newText .= $patternStart . $valeur;
+            $newText .= $patternStart[0] . $valeur;
         }
       }
       else
         $newText .= $omit . $section . $omit;
     }
   }
-  else {
-    $sections = explode($pattern, $text);
-    foreach ($sections as $pospos => $valeur) {
-      if($pospos % 2 == 1)
-        $newText .= $replaceBy[0];
-      $newText .= $valeur;
-      if($pospos % 2 == 1)
-        $newText .= $replaceBy[1];
+  return $newText;
+}
+
+function markUpImages($patternStart, $patternEnd, $text, $omit = NULL) {
+  $newText = "";
+  if(!empty($omit)) {
+    $biggerSections = explode($omit, $text);
+    foreach ($biggerSections as $pos => $section) {
+      if($pos % 2 == 0) {
+        $occ = explode($patternStart, $section);
+        $newText .= $occ[0];
+        array_splice($occ, 0, 1);
+        foreach ($occ as $pospos => $valeur) {
+          $img = explode($patternEnd, $valeur);
+          if(count($link) > 1) {
+            $newText .= "<img class=\"postedImage\" src=\"" . $img[0] . "\">";
+          }
+          else
+            $newText .= $patternStart . $valeur;
+        }
+      }
+      else
+        $newText .= $omit . $section . $omit;
     }
   }
   return $newText;
@@ -94,6 +109,7 @@ function formatEverything($string) {
   $text = markUp("--", ['<quote>', '</quote>'], $text, "@@");
   $text = markUp("##", ['<mark>', '</mark>'], $text, "@@");
   $text = markUpLinks(["[", "("], ["]", ")"], $text, "@@");
+  $text = markUpImages("<:", ":>", $text, "@@");
   $text = str_replace("@@;;=", "", $text);
   $text = str_replace("=;;@@", "", $text);
   $text = markUp("@@", ['<code>', '</code>'], $text);

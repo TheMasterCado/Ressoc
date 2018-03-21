@@ -153,6 +153,14 @@ code {
   color: #303336 !important;
 }
 
+img.postedImage {
+  display: block;
+  margin: auto;
+  margin-bottom: 10px;
+  max-width: 95%;
+  max-height: 20rem;
+}
+
 quote::before {
   content: "- ";
 }
