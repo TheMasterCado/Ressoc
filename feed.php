@@ -145,7 +145,7 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
                 onclick="window.location.replace('./feed.php?id=' + '<?= $id ?>' +
                         '&ordre=' + $('#ordre').val() + (($('#categorie').val().trim() != '')
                          ? '&specialite=' + $('#categorie').val() : '') +
-                         ($('#onlyQuestions').is(':checked')) ? '&onlyQuestions' : '');">Appliquer</button>
+                         ($('#onlyQuestions').is(':checked') ? '&onlyQuestions' : ''));">Appliquer</button>
       </div>
     </div>
     <?php if(empty($publications)) { ?>
