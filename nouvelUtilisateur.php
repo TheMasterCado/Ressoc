@@ -18,22 +18,30 @@ header("Location: ./index.php");
 <body>
 <h1>Créer un compte</h1>
 <form id="formulaire" class="" action="./mc_creerCompte.php" method="post">
-  <label for="prenom">Prénom</label>
-  <input type="text" name="prenom" value="<?=$_SESSION['newUser']['prenom']?>" required>
-  <br>
-  <label for="nom">Nom</label>
-  <input type="text" name="nom" value="<?=$_SESSION['newUser']['nom']?>" required>
-  <br>
-  <label for="nbSessions">Nombre de sessions en informatique</label>
-  <input type="number" name="nbSessions" min="1" max="6" required>
-  <br>
-  <label for="specialite">Spécialité (facultatif)</label>
-  <input type="text" name="specialite">
-  <br>
+  <table>
+    <tr>
+  <label for="prenom">Prénom</label></td>
+  <input type="text" name="prenom" value="<?=$_SESSION['newUser']['prenom']?>" required></td>
+</tr>
+    <tr>
+  <label for="nom">Nom</label></td>
+  <input type="text" name="nom" value="<?=isset($_SESSION['newUser']['nom']) ? $_SESSION['newUser']['nom'] : ""?>" required></td>
+</tr>
+    <tr>
+  <label for="nbSessions">Nombre de sessions en informatique</label></td>
+  <input type="number" name="nbSessions" min="1" max="6" required></td>
+</tr>
+    <tr>
+<td><label for="specialite">Spécialité (facultatif)</label></td>
+  <td><input type="text" name="specialite"></td>
+</tr>
   <input type="hidden" name="email" value="<?=$_SESSION['newUser']['email']?>">
   <input type="hidden" name="image" value="<?=$_SESSION['newUser']['image']?>">
   <input type="hidden" name="id" value="<?=$_SESSION['id']?>">
-  <input type="submit" value="Valider">
+      <tr>
+  <input type="submit" value="Valider"></td>
+</tr>
+    </table>
 </form>
 </body>
 </html>

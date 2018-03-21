@@ -29,6 +29,7 @@ $sql = "SELECT pk_publication, fk_publication, specialite.nom AS nom_specialite,
         WHERE fk_publication IS NULL ".
         (($id == "ALL") ? "" : "AND fk_utilisateur = :pk_utilisateur ").
         (isset($_GET['specialite']) ? "AND specialite.nom LIKE :specialite " : "").
+        (isset($_GET['onlyQuestions']) ? "AND (description = 'Question' OR description = 'QuestionRepondue')" : "").
         "ORDER BY timestamp DESC;";
 $stmt = $db->prepare($sql);
 $params = [];
@@ -138,11 +139,17 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
           <option value="date" <?= ($ordre == "date") ? "selected" : "" ?>>Date</option>
           <option value="points" <?= ($ordre == "points") ? "selected" : "" ?>>Points</option>
         </select>
+        <span class="separateur-vertical"> | </span>
         <input type="text" placeholder="Catégorie" id="categorie" value="<?= isset($_GET['specialite']) ? $_GET['specialite'] : "" ?>">
+        <span class="separateur-vertical"> | </span>
+        <input name="onlyQuestions" type="checkbox" id="onlyQuestions" <?= isset($_GET['onlyQuestions']) ? "checked" : "" ?>>
+        <label for="onlyQuestions">Questions seulement</label>
+        <span class="separateur-vertical"> | </span>
         <button class="button-link-small btn-link"
                 onclick="window.location.replace('./feed.php?id=' + '<?= $id ?>' +
                         '&ordre=' + $('#ordre').val() + (($('#categorie').val().trim() != '')
-                         ? '&specialite=' + $('#categorie').val() : ''));">Appliquer</button>
+                         ? '&specialite=' + $('#categorie').val() : '') +
+                         ($('#onlyQuestions').is(':checked') ? '&onlyQuestions' : ''));">Appliquer</button>
       </div>
     </div>
     <?php if(empty($publications)) { ?>

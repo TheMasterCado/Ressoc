@@ -33,7 +33,6 @@ body {
 .button-link-small {
   border: 0;
   padding: 0;
-  margin-left: 5px;
 }
 
 #main {
@@ -42,6 +41,10 @@ body {
   padding-right: 120px;
   padding-top: 20px;
   padding-bottom: 30px;
+}
+
+.separateur-vertical {
+  margin: 0 5px;
 }
 
 #filter {
