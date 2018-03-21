@@ -108,7 +108,7 @@ select.discreet-dropdown {
   width: auto;
   border: 0;
   height: 23px !important;
-  padding: 0 2px;
+  padding: 0;
 }
 
 .card hr {

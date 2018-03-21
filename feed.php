@@ -174,7 +174,7 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
           </span>
         </h6>
             <hr>
-        <p class="card-text"><?= $publication['texte'] ?></p>
+        <div class="card-text"><?= $publication['texte'] ?></div>
         <hr>
         <span>
           <a href="javascript:void(null);" valeur="<?= ($publication['voteCurrentUser'] == 1) ? "0" : "1" ?>"
