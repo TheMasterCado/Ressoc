@@ -115,7 +115,7 @@ CREATE TABLE `utilisateur` (
   `nom` varchar(45) NOT NULL,
   `prenom` varchar(45) NOT NULL,
   `nb_session` int(11) NOT NULL,
-  `loginID` varchar(50) DEFAULT NULL,
+  `loginID` varchar(70) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
   `image` varchar(300) NOT NULL,
   `fk_specialite` int(10) unsigned DEFAULT NULL,
