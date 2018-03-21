@@ -40,7 +40,7 @@ CREATE TABLE `publication` (
   CONSTRAINT `publication_ibfk_2` FOREIGN KEY (`fk_type_publication`) REFERENCES `type_publication` (`pk_type_publication`),
   CONSTRAINT `publication_ibfk_3` FOREIGN KEY (`fk_utilisateur`) REFERENCES `utilisateur` (`pk_utilisateur`) ON DELETE CASCADE,
   CONSTRAINT `publication_ibfk_4` FOREIGN KEY (`fk_specialite`) REFERENCES `specialite` (`pk_specialite`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -82,7 +82,7 @@ CREATE TABLE `specialite` (
   `pk_specialite` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `nom` varchar(45) NOT NULL,
   PRIMARY KEY (`pk_specialite`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `specialite` WRITE;
@@ -102,7 +102,7 @@ CREATE TABLE `type_publication` (
   `pk_type_publication` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `description` varchar(45) NOT NULL,
   PRIMARY KEY (`pk_type_publication`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -135,7 +135,7 @@ CREATE TABLE `utilisateur` (
   UNIQUE KEY `loginID_UNIQUE` (`loginID`),
   KEY `fk_specialite` (`fk_specialite`),
   CONSTRAINT `utilisateur_ibfk_1` FOREIGN KEY (`fk_specialite`) REFERENCES `specialite` (`pk_specialite`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `utilisateur` WRITE;
