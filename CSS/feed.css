@@ -106,6 +106,13 @@ a.rouge {
   overflow-y: auto;
 }
 
+input.discreet-input {
+  border-radius: 3px;
+  border: 0;
+  padding: 2px 3px;
+  font-size: 0.8rem;
+}
+
 select.discreet-dropdown {
   background-color: transparent;
   width: auto;
@@ -155,9 +162,9 @@ code {
 
 img.postedImage {
   display: block;
-  margin: auto;
-  margin-bottom: 10px;
+  margin: 10px auto;
   max-width: 95%;
+  border-radius: 5px;
   max-height: 20rem;
 }
 

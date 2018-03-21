@@ -140,7 +140,7 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
           <option value="points" <?= ($ordre == "points") ? "selected" : "" ?>>Points</option>
         </select>
         <span class="separateur-vertical"> | </span>
-        <input type="text" placeholder="Catégorie" id="categorie" value="<?= isset($_GET['specialite']) ? $_GET['specialite'] : "" ?>">
+        <input type="text" class="discreet-input" placeholder="Catégorie" id="categorie" value="<?= isset($_GET['specialite']) ? $_GET['specialite'] : "" ?>">
         <span class="separateur-vertical"> | </span>
         <input name="onlyQuestions" type="checkbox" id="onlyQuestions" <?= isset($_GET['onlyQuestions']) ? "checked" : "" ?>>
         <label for="onlyQuestions">Questions seulement</label>

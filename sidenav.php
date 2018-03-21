@@ -38,7 +38,7 @@ if($feedDe['fk_specialite'] != NULL) {
        <a class="lien-feed-utilisateur hide-with-points" href="./feed.php?id=<?= $oneUser['loginID'] ?>"><?= $oneUser['prenom'] . " " . $oneUser['nom'] ?></a>
      <?php } ?>
    </div>
-   <input id="searchBar" type="text" placeholder="Recherche..." onkeyup="refreshSearch()">
+   <input id="searchBar" class="discreet-input" type="text" placeholder="Recherche..." onkeyup="refreshSearch()">
    <div id="sidenav-footer">
      <h6>Connecté en tant que<br><?= $currentUser['prenom']." ".$currentUser['nom'] ?></h6>
    </div>
