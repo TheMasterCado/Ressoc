@@ -20,16 +20,16 @@ header("Location: ./index.php");
 <form id="formulaire" class="" action="./mc_creerCompte.php" method="post">
   <table>
     <tr>
-  <label for="prenom">Prénom</label></td>
-  <input type="text" name="prenom" value="<?=$_SESSION['newUser']['prenom']?>" required></td>
+  <td><label for="prenom">Prénom</label></td>
+  <td><input type="text" name="prenom" value="<?=$_SESSION['newUser']['prenom']?>" required></td>
 </tr>
     <tr>
-  <label for="nom">Nom</label></td>
-  <input type="text" name="nom" value="<?=isset($_SESSION['newUser']['nom']) ? $_SESSION['newUser']['nom'] : ""?>" required></td>
+  <td><label for="nom">Nom</label></td>
+  <td><input type="text" name="nom" value="<?=isset($_SESSION['newUser']['nom']) ? $_SESSION['newUser']['nom'] : ""?>" required></td>
 </tr>
     <tr>
-  <label for="nbSessions">Nombre de sessions en informatique</label></td>
-  <input type="number" name="nbSessions" min="1" max="6" required></td>
+<td><label for="nbSessions">Nombre de sessions en informatique</label></td>
+<td><input type="number" name="nbSessions" min="1" max="6" required></td>
 </tr>
     <tr>
 <td><label for="specialite">Spécialité (facultatif)</label></td>
@@ -39,7 +39,8 @@ header("Location: ./index.php");
   <input type="hidden" name="image" value="<?=$_SESSION['newUser']['image']?>">
   <input type="hidden" name="id" value="<?=$_SESSION['id']?>">
       <tr>
-  <input type="submit" value="Valider"></td>
+        <td><td>
+  <td><input type="submit" value="Valider"></td>
 </tr>
     </table>
 </form>
