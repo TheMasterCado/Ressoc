@@ -40,7 +40,7 @@ header("Location: ./index.php");
       <input type="hidden" name="id" value="<?=$_SESSION['id']?>">
       <tr>
         <td></td>
-        <td><input class="btn btn-default" id="submit" type="submit" value="Valider"></td>
+        <td id="submit"><input class="btn btn-success btn-sm" type="submit" value="Valider"></td>
       </tr>
     </table>
   </form>

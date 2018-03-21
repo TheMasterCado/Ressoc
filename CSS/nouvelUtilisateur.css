@@ -19,8 +19,8 @@ input {
   float: left;
 }
 
-input[type="submit"] {
-  width: 40%;
+#submit {
+  text-align: center;
 }
 
 label {
