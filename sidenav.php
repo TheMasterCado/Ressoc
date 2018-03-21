@@ -13,7 +13,7 @@ if($feedDe['fk_specialite'] != NULL) {
  <script>
    function refreshSearch() {
      $(".lien-feed-utilisateur").each(function(index) {
-       if($(this).text().toLowerCase().indexOf($("#searchBar").text()) >= 0)
+       if($(this).text().toLowerCase().indexOf($("#searchBar").val()) >= 0)
           $(this).show();
        else
          $(this).hide();
