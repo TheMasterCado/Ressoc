@@ -9,7 +9,7 @@ require 'php_utils.php';
 
 $formattedText = formatEverything($_POST['contenu']);
 
-if(!empty(trim($_POST['specialite'])) && $_POST['specialite'].length > 3) {
+if(!empty(trim($_POST['specialite']))) {
   $sql = "SELECT COUNT(*) AS nb FROM specialite WHERE nom = :specialite;";
   $stmt = $db->prepare($sql);
   $stmt->execute([':specialite' => $_POST['specialite']]);
@@ -36,7 +36,7 @@ $stmt->execute([':id' => $_SESSION['id']]);
 $fk_utilisateur = $stmt->fetch();
 
 $sql = "INSERT INTO publication (publication.texte, publication.fk_type_publication,
-        publication.fk_utilisateur, publication.fk_specialite, publication.fk_publication)
+          publication.fk_utilisateur, publication.fk_specialite, publication.fk_publication)
         VALUES (:contenu, :type_pub, :fk_utilisateur, :fk_specialite, :fk_publication);";
 $stmt = $db->prepare($sql);
 $params = [

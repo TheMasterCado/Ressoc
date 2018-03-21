@@ -3,7 +3,7 @@
   var toDelete = null;
 
   function traiterNouvellePub() {
-    if ($("#contenu").val().trim().length == 0) {
+    if ($("#contenu").val().trim().length <= 1) {
       alert("Une publication ne doit pas être vide");
     } else {
     $.post("./mc_creerPublication.php", {
