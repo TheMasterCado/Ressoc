@@ -16,6 +16,11 @@
   margin-bottom: 20px;
 }
 
+#searchBar {
+  background-color: #555;
+  color: #fff;
+}
+
 #sidenav-footer {
   width: 200px;
   position: fixed;
