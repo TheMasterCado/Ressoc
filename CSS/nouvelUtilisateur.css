@@ -3,12 +3,11 @@ body {
   background-size: cover;
 }
 
-form{
+table{
   border-style: dotted;
   border-width: 5px;
   margin: auto;
   width: 50%;
-  text-align: center;
 }
 
 input {
