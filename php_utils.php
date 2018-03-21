@@ -109,7 +109,7 @@ function formatEverything($string) {
   $text = markUp("--", ['<quote>', '</quote>'], $text, "@@");
   $text = markUp("##", ['<mark>', '</mark>'], $text, "@@");
   $text = markUpLinks(["[", "("], ["]", ")"], $text, "@@");
-  $text = markUpImages("<:", ":>", $text, "@@");
+  $text = markUpImages("<", ">", $text, "@@");
   $text = str_replace("@@;;=", "", $text);
   $text = str_replace("=;;@@", "", $text);
   $text = markUp("@@", ['<code>', '</code>'], $text);
