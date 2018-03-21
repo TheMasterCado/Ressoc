@@ -11,6 +11,18 @@ form{
   text-align: center;
 }
 
+input {
+  width: 90%;
+}
+
+input[type="submit"] {
+  width: 40%;
+}
+
+label {
+  margin-right: 15px;
+}
+
 td {
   width: 50%;
   text-align: right;
