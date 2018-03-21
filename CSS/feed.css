@@ -98,7 +98,7 @@ a.rouge {
   color: #dc3545;
 }
 
-p.card-text {
+.card-text {
   text-align: justify;
   padding-left: 10px;
   margin-bottom: 10px;
