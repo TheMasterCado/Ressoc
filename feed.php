@@ -139,13 +139,13 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
           <option value="points" <?= ($ordre == "points") ? "selected" : "" ?>>Points</option>
         </select>
         <input type="text" placeholder="Catégorie" id="categorie" value="<?= isset($_GET['specialite']) ? $_GET['specialite'] : "" ?>">
-        <input name="onlyQuestions" type="checkbox" id="onlyQuestions" <? isset($_GET['onlyQuestions']) ? "checked" : "" ?>>
+        <input name="onlyQuestions" type="checkbox" id="onlyQuestions" <? isset($_GET['onlyQuestions']) ? "checked" : "" ?> >
         <label for="onlyQuestions">Questions seulement</label>
         <button class="button-link-small btn-link"
                 onclick="window.location.replace('./feed.php?id=' + '<?= $id ?>' +
                         '&ordre=' + $('#ordre').val() + (($('#categorie').val().trim() != '')
                          ? '&specialite=' + $('#categorie').val() : '') +
-                         ($('#onlyQuestions[checked]').size() > 0) ? '&onlyQuestions' : '');">Appliquer</button>
+                         ($('#onlyQuestions[checked]').length > 0) ? '&onlyQuestions' : '');">Appliquer</button>
       </div>
     </div>
     <?php if(empty($publications)) { ?>
