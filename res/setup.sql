@@ -90,7 +90,6 @@ LOCK TABLES `specialite` WRITE;
 INSERT INTO `specialite` VALUES (1,'Information');
 /*!40000 ALTER TABLE `specialite` ENABLE KEYS */;
 UNLOCK TABLES;
-
 --
 -- Table structure for table `type_publication`
 --
