@@ -39,7 +39,6 @@ header("Location: ./index.php");
   <input type="hidden" name="image" value="<?=$_SESSION['newUser']['image']?>">
   <input type="hidden" name="id" value="<?=$_SESSION['id']?>">
       <tr>
-        <td><td>
   <td><input type="submit" value="Valider"></td>
 </tr>
     </table>
