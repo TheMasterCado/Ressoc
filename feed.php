@@ -20,7 +20,8 @@ $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $_SESSION['id']]);
 $currentUser = $stmt->fetch();
 //Toutes les publications
-$sql = "SELECT pk_publication, fk_publication, specialite.nom AS nom_specialite, UNIX_TIMESTAMP(timestamp) AS timestamp, description, texte, utilisateur.prenom, utilisateur.nom, utilisateur.loginID
+$sql = "SELECT pk_publication, fk_publication, specialite.nom AS nom_specialite, UNIX_TIMESTAMP(timestamp) AS timestamp,
+          description, texte, utilisateur.prenom, utilisateur.nom, utilisateur.loginID
         FROM publication
         INNER JOIN type_publication ON fk_type_publication = pk_type_publication
         INNER JOIN utilisateur ON fk_utilisateur = pk_utilisateur
@@ -28,6 +29,7 @@ $sql = "SELECT pk_publication, fk_publication, specialite.nom AS nom_specialite,
         WHERE fk_publication IS NULL ".
         (($id == "ALL") ? "" : "AND fk_utilisateur = :pk_utilisateur ").
         (isset($_GET['specialite']) ? "AND specialite.nom LIKE :specialite " : "").
+        (isset($_GET['onlyQuestions']) ? "AND (description = 'Question' OR description = 'QuestionRepondue')" : "").
         "ORDER BY timestamp DESC;";
 $stmt = $db->prepare($sql);
 $params = [];
@@ -125,10 +127,6 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
       });
   }
 
-  function  traiterSuppression(pk_publication) {
-
-  }
-
   function deselectionner(el) {
     $(el).toggleClass("selected", false);
     $(el).attr("valeur", $(el).hasClass("vert") ? 1 : -1);
@@ -149,11 +147,17 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
           <option value="date" <?= ($ordre == "date") ? "selected" : "" ?>>Date</option>
           <option value="points" <?= ($ordre == "points") ? "selected" : "" ?>>Points</option>
         </select>
-        <input type="text" placeholder="Catégorie" id="categorie" value="<?= isset($_GET['specialite']) ? $_GET['specialite'] : "" ?>">
+        <span class="separateur-vertical"> | </span>
+        <input type="text" class="discreet-input" placeholder="Catégorie" id="categorie" value="<?= isset($_GET['specialite']) ? $_GET['specialite'] : "" ?>">
+        <span class="separateur-vertical"> | </span>
+        <input name="onlyQuestions" type="checkbox" id="onlyQuestions" <?= isset($_GET['onlyQuestions']) ? "checked" : "" ?>>
+        <label for="onlyQuestions">Questions seulement</label>
+        <span class="separateur-vertical"> | </span>
         <button class="button-link-small btn-link"
                 onclick="window.location.replace('./feed.php?id=' + '<?= $id ?>' +
                         '&ordre=' + $('#ordre').val() + (($('#categorie').val().trim() != '')
-                         ? '&specialite=' + $('#categorie').val() : ''));">Appliquer</button>
+                         ? '&specialite=' + $('#categorie').val() : '') +
+                         ($('#onlyQuestions').is(':checked') ? '&onlyQuestions' : ''));">Appliquer</button>
       </div>
     </div>
     <?php if(empty($publications)) { ?>
@@ -165,24 +169,27 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
     }
     foreach ($publications as $pos => $publication) {
     ?>
-    <div class='card <?= ($publication['description'] == 'Question') ? 'border-question' : (($publication['description'] == 'QuestionRepondue') ? 'border-bonneReponse' :'border-texte') ?>'>
+    <div class='card <?= ($publication['description'] == 'Question') ? 'border-question' :
+                            (($publication['description'] == 'QuestionRepondue') ? 'border-bonneReponse' :'border-texte') ?>'>
       <div class="card-body">
         <h6 class="card-subtitle mb-3 text-muted">
           <strong><?= $publication['points'] ?></strong> points - par <?= $publication['prenom'] . " " . $publication['nom'] . " - " ?>
           <span class="timestamp"><?= time_ago($publication['timestamp']) ?></span>
           <?php if($publication['loginID'] == $_SESSION['id']) { ?>
-          <a href="javascript:void(null);" onclick="traiterSuppression(<?= $publication['pk_publication'] ?>)">
-            <img src="./Images/glyphicons/png/glyphicons-17-bin.png" class="glyph">
+          <a href="javascript:void(null);" onclick="preparerSuppression(<?= $publication['pk_publication'] ?>)">
+            <img src="./Images/glyphicons/png/glyphicons-17-bin.png" class="glyph"
+                data-toggle="modal" data-target="#confirmationSuppression">
           </a>
           <?php } ?>
           <span class="stay-right">Catégorie: <strong><?=
             (empty($publication['specialite']) ? "Aucune" : $publication['specialite']).
-              (($publication['description'] == 'Question') ? " | QUESTION" : "") ?>
+              (($publication['description'] == 'Question' ||
+                $publication['description'] == 'QuestionRepondue') ? " | QUESTION" : "") ?>
             </strong>
           </span>
         </h6>
             <hr>
-        <p class="card-text"><?= $publication['texte'] ?></p>
+        <div class="card-text"><?= $publication['texte'] ?></div>
         <hr>
         <span>
           <a href="javascript:void(null);" valeur="<?= ($publication['voteCurrentUser'] == 1) ? "0" : "1" ?>"

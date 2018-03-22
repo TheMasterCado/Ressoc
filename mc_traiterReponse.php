@@ -1,6 +1,7 @@
 <?php
 require 'bd.php';
-if(!isset($_POST['commentaire'])){
+session_start();
+if(!isset($_POST['commentaire']) || !isset($_SESSION['id'])){
   header("Location: ./index.php");
 }
 $sql = "UPDATE publication SET fk_type_publication = (SELECT pk_type_publication from type_publication WHERE description = :description) WHERE pk_publication = :pub;";

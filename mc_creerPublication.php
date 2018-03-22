@@ -1,5 +1,8 @@
 <?php
 session_start();
+if(!isset($_SESSION['id'])) {
+  header("Location: ./index.php");
+}
 require 'bd.php';
 
 require 'php_utils.php';
@@ -33,7 +36,7 @@ $stmt->execute([':id' => $_SESSION['id']]);
 $fk_utilisateur = $stmt->fetch();
 
 $sql = "INSERT INTO publication (publication.texte, publication.fk_type_publication,
-        publication.fk_utilisateur, publication.fk_specialite, publication.fk_publication)
+          publication.fk_utilisateur, publication.fk_specialite, publication.fk_publication)
         VALUES (:contenu, :type_pub, :fk_utilisateur, :fk_specialite, :fk_publication);";
 $stmt = $db->prepare($sql);
 $params = [

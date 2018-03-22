@@ -11,6 +11,14 @@ body {
   max-width: 40%;
 }
 
+#confirmationSuppression .modal-dialog {
+  max-width: 32%;
+}
+
+#confirmationSuppression .btn {
+  width: 57px;
+}
+
 .timestamp {
   color: #aaaaaa;
 }
@@ -25,7 +33,6 @@ body {
 .button-link-small {
   border: 0;
   padding: 0;
-  margin-left: 5px;
 }
 
 #main {
@@ -34,6 +41,10 @@ body {
   padding-right: 120px;
   padding-top: 20px;
   padding-bottom: 30px;
+}
+
+.separateur-vertical {
+  margin: 0 5px;
 }
 
 #filter {
@@ -87,7 +98,7 @@ a.rouge {
   color: #dc3545;
 }
 
-p.card-text {
+.card-text {
   text-align: justify;
   padding-left: 10px;
   margin-bottom: 10px;
@@ -95,12 +106,19 @@ p.card-text {
   overflow-y: auto;
 }
 
+input.discreet-input {
+  border-radius: 3px;
+  border: 0;
+  padding: 2px 3px;
+  font-size: 0.8rem;
+}
+
 select.discreet-dropdown {
   background-color: transparent;
   width: auto;
   border: 0;
   height: 23px !important;
-  padding: 0 2px;
+  padding: 0;
 }
 
 .card hr {
@@ -140,6 +158,14 @@ code {
   border-left: 2px solid #bbb;
   white-space: pre;
   color: #303336 !important;
+}
+
+img.postedImage {
+  display: block;
+  margin: 10px auto;
+  max-width: 95%;
+  border-radius: 5px;
+  max-height: 20rem;
 }
 
 quote::before {

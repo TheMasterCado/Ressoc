@@ -49,7 +49,7 @@ function markUpLinks($patternStart, $patternEnd, $text, $omit = NULL) {
             if(count($linkText) > 1 && $linkText[0][0] == $patternStart[1]) {
               $newText .=  substr($linkText[0], 1) . "</a>";
               array_splice($linkText, 0, 1);
-              $newText .= implode($linkText);
+              $newText .= implode($patternEnd[1], $linkText);
             }
             else {
               $newText .= $link[0] . "</a>";
@@ -58,21 +58,36 @@ function markUpLinks($patternStart, $patternEnd, $text, $omit = NULL) {
             }
           }
           else
-            $newText .= $patternStart . $valeur;
+            $newText .= $patternStart[0] . $valeur;
         }
       }
       else
         $newText .= $omit . $section . $omit;
     }
   }
-  else {
-    $sections = explode($pattern, $text);
-    foreach ($sections as $pospos => $valeur) {
-      if($pospos % 2 == 1)
-        $newText .= $replaceBy[0];
-      $newText .= $valeur;
-      if($pospos % 2 == 1)
-        $newText .= $replaceBy[1];
+  return $newText;
+}
+
+function markUpImages($patternStart, $patternEnd, $text, $omit = NULL) {
+  $newText = "";
+  if(!empty($omit)) {
+    $biggerSections = explode($omit, $text);
+    foreach ($biggerSections as $pos => $section) {
+      if($pos % 2 == 0) {
+        $occ = explode($patternStart, $section);
+        $newText .= $occ[0];
+        array_splice($occ, 0, 1);
+        foreach ($occ as $pospos => $valeur) {
+          $img = explode($patternEnd, $valeur);
+          if(count($img) > 1) {
+            $newText .= "<img class=\"postedImage\" src=\"" . $img[0] . "\">";
+          }
+          else
+            $newText .= $patternStart . $valeur;
+        }
+      }
+      else
+        $newText .= $omit . $section . $omit;
     }
   }
   return $newText;
@@ -83,6 +98,9 @@ function formatEverything($string) {
   $text = htmlspecialchars($string, ENT_NOQUOTES);
   $text = str_replace("\n", "<br>", $text);
   $text = str_replace(["@@<br>", "<br>@@"], "@@", $text);
+  $text = str_replace(";;=", "@@;;=", $text);
+  $text = str_replace("=;;", "=;;@@", $text);
+  $text = markUp("!!", ['<h3>', '</h3>'], $text, "@@");
   $text = markUp("**", ['<strong>', '</strong>'], $text, "@@");
   $text = markUp("\"\"", ['<em>', '</em>'], $text, "@@");
   $text = markUp("~~", ['<del>', '</del>'], $text, "@@");
@@ -91,6 +109,9 @@ function formatEverything($string) {
   $text = markUp("--", ['<quote>', '</quote>'], $text, "@@");
   $text = markUp("##", ['<mark>', '</mark>'], $text, "@@");
   $text = markUpLinks(["[", "("], ["]", ")"], $text, "@@");
+  $text = markUpImages("|:", ":|", $text, "@@");
+  $text = str_replace("@@;;=", "", $text);
+  $text = str_replace("=;;@@", "", $text);
   $text = markUp("@@", ['<code>', '</code>'], $text);
   return $text;
 }
@@ -126,9 +147,9 @@ function formatEverything($string) {
    elseif( $diff < 3600 * 24 * 2 ) // it happened yesterday
     return $TIMEBEFORE_YESTERDAY;
 
-   elseif(date( 'A', $time ) == date( 'A' ))
+   elseif(date( 'Y', $time ) == date( 'Y' ))
     return sprintf($TIMEBEFORE_FORMAT, date( 'j', $time ), $mois[date( 'm', $time ) - 1]);
    else
-    return sprintf($TIMEBEFORE_FORMAT_YEAR, date( 'j', $time ), mois[date( 'm', $time ) + 1], date( 'A', $time ));
+    return sprintf($TIMEBEFORE_FORMAT_YEAR, date( 'j', $time ), $mois[date( 'm', $time ) - 1], date( 'Y', $time ));
  }
  ?>

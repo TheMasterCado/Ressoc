@@ -47,7 +47,7 @@ $publication = [
   'voteCurrentUser' => $voteCurrentUser
 ];
 //Tous les commentaires
-$sql = "SELECT pk_publication, fk_publication, UNIX_TIMESTAMP(timestamp) AS timestamp, description, texte, prenom, nom
+$sql = "SELECT pk_publication, fk_publication, UNIX_TIMESTAMP(timestamp) AS timestamp, description, texte, prenom, nom, loginID
         FROM publication
         INNER JOIN type_publication ON fk_type_publication = pk_type_publication
         INNER JOIN utilisateur ON fk_utilisateur = pk_utilisateur
@@ -78,6 +78,7 @@ foreach ($commentairesRaw as $i => $row) {
     'timestamp' => $row['timestamp'],
     'prenom' => $row['prenom'],
     'nom' => $row['nom'],
+    'loginID' => $row['loginID'],
     'points' => $points,
     'voteCurrentUser' => $voteCurrentUser
   ];
@@ -96,7 +97,7 @@ $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $_GET['id']]);
 $nbBonneReponse = $stmt->fetch();
 //Infos sur OP
-$sql = "SELECT prenom, nom, pk_utilisateur, image, fk_specialite, nb_session FROM utilisateur WHERE pk_utilisateur =
+$sql = "SELECT prenom, nom, loginID, pk_utilisateur, image, fk_specialite, nb_session FROM utilisateur WHERE pk_utilisateur =
         (SELECT fk_utilisateur FROM publication WHERE pk_publication = :id);";
 $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $id]);
@@ -164,7 +165,7 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
     else {
       $.post("./mc_creerPublication.php", {
         'contenu' : $("#nouveauCom").val(),
-        'parent'  : <?= $publication['pk_publication'] ?>}, function(data) {
+        'parent'  : '<?= $publication['pk_publication'] ?>'}, function(data) {
           location.reload(true);
         });
       }
@@ -178,68 +179,110 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
         location.reload(true);
       });
   }
+  var toDelete = null;
+  var goAway = false;
+  function traiterSuppression() {
+    if(toDelete != null) {
+      $.post("./mc_traiterSuppression.php", {
+        'pk_publication' : toDelete}, function(data) {
+          if(goAway)
+            window.location.replace("./feed.php");
+          else
+            location.reload(true);
+      });
+    }
+  }
+
+  function preparerSuppression(pk_publication, goaw) {
+    toDelete = pk_publication;
+    goAway = goaw;
+  }
   </script>
   <?php require 'sidenav.php'; ?>
   <div id="main">
     <div id="publication-originale">
-      <div class='card <?= ($publication['description'] == 'Question') ? 'border-question' : (($publication['description'] == 'QuestionRepondue') ? 'border-bonneReponse' : 'border-texte') ?>'>
+      <div class='card <?= ($publication['description'] == 'Question') ? 'border-question' :
+                              (($publication['description'] == 'QuestionRepondue') ? 'border-bonneReponse' : 'border-texte') ?>'>
         <div class="card-body">
           <h6 class="card-subtitle mb-3 text-muted">
             <strong><?= $publication['points'] ?></strong> points - par <?= $feedDe['prenom'] . " " . $feedDe['nom'] . " - " ?>
             <span class="timestamp"><?= time_ago($publication['timestamp']) ?></span>
+            <?php if($feedDe['loginID'] == $_SESSION['id']) { ?>
+            <a href="javascript:void(null);" onclick="preparerSuppression(<?= $publication['pk_publication'] ?>, true)">
+              <img src="./Images/glyphicons/png/glyphicons-17-bin.png" class="glyph"
+                  data-toggle="modal" data-target="#confirmationSuppression">
+            </a>
+            <?php } ?>
             <span class="stay-right">Catégorie: <strong><?=
               (empty($publication['specialite']) ? "Aucune" : $publication['specialite']).
-                (($publication['description'] == 'Question') ? " | QUESTION" : "") ?>
+                (($publication['description'] == 'Question' ||
+                    $publication['description'] == 'QuestionRepondue') ? " | QUESTION" : "") ?>
               </strong>
             </span>
           </h6>
           <hr>
-          <p class="card-text"><?= $publication['texte'] ?></p>
+          <div class="card-text"><?= $publication['texte'] ?></div>
           <hr>
           <span>
             <a href="javascript:void(null);" valeur="<?= ($publication['voteCurrentUser'] == 1) ? "0" : "1" ?>"
-               class="card-link vert <?= ($publication['voteCurrentUser'] == 1) ? "selected" : "" ?>"
-               onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Bien (+1)</a>
-              <a href="javascript:void(null);" valeur="<?= ($publication['voteCurrentUser'] == -1) ? "0" : "-1" ?>"
-                 class="card-link rouge <?= ($publication['voteCurrentUser'] == -1) ? "selected" : "" ?>"
-                 onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Mauvais (-1)</a>
-              </span>
-            </div>
+              class="card-link vert <?= ($publication['voteCurrentUser'] == 1) ? "selected" : "" ?>"
+              onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Bien (+1)</a>
+            <a href="javascript:void(null);" valeur="<?= ($publication['voteCurrentUser'] == -1) ? "0" : "-1" ?>"
+              class="card-link rouge <?= ($publication['voteCurrentUser'] == -1) ? "selected" : "" ?>"
+              onclick="traiterPoints(<?= $publication['pk_publication'] ?>, this)">Mauvais (-1)</a>
+            </span>
+            <?php if($publication['description'] == 'QuestionRepondue') { ?>
+            <a href="#bonne-reponse" class="card-link stay-right">
+              Aller à la bonne réponse
+            </a>
+            <?php } ?>
+          </div>
           </div>
         </div>
         <div id="filter">
-          <div class="stay-right floating-element">
-            <label for="ordre">Classer par</label>
-            <select name="ordre" class="discreet-dropdown" id="ordre">
-              <option value="date" <?= ($ordre == "date") ? "selected" : "" ?>>Date</option>
-              <option value="points" <?= ($ordre == "points") ? "selected" : "" ?>>Points</option>
-            </select>
+           <div class="stay-right floating-element">
+             <label for="ordre">Classer par</label>
+             <select name="ordre" class="discreet-dropdown" id="ordre">
+               <option value="date" <?= ($ordre == "date") ? "selected" : "" ?>>Date</option>
+               <option value="points" <?= ($ordre == "points") ? "selected" : "" ?>>Points</option>
+             </select>
+             <span class="separateur-vertical"> | </span>
             <button class="button-link-small btn-link"
-            onclick="window.location.replace('./publication.php?id=' + '<?= $id ?>' +
-                    '&ordre=' + $('#ordre').val());">Appliquer</button>
+                onclick="window.location.replace('./publication.php?id=' + '<?= $id ?>' +
+                        '&ordre=' + $('#ordre').val());">Appliquer</button>
           </div>
         </div>
         <div id="commentaires">
       <?php
       foreach ($commentaires as $pos => $commentaire) {
       ?>
-      <div class='card<?= ($commentaire['description'] == 'BonneReponse') ? ' border-bonneReponse' : '' ?>'>
+      <div class='card<?= ($commentaire['description'] == 'BonneReponse') ? ' border-bonneReponse\' id=\'bonne-reponse' : '' ?>'>
         <div class="card-body">
           <h6 class="card-subtitle mb-3 text-muted">
             <strong><?= $commentaire['points'] ?></strong> points - par <?= $commentaire['prenom'] . " " . $commentaire['nom'] . " - " ?>
             <span class="timestamp"><?= time_ago($commentaire['timestamp']) ?></span>
+            <?php if($commentaire['loginID'] == $_SESSION['id']) { ?>
+            <a href="javascript:void(null);" onclick="preparerSuppression(<?= $commentaire['pk_publication'] ?>, false)">
+              <img src="./Images/glyphicons/png/glyphicons-17-bin.png" class="glyph"
+                  data-toggle="modal" data-target="#confirmationSuppression">
+            </a>
+            <?php } ?>
+            <span class="stay-right"><strong><?= (($publication['description'] == 'BonneReponse') ? "Bonne réponse" : "") ?></strong></span>
             <?php
-            if(($publication['description'] == 'Question' || $publication['description'] == 'QuestionRepondue') && $currentUser['pk_utilisateur'] == $publication['fk_utilisateur'] && ($nbBonneReponse['nb'] == 0 || $commentaire['description'] == 'BonneReponse')){
+            if(($publication['description'] == 'Question' || $publication['description'] == 'QuestionRepondue') &&
+                $currentUser['pk_utilisateur'] == $publication['fk_utilisateur'] && ($nbBonneReponse['nb'] == 0 ||
+                $commentaire['description'] == 'BonneReponse')){
               ?>
             <a href="javascript:void(null);" onclick="traiterBonneReponse(<?= $commentaire['pk_publication'] ?>, '<?= $commentaire['description'] ?>')">
-              <img src=<?= ($commentaire['description'] == 'BonneReponse') ? "./Images/glyphicons/png/glyphicons-208-remove.png" : "./Images/glyphicons/png/glyphicons-153-check.png" ?> class="glyph">
+              <img src=<?= ($commentaire['description'] == 'BonneReponse') ? "./Images/glyphicons/png/glyphicons-208-remove.png" :
+                        "./Images/glyphicons/png/glyphicons-153-check.png" ?> class="glyph">
             </a>
             <?php
           }
              ?>
           </h6>
           <hr>
-          <p class="card-text"><?= $commentaire['texte'] ?></p>
+          <div class="card-text"><?= $commentaire['texte'] ?></div>
           <hr>
           <span>
             <a href="javascript:void(null);" valeur="<?= ($commentaire['voteCurrentUser'] == 1) ? "0" : "1" ?>"
@@ -261,7 +304,23 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
       </div>
     </div>
   </div>
+  <div class="modal fade" id="confirmationSuppression" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Confirmation de la suppression</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          Voulez-vous vraiment supprimer cela?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger stay-left" data-dismiss="modal">Non</button>
+          <button type="button" class="btn btn-success" data-dismiss="modal" onclick="traiterSuppression()">Oui</button>
+        </div>
+      </div>
 
-  <?php require "maPage.php"; ?>
+    </div>
+  </div>
 </body>
 </html>

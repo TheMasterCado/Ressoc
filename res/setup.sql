@@ -40,7 +40,7 @@ CREATE TABLE `publication` (
   CONSTRAINT `publication_ibfk_2` FOREIGN KEY (`fk_type_publication`) REFERENCES `type_publication` (`pk_type_publication`),
   CONSTRAINT `publication_ibfk_3` FOREIGN KEY (`fk_utilisateur`) REFERENCES `utilisateur` (`pk_utilisateur`) ON DELETE CASCADE,
   CONSTRAINT `publication_ibfk_4` FOREIGN KEY (`fk_specialite`) REFERENCES `specialite` (`pk_specialite`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -60,6 +60,12 @@ BEGIN
     VALUES (NEW.pk_publication, NEW.fk_utilisateur, 1);
 END */;;
 DELIMITER ;
+
+LOCK TABLES `publication` WRITE;
+/*!40000 ALTER TABLE `publication` DISABLE KEYS */;
+INSERT INTO `publication` VALUES (1,'<h3>Aide formatage du texte</h3><br>Voici les balises à utiliser pour les différents styles de texte:<br><br>@ @texte@ @(sans l'espace) -&gt; Bloc de code<code>Ce bloc conservera l'indentation du code</code><br>!!texte!! -&gt; Titre<br><h3>Voici un titre</h3><br>**texte** -&gt; Texte en gras<br><strong>Texte en gras</strong><br><br>""texte"" -&gt; Texte en italique<br><em>Texte en italique</em><br><br>~~texte~~ -&gt; Texte <em>strikethrough</em><br><del>Texte strikethrough</del><br><br>__texte__ -&gt; Texte souligné<br><ins>Texte souligné</ins><br><br>texte^^texte^^ -&gt; Texte en "exposant"<br>Texte en<sup>exposant</sup><br><br>--texte-- -&gt; Citation<br><quote>Citation</quote><br><br>##texte## -&gt; Texte surligné<br><mark>Texte surligné</mark><br><br>[lien](texte) -&gt; Lien (le texte entre parenthèses est optionnel)<br><a target="_blank" href="http://cegepthetford.ca">Site du Cegep</a><br><br>|:lien vers image:| -&gt; Image<br><br>;; =texte= ;;(sans l'espace) -&gt; Permet d'échapper des marqueurs',NULL,2,1,1,'2000-01-01 03:48:57');
+/*!40000 ALTER TABLE `publication` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
@@ -76,9 +82,14 @@ CREATE TABLE `specialite` (
   `pk_specialite` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `nom` varchar(45) NOT NULL,
   PRIMARY KEY (`pk_specialite`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+LOCK TABLES `specialite` WRITE;
+/*!40000 ALTER TABLE `specialite` DISABLE KEYS */;
+INSERT INTO `specialite` VALUES (1,'Information');
+/*!40000 ALTER TABLE `specialite` ENABLE KEYS */;
+UNLOCK TABLES;
 --
 -- Table structure for table `type_publication`
 --
@@ -90,7 +101,7 @@ CREATE TABLE `type_publication` (
   `pk_type_publication` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `description` varchar(45) NOT NULL,
   PRIMARY KEY (`pk_type_publication`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -99,7 +110,7 @@ CREATE TABLE `type_publication` (
 
 LOCK TABLES `type_publication` WRITE;
 /*!40000 ALTER TABLE `type_publication` DISABLE KEYS */;
-INSERT INTO `type_publication` VALUES (1,'Question'),(2,'Texte'),(3,'BonneReponse');
+INSERT INTO `type_publication` VALUES (1,'Question'),(2,'Texte'),(3,'BonneReponse'),(4,'QuestionRepondue');
 /*!40000 ALTER TABLE `type_publication` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -115,7 +126,7 @@ CREATE TABLE `utilisateur` (
   `nom` varchar(45) NOT NULL,
   `prenom` varchar(45) NOT NULL,
   `nb_session` int(11) NOT NULL,
-  `loginID` varchar(50) DEFAULT NULL,
+  `loginID` varchar(70) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
   `image` varchar(300) NOT NULL,
   `fk_specialite` int(10) unsigned DEFAULT NULL,
@@ -123,8 +134,14 @@ CREATE TABLE `utilisateur` (
   UNIQUE KEY `loginID_UNIQUE` (`loginID`),
   KEY `fk_specialite` (`fk_specialite`),
   CONSTRAINT `utilisateur_ibfk_1` FOREIGN KEY (`fk_specialite`) REFERENCES `specialite` (`pk_specialite`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+LOCK TABLES `utilisateur` WRITE;
+/*!40000 ALTER TABLE `utilisateur` DISABLE KEYS */;
+INSERT INTO `utilisateur` VALUES (1,'','Système',0,NULL,'master_cado@hotmail.com','./Images/network_server.png',NULL);
+/*!40000 ALTER TABLE `utilisateur` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `vote`
@@ -136,7 +153,7 @@ DROP TABLE IF EXISTS `vote`;
 CREATE TABLE `vote` (
   `fk_publication` int(10) unsigned NOT NULL,
   `fk_utilisateur` int(10) unsigned NOT NULL,
-  `valeur` int(11) NOT NULL,
+  `valeur` int(11) NOT NULL CHECK (valeur>=-1 AND valeur<=1),
   PRIMARY KEY (`fk_publication`,`fk_utilisateur`),
   KEY `fk_utilisateur` (`fk_utilisateur`),
   CONSTRAINT `vote_ibfk_1` FOREIGN KEY (`fk_publication`) REFERENCES `publication` (`pk_publication`) ON DELETE CASCADE,
@@ -163,3 +180,42 @@ CREATE TABLE `vote` (
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2018-03-11 13:13:25
+
+
+/*
+!!Aide formatage du texte!!
+Voici les balises à utiliser pour les différents styles de texte:
+
+@ @texte@ @(sans l'espace) -> Bloc de code
+@@Ce bloc conservera l'indentation du code@@
+
+;;=!!texte!!=;; -> Titre
+!!Voici un titre!!
+;;=**texte**=;; -> Texte en gras
+**Texte en gras**
+
+;;=""texte""=;; -> Texte en italique
+""Texte en italique""
+
+;;=~~texte~~=;; -> Texte ""strikethrough""
+~~Texte strikethrough~~
+
+;;=__texte__=;; -> Texte souligné
+__Texte souligné__
+
+;;=texte^^texte^^=;; -> Texte en "exposant"
+Texte en^^exposant^^
+
+;;=--texte--=;; -> Citation
+--Citation--
+
+;;=##texte##=;; -> Texte surligné
+##Texte surligné##
+
+;;=[lien](texte)=;; -> Lien (le texte entre parenthèses est optionnel)
+[http://cegepthetford.ca](Site du Cegep)
+
+;;=|:lien vers image:|=;; -> Image
+
+;; =texte= ;;(sans l'espace) -> Permet d'échapper des marqueurs
+*/

@@ -10,6 +10,16 @@ if($feedDe['fk_specialite'] != NULL) {
   $specialiteUser = $stmt->fetch();
 }
  ?>
+ <script>
+   function refreshSearch() {
+     $(".lien-feed-utilisateur").each(function(index) {
+       if($(this).text().toLowerCase().indexOf($("#searchBar").val().toLowerCase()) >= 0)
+          $(this).show();
+       else
+         $(this).hide();
+     });
+   }
+ </script>
  <div id="sidenav">
    <h6><?= $titre ?><br><?= $titre2 ?></h6>
    <img src="<?= $feedDe['image'] ?>">
@@ -19,6 +29,7 @@ if($feedDe['fk_specialite'] != NULL) {
      <?php if($id == $_SESSION['id'] || $id == "ALL") { ?>
        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#nouvellePublication">Nouvelle publication</button>
      <?php } ?>
+     <a class="btn btn-info btn-sm" href="./feed.php">Feed général</a>
      <a class="btn btn-info btn-sm" href="./feed.php?id=<?= $_SESSION['id'] ?>">Mon feed</a>
      <a class="btn btn-info btn-sm" href="./signOut.php">Se déconnecter</a>
    </div>
@@ -27,6 +38,7 @@ if($feedDe['fk_specialite'] != NULL) {
        <a class="lien-feed-utilisateur hide-with-points" href="./feed.php?id=<?= $oneUser['loginID'] ?>"><?= $oneUser['prenom'] . " " . $oneUser['nom'] ?></a>
      <?php } ?>
    </div>
+   <input id="searchBar" class="discreet-input" type="text" placeholder="Recherche..." onkeyup="refreshSearch()">
    <div id="sidenav-footer">
      <h6>Connecté en tant que<br><?= $currentUser['prenom']." ".$currentUser['nom'] ?></h6>
    </div>
