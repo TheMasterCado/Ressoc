@@ -19,8 +19,9 @@ input {
   float: left;
 }
 
-#submit {
+.bouton {
   margin-left: 16%;
+  margin-right: 16%;
   width: 30%;
 }
 
