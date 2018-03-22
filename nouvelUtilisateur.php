@@ -24,6 +24,16 @@ header("Location: ./index.php");
   gtag('config', 'UA-116236338-1');
 </script>
 <body>
+  <script>
+    function creerCompte() {
+      gtag('send', {
+        hitType: 'event',
+        eventCategory: 'utilisateur',
+        eventAction: 'creationCompte'
+      });
+      $("#formulaire").submit();
+    }
+  </script>
   <h1>Créer un compte</h1>
   <form id="formulaire" class="" action="./mc_creerCompte.php" method="post">
     <table>
@@ -48,7 +58,7 @@ header("Location: ./index.php");
       <input type="hidden" name="id" value="<?=$_SESSION['id']?>">
       <tr>
         <td><a class="bouton btn btn-danger btn-sm" href="./signOut.php">Retour</a></td>
-        <td><input class="bouton btn btn-success btn-sm" type="submit" value="Valider"></td>
+        <td><button class="bouton btn btn-success btn-sm" onclick="creerCompte()">Valider</button></td>
       </tr>
     </table>
   </form>
