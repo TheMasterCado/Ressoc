@@ -115,6 +115,14 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
   <link rel="stylesheet" href="./CSS/sidenav.css">
   <link rel="stylesheet" href="./CSS/publication.css">
 </head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-116236338-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-116236338-1');
+</script>
 <body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

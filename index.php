@@ -7,6 +7,14 @@
   <link rel="stylesheet" type="text/css" href="./CSS/index.css">
   <title>Login Ressoc</title>
 </head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-116236338-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-116236338-1');
+</script>
 <body>
   <script src="https://apis.google.com/js/platform.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
