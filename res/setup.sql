@@ -194,8 +194,8 @@ Voici les balises à utiliser pour les différents styles de texte:
 ;;=**texte**=;; -> Texte en gras
 **Texte en gras**
 
-;;=""texte""=;; -> Texte en italique
-""Texte en italique""
+;;=::texte::=;; -> Texte en italique
+::Texte en italique::
 
 ;;=~~texte~~=;; -> Texte ""strikethrough""
 ~~Texte strikethrough~~
@@ -215,7 +215,7 @@ Texte en^^exposant^^
 ;;=[lien](texte)=;; -> Lien (le texte entre parenthèses est optionnel)
 [http://cegepthetford.ca](Site du Cegep)
 
-;;=|:lien vers image:|=;; -> Image
+;;=|=lien vers image=|=;; -> Image
 
 ;; =texte= ;;(sans l'espace) -> Permet d'échapper des marqueurs
 */
