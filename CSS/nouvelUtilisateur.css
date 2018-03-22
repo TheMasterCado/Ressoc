@@ -22,7 +22,9 @@ input {
 .bouton {
   margin-left: 16%;
   margin-right: 16%;
+  margin-top: 20px;
   width: 30%;
+  color: white;
 }
 
 label {

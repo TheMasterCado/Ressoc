@@ -47,7 +47,7 @@ header("Location: ./index.php");
       <input type="hidden" name="image" value="<?=$_SESSION['newUser']['image']?>">
       <input type="hidden" name="id" value="<?=$_SESSION['id']?>">
       <tr>
-        <td><a class="bouton btn btn-danger btn-sm">Retour</a></td>
+        <td><a class="bouton btn btn-danger btn-sm" href="./signOut.php">Retour</a></td>
         <td><input class="bouton btn btn-success btn-sm" type="submit" value="Valider"></td>
       </tr>
     </table>
