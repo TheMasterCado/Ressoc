@@ -147,8 +147,8 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
       <div class="stay-right floating-element">
         <label for="ordre">Classer par</label>
         <select name="ordre" class="discreet-dropdown" id="ordre">
-          <option value="date" <?= ($ordre == "date") ? "selected" : "" ?>>Date</option>
-          <option value="points" <?= ($ordre == "points") ? "selected" : "" ?>>Points</option>
+          <option value="date" <?= ($ordre == "date") ? "selected" : "" ?>>date</option>
+          <option value="points" <?= ($ordre == "points") ? "selected" : "" ?>>points</option>
           <option value="hot" <?= ($ordre == "hot") ? "selected" : "" ?>>popularité</option>
         </select>
         <span class="separateur-vertical"> | </span>
