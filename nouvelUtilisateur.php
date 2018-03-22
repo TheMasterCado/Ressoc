@@ -31,7 +31,7 @@ header("Location: ./index.php");
         eventCategory: 'utilisateur',
         eventAction: 'creationCompte'
       });
-      $("#formulaire").submit();
+      document.getElementById("formulaire").submit();
     }
   </script>
   <h1>Créer un compte</h1>
