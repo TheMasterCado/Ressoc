@@ -15,6 +15,14 @@ header("Location: ./index.php");
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="./CSS/nouvelUtilisateur.css">
 </head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-116236338-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-116236338-1');
+</script>
 <body>
 <h1>Créer un compte</h1>
 <form id="formulaire" class="" action="./mc_creerCompte.php" method="post">
