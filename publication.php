@@ -108,6 +108,14 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Google Analytics -->
+  <script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-116236338-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
   <meta charset="utf-8">
   <title><?= $titre." ".$titre2 ?></title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -115,14 +123,6 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
   <link rel="stylesheet" href="./CSS/sidenav.css">
   <link rel="stylesheet" href="./CSS/publication.css">
 </head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-116236338-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-116236338-1');
-</script>
 <body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
