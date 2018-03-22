@@ -128,7 +128,7 @@ function formatEverything($string) {
  }
 
  function compareRowsHotness($a, $b) {
-   return calculateHotness($b['points'], $b['timestamp']) - calculateHotness($a['points'], $a['timestamp']);
+   return 10000*(calculateHotness($b['points'], $b['timestamp']) - calculateHotness($a['points'], $a['timestamp']));
  }
 
  function time_ago( $time )
