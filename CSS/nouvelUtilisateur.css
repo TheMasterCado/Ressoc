@@ -16,6 +16,7 @@ input {
   border: 0;
   padding: 2px;
   border-radius: 3px;
+  float: left;
 }
 
 .bouton {
