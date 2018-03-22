@@ -269,7 +269,7 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
         <div class="card-body">
           <h6 class="card-subtitle mb-3 text-muted">
             <strong><?= $commentaire['points'] ?></strong> points - par <?= $commentaire['prenom'] . " " . $commentaire['nom'] . " - " ?>
-            <span class="timestamp"><?= time_ago($commentaire['timestamp']) ?></span>
+            <span class="timestamp"><?= time_ago($commentaire['timestamp']) . " - " . calculateHotness($commentaire['points'], $commentaire['timestamp']) ?></span>
             <?php if($commentaire['loginID'] == $_SESSION['id']) { ?>
             <a href="javascript:void(null);" onclick="preparerSuppression(<?= $commentaire['pk_publication'] ?>, false)">
               <img src="./Images/glyphicons/png/glyphicons-17-bin.png" class="glyph"
