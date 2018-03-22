@@ -163,6 +163,11 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
       alert("Un commentaire ne doit pas être vide");
     }
     else {
+      ga('send', {
+        hitType: 'event',
+        eventCategory: 'commentaire',
+        eventAction: 'creation'
+      });
       $.post("./mc_creerPublication.php", {
         'contenu' : $("#nouveauCom").val(),
         'parent'  : '<?= $publication['pk_publication'] ?>'}, function(data) {
