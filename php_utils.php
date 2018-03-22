@@ -120,6 +120,17 @@ function formatEverything($string) {
    return $b['points'] - $a['points'];
  }
 
+ function calculateHotness($score, $time) {
+   $sinceLongAgo = $time - strtotime("31 December 2005");
+   $order = log10(max(abs($score), 1));
+   $sign = ($score > 0) ? 1 : (($score < 0) ? -1 : 0);
+   return round($sign * $order + $sinceLongAgo / 45000, 5);
+ }
+
+ function compareRowsHotness($a, $b) {
+   return calculateHotness($b['points'], $b['timestamp']) - calculateHotness($a['points'], $a['timestamp']);
+ }
+
  function time_ago( $time )
  {
    $TIMEBEFORE_NOW = 'à l\'instant';

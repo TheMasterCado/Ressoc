@@ -76,8 +76,11 @@ foreach ($publicationsRaw as $i => $row) {
 $ordre = isset($_GET['ordre']) ? $_GET['ordre'] : "date";
 switch ($ordre) {
   case 'points':
-  usort($publications, "compareRowsPoints");
-  break;
+    usort($publications, "compareRowsPoints");
+    break;
+  case 'hot':
+    usort($publications, "compareRowsHotness");
+    break;
 }
 if($id == "ALL")
   $titre = "Feed général";
@@ -146,6 +149,7 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
         <select name="ordre" class="discreet-dropdown" id="ordre">
           <option value="date" <?= ($ordre == "date") ? "selected" : "" ?>>Date</option>
           <option value="points" <?= ($ordre == "points") ? "selected" : "" ?>>Points</option>
+          <option value="hot" <?= ($ordre == "hot") ? "selected" : "" ?>>popularité</option>
         </select>
         <span class="separateur-vertical"> | </span>
         <input type="text" class="discreet-input" placeholder="Catégorie" id="categorie" value="<?= isset($_GET['specialite']) ? $_GET['specialite'] : "" ?>">
