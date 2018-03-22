@@ -89,7 +89,7 @@ switch ($ordre) {
       usort($commentaires, "compareRowsPoints");
       break;
     case 'hot':
-      usort($publications, "compareRowsHotness");
+      usort($commentaires, "compareRowsHotness");
       break;
 }
 $sql = "SELECT COUNT(*) AS nb
