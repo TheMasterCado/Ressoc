@@ -168,6 +168,12 @@ img.postedImage {
   max-height: 20rem;
 }
 
+iframe {
+  display: block;
+  margin: 10px auto;
+  border-radius: 5px;
+}
+
 quote::before {
   content: "- ";
 }

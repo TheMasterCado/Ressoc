@@ -93,6 +93,31 @@ function markUpImages($patternStart, $patternEnd, $text, $omit = NULL) {
   return $newText;
 }
 
+function markUpImages($patternStart, $patternEnd, $text, $omit = NULL) {
+  $newText = "";
+  if(!empty($omit)) {
+    $biggerSections = explode($omit, $text);
+    foreach ($biggerSections as $pos => $section) {
+      if($pos % 2 == 0) {
+        $occ = explode($patternStart, $section);
+        $newText .= $occ[0];
+        array_splice($occ, 0, 1);
+        foreach ($occ as $pospos => $valeur) {
+          $vid = explode($patternEnd, $valeur);
+          if(count($vid) > 1) {
+            $newText .= "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" . $vid[0] . "\" allowfullscreen></iframe>";
+          }
+          else
+            $newText .= $patternStart . $valeur;
+        }
+      }
+      else
+        $newText .= $omit . $section . $omit;
+    }
+  }
+  return $newText;
+}
+
 function formatEverything($string) {
   $text = trim($string);
   $text = htmlspecialchars($string, ENT_COMPAT);
@@ -110,6 +135,7 @@ function formatEverything($string) {
   $text = markUp("##", ['<mark>', '</mark>'], $text, "@@");
   $text = markUpLinks(["[", "("], ["]", ")"], $text, "@@");
   $text = markUpImages("|=", "=|", $text, "@@");
+  $text = markUpVideos("?=", "=?", $text, "@@");
   $text = str_replace("@@;;=", "", $text);
   $text = str_replace("=;;@@", "", $text);
   $text = markUp("@@", ['<code>', '</code>'], $text);
