@@ -93,7 +93,7 @@ function markUpImages($patternStart, $patternEnd, $text, $omit = NULL) {
   return $newText;
 }
 
-function markUpImages($patternStart, $patternEnd, $text, $omit = NULL) {
+function markUpVideos($patternStart, $patternEnd, $text, $omit = NULL) {
   $newText = "";
   if(!empty($omit)) {
     $biggerSections = explode($omit, $text);
