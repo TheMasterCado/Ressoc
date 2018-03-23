@@ -217,5 +217,7 @@ Texte en^^exposant^^
 
 ;;=|=lien vers image=|=;; -> Image
 
+;;=?=id d'une vidéo Youtube=?=;; -> Vidéo
+
 ;; =texte= ;;(sans l'espace) -> Permet d'échapper des marqueurs
 */
