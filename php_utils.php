@@ -124,7 +124,7 @@ function formatEverything($string) {
    $sinceLongAgo = $time - strtotime("31 December 2015");
    $order = log(max(abs($score), 1), 4);
    $sign = ($score > 0) ? 1 : (($score < 0) ? -1 : 0);
-   return round($sign * $order + $sinceLongAgo / 400000, 5);
+   return round($sign * $order + $sinceLongAgo / 200000, 5);
  }
 
  function compareRowsHotness($a, $b) {
