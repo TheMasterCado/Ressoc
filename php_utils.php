@@ -124,7 +124,7 @@ function formatEverything($string) {
    $sinceLongAgo = $time - strtotime("31 December 2015");
    $order = log(max(abs($score), 1), 4);
    $sign = ($score > 0) ? 1 : (($score < 0) ? -1 : 0);
-   return round($sign * $order + $sinceLongAgo / 200000, 5);
+   return round($sign * $order + $sinceLongAgo / 72000, 5);
  }
 
  function compareRowsHotness($a, $b) {
@@ -155,7 +155,7 @@ function formatEverything($string) {
    elseif( $diff < 3600 * 24 ) // it happened X hours ago
     return str_replace( '{num}', ( $out = round( $diff / 3600 ) ), $out == 1 ? $TIMEBEFORE_HOUR : $TIMEBEFORE_HOURS );
 
-   elseif( $diff < 3600 * 24 * 2 ) // it happened yesterday
+   elseif( date('j', $now) - date( 'j' ,$time) < 2 ) // it happened yesterday
     return $TIMEBEFORE_YESTERDAY;
 
    elseif(date( 'Y', $time ) == date( 'Y' ))
