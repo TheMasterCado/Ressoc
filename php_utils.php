@@ -122,9 +122,9 @@ function formatEverything($string) {
 
  function calculateHotness($score, $time) {
    $sinceLongAgo = $time - strtotime("31 December 2015");
-   $order = log(max(abs($score), 1), 3);
+   $order = log(max(abs($score), 1), 4);
    $sign = ($score > 0) ? 1 : (($score < 0) ? -1 : 0);
-   return round($sign * $order + $sinceLongAgo / 50000, 5);
+   return round($sign * $order + $sinceLongAgo / 60000, 5);
  }
 
  function compareRowsHotness($a, $b) {
