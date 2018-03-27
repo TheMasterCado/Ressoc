@@ -61,11 +61,6 @@ BEGIN
 END */;;
 DELIMITER ;
 
-LOCK TABLES `publication` WRITE;
-/*!40000 ALTER TABLE `publication` DISABLE KEYS */;
-INSERT INTO `publication` VALUES (1,'<h3>Aide formatage du texte</h3><br>Voici les balises à utiliser pour les différents styles de texte:<br><br>@ @texte@ @(sans l'espace) -&gt; Bloc de code<code>Ce bloc conservera l'indentation du code</code><br>!!texte!! -&gt; Titre<br><h3>Voici un titre</h3><br>**texte** -&gt; Texte en gras<br><strong>Texte en gras</strong><br><br>::texte:: -&gt; Texte en italique<br><em>Texte en italique</em><br><br>~~texte~~ -&gt; Texte &quot;&quot;strikethrough&quot;&quot;<br><del>Texte strikethrough</del><br><br>__texte__ -&gt; Texte souligné<br><ins>Texte souligné</ins><br><br>texte^^texte^^ -&gt; Texte en &quot;exposant&quot;<br>Texte en<sup>exposant</sup><br><br>--texte-- -&gt; Citation<br><quote>Citation</quote><br><br>##texte## -&gt; Texte surligné<br><mark>Texte surligné</mark><br><br>[lien](texte) -&gt; Lien (le texte entre parenthèses est optionnel)<br><a target="_blank" href="http://cegepthetford.ca">Site du Cegep</a><br><br>|=lien vers image=| -&gt; Image<br><br>;; =texte= ;;(sans l'espace) -&gt; Permet d'échapper des marqueurs',NULL,2,1,1,'2000-01-01 03:48:57');
-/*!40000 ALTER TABLE `publication` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
@@ -85,11 +80,6 @@ CREATE TABLE `specialite` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
-LOCK TABLES `specialite` WRITE;
-/*!40000 ALTER TABLE `specialite` DISABLE KEYS */;
-INSERT INTO `specialite` VALUES (1,'Information');
-/*!40000 ALTER TABLE `specialite` ENABLE KEYS */;
-UNLOCK TABLES;
 --
 -- Table structure for table `type_publication`
 --
@@ -107,12 +97,6 @@ CREATE TABLE `type_publication` (
 --
 -- Dumping data for table `type_publication`
 --
-
-LOCK TABLES `type_publication` WRITE;
-/*!40000 ALTER TABLE `type_publication` DISABLE KEYS */;
-INSERT INTO `type_publication` VALUES (1,'Question'),(2,'Texte'),(3,'BonneReponse'),(4,'QuestionRepondue');
-/*!40000 ALTER TABLE `type_publication` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `utilisateur`
@@ -137,11 +121,6 @@ CREATE TABLE `utilisateur` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
-LOCK TABLES `utilisateur` WRITE;
-/*!40000 ALTER TABLE `utilisateur` DISABLE KEYS */;
-INSERT INTO `utilisateur` VALUES (1,'','Système',0,NULL,'master_cado@hotmail.com','./Images/network_server.png',NULL);
-/*!40000 ALTER TABLE `utilisateur` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `vote`
@@ -161,6 +140,29 @@ CREATE TABLE `vote` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+LOCK TABLES `specialite` WRITE;
+/*!40000 ALTER TABLE `specialite` DISABLE KEYS */;
+INSERT INTO `specialite` VALUES (1,'Information');
+/*!40000 ALTER TABLE `specialite` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `type_publication` WRITE;
+/*!40000 ALTER TABLE `type_publication` DISABLE KEYS */;
+INSERT INTO `type_publication` VALUES (1,'Question'),(2,'Texte'),(3,'BonneReponse'),(4,'QuestionRepondue');
+/*!40000 ALTER TABLE `type_publication` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `utilisateur` WRITE;
+/*!40000 ALTER TABLE `utilisateur` DISABLE KEYS */;
+INSERT INTO `utilisateur` VALUES (1,'','Système',0,NULL,'master_cado@hotmail.com','./Images/network_server.png',NULL);
+/*!40000 ALTER TABLE `utilisateur` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `publication` WRITE;
+/*!40000 ALTER TABLE `publication` DISABLE KEYS */;
+INSERT INTO `publication` VALUES (1,'<h3>Aide formatage du texte</h3><br>Voici les balises à utiliser pour les différents styles de texte:<br><br>@ @texte@ @(sans l\'espace) -&gt; Bloc de code<code>Ce bloc conservera l\'indentation du code</code><br>!!texte!! -&gt; Titre<br><h3>Voici un titre</h3><br>**texte** -&gt; Texte en gras<br><strong>Texte en gras</strong><br><br>::texte:: -&gt; Texte en italique<br><em>Texte en italique</em><br><br>~~texte~~ -&gt; Texte &quot;&quot;strikethrough&quot;&quot;<br><del>Texte strikethrough</del><br><br>__texte__ -&gt; Texte souligné<br><ins>Texte souligné</ins><br><br>texte^^texte^^ -&gt; Texte en &quot;exposant&quot;<br>Texte en<sup>exposant</sup><br><br>--texte-- -&gt; Citation<br><quote>Citation</quote><br><br>##texte## -&gt; Texte surligné<br><mark>Texte surligné</mark><br><br>[lien](texte) -&gt; Lien (le texte entre parenthèses est optionnel)<br><a target="_blank" href="http://cegepthetford.ca">Site du Cegep</a><br><br>|=lien vers image=| -&gt; Image<br><br>;; =texte= ;;(sans l\'espace) -&gt; Permet d\'échapper des marqueurs',NULL,2,1,1,'2000-01-01 03:48:57');
+/*!40000 ALTER TABLE `publication` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Dumping events for database 'alecado'

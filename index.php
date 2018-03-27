@@ -22,7 +22,7 @@
     function onSignIn(googleUser) {
       var profile = googleUser.getBasicProfile();
       $.post("./mc_connexion.php", {
-        id: profile.getId(),
+        token: googleUser.getAuthResponse().id_token,
         prenom: profile.getGivenName(),
         nom: profile.getFamilyName(),
         email: profile.getEmail(),
