@@ -30,6 +30,8 @@
       }, function(data) {
         if (data == "NEW")
           window.location.replace("./nouvelUtilisateur.php");
+        else if (data == "DENIED")
+          alert("Something something not allowed");
         else
           window.location.replace("./feed.php");
       });
