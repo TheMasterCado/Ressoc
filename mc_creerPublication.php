@@ -12,16 +12,16 @@ $formattedText = formatEverything($_POST['contenu']);
 if(!empty(trim($_POST['specialite']))) {
   $sql = "SELECT COUNT(*) AS nb FROM specialite WHERE nom = :specialite;";
   $stmt = $db->prepare($sql);
-  $stmt->execute([':specialite' => htmlspecialchars($_POST['specialite'])]);
+  $stmt->execute([':specialite' => htmlspecialchars($_POST['specialite'], ENT_COMPAT)]);
   $resultat = $stmt->fetch();
   if($resultat['nb'] == 0){
     $sql = "INSERT INTO specialite (specialite.nom) VALUES (:specialite);";
     $stmt = $db->prepare($sql);
-    $stmt->execute([':specialite' => htmlspecialchars($_POST['specialite'])]);
+    $stmt->execute([':specialite' => htmlspecialchars($_POST['specialite'], ENT_COMPAT)]);
   }
   $sql = "SELECT pk_specialite FROM specialite WHERE nom = :specialite;";
   $stmt = $db->prepare($sql);
-  $stmt->execute([':specialite' => htmlspecialchars($_POST['specialite'])]);
+  $stmt->execute([':specialite' => htmlspecialchars($_POST['specialite'], ENT_COMPAT)]);
   $specialite = $stmt->fetch();
 }
 
