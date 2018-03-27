@@ -174,6 +174,7 @@ $titre2 = $feedDe['prenom']." ".$feedDe['nom'];
       $.post("./mc_creerPublication.php", {
         'contenu' : $("#nouveauCom").val(),
         'parent'  : '<?= $publication['pk_publication'] ?>'}, function(data) {
+          ga('send', 'pageview', "/publication.php/commentaireCree");
           location.reload(true);
         });
       }
