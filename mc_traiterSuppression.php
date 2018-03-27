@@ -15,10 +15,13 @@ $author = $stmt->fetch();
 if($author['loginID'] != $_SESSION['id'])
   header("Location: ./index.php");
 else {
-  $sql = "DELETE FROM publication WHERE pk_publication = :pub;";
+  $sql = "DELETE FROM publication
+          INNER JOIN utilisateur ON pk_utilisateur = fk_utilisateur
+          WHERE pk_publication = :pub AND loginID = :who;";
   $stmt = $db->prepare($sql);
   $params = [
-    ':pub' => $_POST['pk_publication']
+    ':pub' => $_POST['pk_publication'],
+    ':who' => $_SESSION['id']
   ];
   $stmt->execute($params);
 }
