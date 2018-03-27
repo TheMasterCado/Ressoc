@@ -7,16 +7,16 @@ if(!isset($_SESSION['id'])) {
 if(!empty(trim($_POST['specialite']))) {
   $sql = "SELECT COUNT(*) AS nb FROM specialite WHERE nom = :specialite;";
   $stmt = $db->prepare($sql);
-  $stmt->execute([':specialite' => $_POST['specialite']]);
+  $stmt->execute([':specialite' => htmlspecialchars($_POST['specialite']]);
   $resultat = $stmt->fetch();
   if($resultat['nb'] == 0){
     $sql = "INSERT INTO specialite (specialite.nom) VALUES (:specialite);";
     $stmt = $db->prepare($sql);
-    $stmt->execute([':specialite' => $_POST['specialite']]);
+    $stmt->execute([':specialite' => htmlspecialchars($_POST['specialite']]);
   }
   $sql = "SELECT pk_specialite FROM specialite WHERE nom = :specialite;";
   $stmt = $db->prepare($sql);
-  $stmt->execute([':specialite' => $_POST['specialite']]);
+  $stmt->execute([':specialite' => htmlspecialchars($_POST['specialite'], ENT_COMPAT)]);
   $specialite = $stmt->fetch();
 }
 $sql = "INSERT INTO utilisateur (utilisateur.nom, utilisateur.prenom, utilisateur.nb_session,
@@ -24,8 +24,8 @@ $sql = "INSERT INTO utilisateur (utilisateur.nom, utilisateur.prenom, utilisateu
         VALUES (:nom, :prenom, :nbSessions, :id, :image, :email, :fk_specialite);";
 $stmt = $db->prepare($sql);
 $params = [
-  ':prenom' => $_POST['prenom'],
-  ':nom' => $_POST['nom'],
+  ':prenom' => htmlspecialchars($_POST['prenom'], ENT_COMPAT),
+  ':nom' => htmlspecialchars($_POST['nom'], ENT_COMPAT),
   ':nbSessions' => $_POST['nbSessions'],
   ':id' => $_POST['id'],
   ':image' => $_POST['image'],
