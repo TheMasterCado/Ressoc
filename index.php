@@ -21,8 +21,9 @@
   <script>
     function onSignIn(googleUser) {
       var profile = googleUser.getBasicProfile();
+      var id_token = googleUser.getAuthResponse().id_token;
       $.post("./mc_connexion.php", {
-        token: googleUser.getAuthResponse().id_token,
+        token: id_token,
         prenom: profile.getGivenName(),
         nom: profile.getFamilyName(),
         email: profile.getEmail(),
