@@ -16,12 +16,10 @@ if($author['loginID'] != $_SESSION['id'])
   header("Location: ./index.php");
 else {
   $sql = "DELETE FROM publication
-          INNER JOIN utilisateur ON pk_utilisateur = fk_utilisateur
-          WHERE pk_publication = :pub AND loginID = :who;";
+          WHERE pk_publication = :pub;";
   $stmt = $db->prepare($sql);
   $params = [
-    ':pub' => $_POST['pk_publication'],
-    ':who' => $_SESSION['id']
+    ':pub' => $_POST['pk_publication']
   ];
   $stmt->execute($params);
 }
