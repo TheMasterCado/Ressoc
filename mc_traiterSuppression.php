@@ -14,10 +14,12 @@ $stmt->execute($params);
 $author = $stmt->fetch();
 if($author['loginID'] != $_SESSION['id'])
   header("Location: ./index.php");
-$sql = "DELETE FROM publication WHERE pk_publication = :pub;";
-$stmt = $db->prepare($sql);
-$params = [
-  ':pub' => $_POST['pk_publication']
-];
-$stmt->execute($params);
+else {
+  $sql = "DELETE FROM publication WHERE pk_publication = :pub;";
+  $stmt = $db->prepare($sql);
+  $params = [
+    ':pub' => $_POST['pk_publication']
+  ];
+  $stmt->execute($params);
+}
  ?>
